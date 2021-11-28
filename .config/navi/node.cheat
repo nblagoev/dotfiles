@@ -1,0 +1,6 @@
+% switch, node
+# switch node version
+brew unlink node
+brew link --overwrite node@<version>
+
+$ version: echo "10 11 12 13 14 15 16 17 18" | tr ' ' '\n'
