@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e pipefail
+# inside vim, vim-rooter is used to find the .git root to start searching from
+# for projects if available. Do the same here for consistency.
+PROJECT_ROOT="$(git rev-parse --show-toplevel 2> /dev/null)" && cd "${PROJECT_ROOT}" || true
+
+# tty required, see GNU xargs man page
+# Note that BSD args does not allow the delimiter to be \n so \0 must be used with the -0 option.
+fzf --height 40% --cycle --multi --header="cwd: $(pwd)"| \
+    tr '\n' '\0' | \
+    xargs -0 sh -c '$0 "$@" </dev/tty' $EDITOR
