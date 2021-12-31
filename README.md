@@ -1,3 +1,7 @@
+# Install
+```
+curl -Lks https://github.com/nblagoev/dotfiles/raw/main/install.sh | /bin/bash
+```
 # Custom bindings
 
 | Binding        | Context      | Description                                                                                                                                    |
