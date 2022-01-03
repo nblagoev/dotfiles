@@ -1,6 +1,6 @@
 # Install
 ```
-curl -Lks https://github.com/nblagoev/dotfiles/raw/main/install.sh | /bin/bash
+curl -Lks https://github.com/nblagoev/dotfiles/raw/main/bootstrap.sh | /bin/bash
 ```
 # Custom bindings
 
