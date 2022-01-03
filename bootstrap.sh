@@ -65,20 +65,20 @@ case $PLATFORM in
 esac
 
 test ! -d $HOME/.dotfiles && git clone --bare $ORIGIN $HOME/.dotfiles
-function dotfiles {
+function dot {
    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
 mkdir -p .dotfiles-backup
-dotfiles checkout
+dot checkout
 
 if [ $? = 0 ]; then
   printf '\n\e[1;32m%s\e[m\n' "Checked out dotfiles.";
 else
   printf '\n\e[1;32m%s\e[m\n' "Backing up pre-existing dotfiles.";
-  dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
+  dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
 fi;
 
-dotfiles checkout
-dotfiles config status.showUntrackedFiles no
-dotfiles pull --ff-only
+dot checkout
+dot config status.showUntrackedFiles no
+dot pull --ff-only
 

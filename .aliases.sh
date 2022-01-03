@@ -3,7 +3,7 @@ alias r="rgfzf"
 alias k="kubectl"
 alias vim="nvim"
 
-alias dotfiles='/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dot='/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias navi='navi --path ~/.config/navi'
 
 alias ll='exa -ghlFa --group-directories-first --git'
