@@ -6,6 +6,7 @@ ORIGIN=git@github.com:nblagoev/dotfiles.git
 set -e
 
 # Supported platforms
+MACOS_ARM64=MACOS_ARM64
 MACOS_AMD64=MACOS_AMD64
 UBUNTU_AMD64=UBUNTU_AMD64
 RASPBIAN_ARMV5=RASPBIAN_ARMV5
@@ -38,7 +39,11 @@ if uname | grep -q Linux; then
         exit 1
     fi
 elif uname | grep -q Darwin && getconf LONG_BIT | grep -q 64; then
-    PLATFORM=$MACOS_AMD64
+    if uname -m | grep -q arm; then
+        PLATFORM=$MACOS_ARM64
+    else
+        PLATFORM=$MACOS_AMD64
+    fi
 else
     >&2 echo "Unsupported OS"
     exit 1
@@ -64,7 +69,7 @@ case $PLATFORM in
         ;;
 esac
 
-test ! -d $HOME/.dotfiles && git clone --bare $ORIGIN $HOME/.dotfiles
+test ! -d $HOME/.dotfiles && git clone --recurse-submodules --bare $ORIGIN $HOME/.dotfiles
 function dot {
    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
@@ -82,3 +87,15 @@ dot checkout
 dot config status.showUntrackedFiles no
 dot pull --ff-only
 
+source ./.bootstrap/"${PLATFORM}".sh
+
+mkdir ~/.ssh
+touch ~/.history
+touch ~/.ssh/known_hosts
+touch ~/.ssh/authorized_keys
+touch ~/.ssh/config
+chmod 600 ~/.history
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/known_hosts
+chmod 600 ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/config

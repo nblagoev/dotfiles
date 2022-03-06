@@ -1,7 +1,6 @@
 [user]
 	name = Nikolay Blagoev
 	email = nikolay.blagoev@gmail.com
-	signingkey = 0x84C1F7D9ECED9549
 
 [init]
 	templatedir = ~/.config/git/templates

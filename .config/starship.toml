@@ -1,2 +1,23 @@
 [package]
-symbol = " "
+symbol = "📦  "
+disabled = true
+
+[sudo]
+symbol = "🧙  "
+disabled = false
+
+[status]
+format = '[$symbol$maybe_int]($style) '
+map_symbol = true
+disabled = false
+
+[nodejs]
+symbol = "🤖  "
+disabled = true
+
+[git_branch]
+symbol = "🌱  "
+
+[git_commit]
+tag_disabled = false
+
