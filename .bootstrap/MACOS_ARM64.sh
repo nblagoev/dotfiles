@@ -11,7 +11,7 @@ brew update
 # Recently this command is no longer idempotent and fails if already installed
 xcode-select --install || true
 
-brew bundle install --file=./Brewfile
+brew bundle install --file=~/.bootstrap/Brewfile
 
 mkdir -p ~/.1password
 
@@ -20,7 +20,7 @@ if [ -f "$ONEPASS_AGENT" ]; then
     ln -s $ONEPASS_AGENT ~/.1password/agent.sock
 fi
 
-cp -r "~/.config/kbl/*" "~/Library/Keyboard Layouts"
+cp -R ~/.config/kbl/ ~/Library/Keyboard\ Layouts
 
 ###############################################################################
 # General UI/UX                                                               #
