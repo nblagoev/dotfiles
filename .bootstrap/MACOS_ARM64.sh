@@ -4,6 +4,8 @@ if [ ! -f /usr/local/bin/brew ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 brew update
 
 # Recently this command is no longer idempotent and fails if already installed
@@ -12,7 +14,11 @@ xcode-select --install || true
 brew bundle install --file=./Brewfile
 
 mkdir -p ~/.1password
-ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+
+ONEPASS_AGENT=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+if [ -f "$ONEPASS_AGENT" ]; then
+    ln -s $ONEPASS_AGENT ~/.1password/agent.sock
+fi
 
 cp -r "~/.config/kbl/*" "~/Library/Keyboard Layouts"
 
