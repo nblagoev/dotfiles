@@ -15,9 +15,11 @@ disabled = false
 symbol = "🤖  "
 disabled = true
 
-[git_branch]
-symbol = "🌱  "
-
 [git_commit]
 tag_disabled = false
 
+[gcloud]
+disabled = true
+
+[terraform]
+symbol = "💠  "

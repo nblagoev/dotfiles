@@ -24,7 +24,8 @@ fi
 
 source ~/.aliases.sh
 source ~/.functions.sh
-
+source ~/.config/op/plugins.sh
+source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 # ZSH highlighting settings {{{
 typeset -A ZSH_HIGHLIGHT_PATTERNS
 
@@ -233,3 +234,6 @@ eval "$(starship init zsh)"
 trap "~/.local/bin/cleanup-history ~/.history" EXIT
 
 # vim: foldmethod=marker:sw=2
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform

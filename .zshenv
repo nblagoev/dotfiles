@@ -39,6 +39,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
   #[ -d ~/.npm-global ] && _extend_path "~/.npm-global/bin"
 # }}}
 
+source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+
 # Java {{{
   #export JAVA_HOME="$(/usr/libexec/java_home -v 1.8.0_281)"
 # }}}

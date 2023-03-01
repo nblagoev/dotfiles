@@ -2,6 +2,7 @@
 alias r="rgfzf"
 alias k="kubectl"
 alias vim="nvim"
+alias cat="bat"
 
 alias dot='/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias navi='navi --path ~/.config/navi'
