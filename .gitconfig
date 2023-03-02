@@ -3,7 +3,6 @@
 	email = nikolay.blagoev@gmail.com
 
 [init]
-	templatedir = ~/.config/git/templates
 	defaultBranch = main
 
 [alias]
@@ -196,8 +195,7 @@
 	editor = nvim
 	excludesfile = ~/.gitignore
 	autocrlf = input
-	gnorecase = false
-	hooksPath = ~/.config/git/templates/hooks
+	ignorecase = false
     pager = delta
 
 [interactive]
