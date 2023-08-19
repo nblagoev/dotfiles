@@ -1,9 +1,20 @@
 [user]
 	name = Nikolay Blagoev
 	email = nikolay.blagoev@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZDXW6dgejzBGOCKZhPews//DA+yrVniFCdIEJaOp9u
 
 [init]
 	defaultBranch = main
+
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = ~/.ssh/allowed_signers
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
 
 [alias]
     aliases     = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
@@ -64,7 +75,6 @@
 	# Status/Logging
 	st			= status -sb
 	last    	= log -1 HEAD
-	l 			= log --pretty=custom2
 	lg 			= log --graph --pretty=custom2 --abbrev-commit --date=relative
 	ll 			= log --stat --abbrev-commit
 	lc 			= shortlog --summary --numbered # List contributors
@@ -78,11 +88,7 @@
 					--abbrev-commit
 
 	# Reset
-	undo		= reset --hard
 	uncommit	= reset HEAD~1 --mixed # Resets the previous commit, but keeps all the changes from that commit in the WD
-	unstage		= reset HEAD # Unstage any files that have been added to the staging area
-	restore		= checkout --
-	undocommit	= reset --hard HEAD~1
 	untrack 	= rm --cached --
 	unpushed = log --branches --not --remotes --simplify-by-decoration --decorate --oneline
     untracked = "!git ls-files . --exclude-standard --others"
@@ -116,9 +122,7 @@
 
 	# show what I did today
     day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
-    # show the committers in the last 100 commits, sorted by who has commited the most
-	review = "!git log --no-merges --pretty=%an | head -n 100 | sort | uniq -c | sort -nr"
-	# Deletes all branches already merged into master.
+    # Deletes all branches already merged into master.
 	bclean      = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
 	#via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
 	# show the most recently touched branches
@@ -127,33 +131,10 @@
 	ignored 	= !git ls-files -ci --exclude-standard
 	lasttag 	= describe --tags --abbrev=0
 	findtodo 	= grep --line-number --word-regexp TODO
-	la          = "!git config -l | grep alias | cut -c 7-"
 	cleanup     = !git remote prune origin && git gc && git clean -dfx && git stash clear
 	ignore      = "!([ ! -e .gitignore ] && touch .gitignore) | echo `\n$2` >> .gitignore"
-	stat        = !git ls-files | xargs wc -l # How many lines in repo
-	release     = !sh "$HOME/.config/git/extras/git-release.sh"
-  	setup       = !zsh "$HOME/.config/git/extras/git-setup.sh"
-  	summary     = !zsh "$HOME/.config/git/extras/git-summary.sh"
-	ghfork      = !sh "$HOME/.config/git/extras/git-ghpull.sh"
-	clonep      = !python3 "$HOME/.config/git/extras/git-clonep"
-
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-	# Merge repo
-	mergeRepo   = "!mergeRepo() { \
-						[ $# -ne 3 ] && echo \"Three parameters required, <remote URI> <new branch> <new dir>\" && exit 1; \
-						git remote add newRepo $1; \
-						git fetch newRepo; \
-						git branch \"$2\" newRepo/master; \
-						git checkout \"$2\"; \
-						mkdir -vp \"${GIT_PREFIX}$3\"; \
-						git ls-tree -z --name-only HEAD | xargs -0 -I {} git mv {} \"${GIT_PREFIX}$3\"/; \
-						git commit -m \"Moved files to '${GIT_PREFIX}$3'\"; \
-						git checkout master; git merge --allow-unrelated-histories --no-edit -s recursive -X no-renames \"$2\"; \
-						git branch -D \"$2\"; git remote remove newRepo; \
-				   }; \
-				   mergeRepo"
 
 [color]
 	ui = always
@@ -210,22 +191,5 @@
 [diff]
     colorMoved = default
 
-# URL shorthands
-# gh:paulmillr/dotfiles
-[url "git@github.com:"]
-	insteadOf = "gh:"
-	pushInsteadOf = "gh:"
-	pushInsteadOf = "git://github.com/"
-
-# gist:3928760
-[url "git@gist.github.com:"]
-	insteadOf = "gist:"
-	pushInsteadOf = "gist:"
-	pushInsteadOf = "git://gist.github.com/"
-[filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
 [split-diffs]
 	syntax-highlighting-theme = github-dark

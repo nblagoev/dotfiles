@@ -92,10 +92,12 @@ source ./.bootstrap/"${PLATFORM}".sh
 mkdir ~/.ssh
 touch ~/.history
 touch ~/.ssh/known_hosts
+touch ~/.ssh/allowed_signers
 touch ~/.ssh/authorized_keys
 touch ~/.ssh/config
 chmod 600 ~/.history
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/known_hosts
+chmod 600 ~/.ssh/allowed_signers
 chmod 600 ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/config

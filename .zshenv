@@ -2,15 +2,13 @@
 # ~/.zshenv
 #
 
-# Defines environment variables.
-export ENABLE_SPRING=0
 export DEFAULT_USER=$USER
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-export GIT_CLONEP_PATH="$HOME/dev"
+export GH_GET_WORKSPACE_PATH="$HOME/dev"
 #export TERM=xterm-256color-italic
-export EDITOR=vim-wrapper
+export EDITOR=hx
 export BAT_THEME="TwoDark"
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 export HOMEBREW_CASK_OPTS=--require-sha
@@ -19,12 +17,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Path {{{
 
-  # recommended by brew doctor {{{
-    export PATH="/usr/local/bin:$PATH"
-    export PATH="/usr/local/sbin:$PATH"
-    #export PATH=$(brew --prefix openssh)/bin:$PATH
-  # }}}
-
   # Extend $PATH without duplicates
   function _extend_path() {
     if ! $( echo "$PATH" | tr ":" "\n" | grep -qx "$1" ) ; then
@@ -32,10 +24,10 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
   }
 
-  # Add custom bin to $PATH
   [ -d ~/.bin ] && _extend_path "$HOME/.bin"
   [ -d ~/.local/bin ] && _extend_path "$HOME/.local/bin"
-  #[ -d /usr/local/MacGPG2/bin ] && _extend_path "/usr/local/MacGPG2/bin"
+  [ -d /usr/local/bin ] && _extend_path "/usr/local/bin"
+  [ -d /usr/local/sbin ] && _extend_path "/usr/local/sbin"
   #[ -d ~/.npm-global ] && _extend_path "~/.npm-global/bin"
 # }}}
 
@@ -46,12 +38,17 @@ source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.z
 # }}}
 
 # FZF {{{
- export FZF_HOME=$(brew --prefix fzf)
- export FZF_DEFAULT_OPTS="
+
+export FZF_HOME=$(brew --prefix fzf)
+export FZF_DEFAULT_OPTS="
   --prompt='➤ '
-  --color fg:223,bg:236,hl:245,fg+:223,bg+:237,hl+:11
-  --color info:81,prompt:167,pointer:167,marker:167,spinner:167,header:245
+  --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8
+  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc
+  --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
 "
 export FZF_DEFAULT_COMMAND="rg --smart-case --files --hidden --ignore-file=$HOME/.rgignore"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # }}}
+
+. "$HOME/.cargo/env"

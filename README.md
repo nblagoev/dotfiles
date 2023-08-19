@@ -12,5 +12,5 @@ curl -Lks https://github.com/nblagoev/dotfiles/raw/main/bootstrap.sh | /bin/bash
 | `CTRL+s`       | bash/zsh     | Prepend `sudo` to the prompt and move the cursor back to the end of the prompt.                                                                |
 | `OPT+c`        | bash/zsh     | Use FZF to cd into a subdir of the current path                                                                                                |
 | `CTRL+b`       | bash/zsh     | Use FZF to show git branches                                                                                                                   |
-
-
+| `CTRL + a`     | tmux         | tmux prefix                                                                                                                                    |
+| `prefix + F`   | tmux         | Launch tmux-fzf                                                                                                                                |

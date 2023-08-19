@@ -1,0 +1,21 @@
+#!/bin/bash
+
+op inject -f -i ~/.config/rclone/rclone.conf.tpl -o ~/.config/rclone/rclone.conf
+
+icloud-sync start "~/Library/Mobile Documents/iCloud~com~apple~iBooks/Documents" \
+					"~/Library/Mobile Documents/com~apple~CloudDocs/misc" \
+					"~/Library/Mobile Documents/com~apple~CloudDocs/docs"
+
+rclone sync -P --ask-password=false --fast-list --exclude-from ~/.config/rclone/filter.txt \
+	 ~/Library/Mobile\ Documents/iCloud~com~apple~iBooks/Documents \
+	 "gcs:nblagoev-europe-north1-glacier/nbl/Books"
+
+rclone sync -P --ask-password=false --fast-list --exclude-from ~/.config/rclone/filter.txt \
+	 ~/Library/Mobile\ Documents/com~apple~CloudDocs/misc \
+	 "gcs:nblagoev-europe-north1-glacier/nbl/Misc"
+
+rclone sync -P --ask-password=false --fast-list --exclude-from ~/.config/rclone/filter.txt \
+	 ~/Library/Mobile\ Documents/com~apple~CloudDocs/docs \
+	 "sec:Docs"
+
+rm -rf ~/.config/rclone/rclone.conf

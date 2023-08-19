@@ -12,7 +12,7 @@ brew update
 xcode-select --install || true
 
 brew bundle install --file=~/.bootstrap/Brewfile
-
+tmux source-file ~/.config/tmux/tmux.conf
 mkdir -p ~/.1password
 
 ONEPASS_AGENT=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
@@ -25,6 +25,8 @@ cp -R ~/.config/kbl/ ~/Library/Keyboard\ Layouts
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
+
+defaults write io.alacritty AppleFontSmoothing -int 0
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true

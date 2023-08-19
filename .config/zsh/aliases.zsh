@@ -52,9 +52,9 @@ alias pubkey="more ~/.ssh/id_rsa.pub | xclip -selection clipboard | echo '=> Pub
 alias prikey="more ~/.ssh/id_rsa | xclip -selection clipboard | echo '=> Private key copied to clipboard.'"
 
 # tmux
-#alias tn='tmux new -s "${$(basename `PWD`)//./}" || tmux at -t "${$(basename `PWD`)//./}"'
-#alias attach="tmux attach -t"
-#alias clearTmux="clear && printf '\e[3J'"
+alias tn='tmux new -s "${$(basename `PWD`)//./}" || tmux at -t "${$(basename `PWD`)//./}"'
+alias attach="tmux attach -t"
+alias clearTmux="clear && printf '\e[3J'"
 
 # Download file with original filename
 alias get="curl -O -L"
