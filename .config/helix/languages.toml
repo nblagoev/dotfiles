@@ -1,0 +1,20 @@
+[[language]]
+name = "rust"
+
+[language.debugger]
+name = "lldb-vscode"
+transport = "stdio"
+command = "lldb-vscode"
+
+[[language.debugger.templates]]
+name = "binary"
+request = "launch"
+completion = [ { name = "binary", completion = "filename" } ]
+args = { program = "{0}", initCommands = [ "command script import ~/.config/helix/scripts/lldb_vscode_rustc_primer.py" ] }
+
+[[language.debugger.templates]]
+name = "binary (terminal)"
+request = "launch"
+completion = [ { name = "binary", completion = "filename" } ]
+args = { program = "{0}", runInTerminal = true , initCommands = [ "command script import ~/.config/helix/scripts/lldb_vscode_rustc_primer.py" ] }
+

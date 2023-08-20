@@ -29,6 +29,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
   [ -d /usr/local/bin ] && _extend_path "/usr/local/bin"
   [ -d /usr/local/sbin ] && _extend_path "/usr/local/sbin"
   #[ -d ~/.npm-global ] && _extend_path "~/.npm-global/bin"
+  _extend_path $(brew --prefix)/opt/llvm/bin
 # }}}
 
 source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc

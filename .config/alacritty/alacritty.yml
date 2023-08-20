@@ -48,7 +48,7 @@ font:
     style: Light
   bold:
     family: CaskaydiaCove Nerd Font Mono
-    style: Regular
+    style: SemiLight
   italic:
     family: CaskaydiaCove Nerd Font Mono
     style: Italic
