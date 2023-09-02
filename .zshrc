@@ -8,14 +8,12 @@ if [[ $TERM = dumb ]]; then
   unset zle_bracketed_paste
 fi
 
-# # Start tmux by default and exit terminal if tmux exits.
-# if [[ -n "$TMUX" || "$AUTOSTART_TMUX" = "no" ]] ; then
-#   export TERM=screen-256color
-#   #export TERM=screen-256color-italic
-# else
-#   tmux attach-session || exec tmux new-session;
-#   #tmux attach-session || exec tmux new-session && exit;
-# fi
+# Start tmux by default and exit terminal if tmux exits.
+if [[ -n "$TMUX" || "$AUTOSTART_TMUX" = "no" ]] ; then
+   #export TERM=screen-256color-italic
+else
+  tmux attach-session || exec tmux new-session;
+fi
 
 # Zplug plugin definitions {{{
 export ZPLUG_HOME=/opt/homebrew/opt/zplug
@@ -25,7 +23,7 @@ zplug zplug/zplug, hook-build:'zplug --self-manage'
 zplug zsh-users/zsh-syntax-highlighting
 zplug zsh-users/zsh-completions
 zplug zsh-users/zsh-autosuggestions
-zplug plugins/kubectl, from:oh-my-zsh
+#zplug plugins/kubectl, from:oh-my-zsh
 zplug plugins/docker, from:oh-my-zsh
 zplug plugins/git, from:oh-my-zsh, defer:3
 zplug zsh-users/zsh-history-substring-search

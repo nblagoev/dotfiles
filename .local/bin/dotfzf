@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e pipefail
+
+files=$(/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME ls-tree --full-tree --name-only -r HEAD | sed "s|^|$HOME/|")
+
+# tty required, see GNU xargs man page
+# Note that BSD args does not allow the delimiter to be \n so \0 must be used with the -0 option.
+echo "$files" | \
+    fzf --height 40% --cycle --multi | \
+    tr '\n' '\0' | \
+    xargs -0 sh -c '$0 "$@" </dev/tty' $EDITOR

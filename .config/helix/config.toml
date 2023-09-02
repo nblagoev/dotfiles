@@ -23,6 +23,7 @@ mode.insert = "INS"
 mode.select = "SEL"
 
 [editor.lsp]
+display-inlay-hints = true
 display-messages = true
 
 [editor.indent-guides]
@@ -108,5 +109,4 @@ F = "file_picker_in_current_buffer_directory" # useful for accessing sibling fil
 "+" = ":indent-style 4"
 "q" = ":wqa!" 
 "c" = { "r" = ":config-reload", "o" = ":config-open" }
-"t" = { "d" = ":sh $HOME/.config/helix/to_dark.sh", "l" = ":sh $HOME/.config/helix/to_light.sh" }
 
