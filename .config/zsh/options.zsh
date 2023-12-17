@@ -45,3 +45,6 @@ setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
 setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a trailing slash.
 setopt EXTENDED_GLOB       # Needed for file modification glob modifiers with compinit
 unsetopt FLOW_CONTROL # Disable start/stop characters in shell editor.
+
+# Other
+setopt interactivecomments

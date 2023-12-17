@@ -184,6 +184,7 @@
 
 [delta]
     navigate = true
+	syntax-theme = Catppuccin-mocha
 
 [merge]
     conflictstyle = diff3

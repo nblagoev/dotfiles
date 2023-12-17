@@ -44,22 +44,22 @@ scrolling:
 # Font settings
 font:
   normal:
-    family: CaskaydiaCove Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Light
   bold:
-    family: CaskaydiaCove Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: SemiLight
   italic:
-    family: CaskaydiaCove Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Italic
   # point size
-  size: 12.0
+  size: 13.0
   # extra space around each character.
   # offset.y can be thought of as modifying the line spacing
   # offset.x can be thought of as modifying the letter spacing
   offset:
     x: 0
-    y: 1
+    y: 0
   glyph_offset:
     x: 0
     y: 0
@@ -78,7 +78,7 @@ cursor:
   # - ▇ Block
   # - _ Underline
   # - | Beam
-  style: Block
+  style: Beam
   # render the cursor as a hollow box when window is not focused
   unfocused_hollow: true
 

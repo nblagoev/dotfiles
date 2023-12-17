@@ -3,12 +3,14 @@ alias r="rgfzf"
 alias k="kubectl"
 alias vim="nvim"
 alias cat="bat"
+alias da="direnv allow"
 
 alias dot='/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias navi='navi --path ~/.config/navi'
 
 alias ll='exa -ghlFa --group-directories-first --git'
 alias lt='exa -ghlFT --git'
+alias lx='exa * --color always --icons --tree --group-directories-first --git-ignore'
 
 alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
 alias ..='cd ../'                           # Go back 1 directory level

@@ -9,7 +9,7 @@ if [[ $TERM = dumb ]]; then
 fi
 
 # Start tmux by default and exit terminal if tmux exits.
-if [[ -n "$TMUX" || "$AUTOSTART_TMUX" = "no" ]] ; then
+if [[ -n "$TMUX" || "$AUTOSTART_TMUX" = "no" || -n "$INTELLIJ_ENVIRONMENT_READER" || -n "$VSCODE_PID" ]] ; then
    #export TERM=screen-256color-italic
 else
   tmux attach-session || exec tmux new-session;

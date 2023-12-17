@@ -46,3 +46,19 @@ function ctrla() {
         zle push-input
     fi
 }
+
+
+function zle-keymap-select zle-line-init
+{
+       # change cursor shape in xterm
+       case $KEYMAP in
+               vicmd)      echo -e -n "\x1b[\x32 q";;  # block cursor
+               viins|main) echo -e -n "\x1b[\x35 q";;  # blinking line cursor
+       esac
+
+       zle reset-prompt
+       zle -R
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select

@@ -9,7 +9,7 @@ export LANGUAGE=en_US.UTF-8
 export GH_GET_WORKSPACE_PATH="$HOME/dev"
 #export TERM=xterm-256color-italic
 export EDITOR=hx
-export BAT_THEME="TwoDark"
+export BAT_THEME="Catppuccin-mocha"
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 export HOMEBREW_CASK_OPTS=--require-sha
 
