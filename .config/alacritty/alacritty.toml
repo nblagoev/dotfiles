@@ -1,0 +1,59 @@
+import = ["/Users/nblagoev/.config/alacritty/themes/catppuccin/catppuccin-mocha.toml"]
+live_config_reload = true
+
+[cursor]
+style = "Beam"
+unfocused_hollow = true
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[font]
+size = 13.0
+
+[font.bold]
+family = "JetBrainsMono Nerd Font Mono"
+style = "SemiLight"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "JetBrainsMono Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font Mono"
+style = "Light"
+
+[font.offset]
+x = 0
+y = 0
+
+[mouse]
+hide_when_typing = true
+
+[selection]
+save_to_clipboard = true
+
+[scrolling]
+history = 50000
+multiplier = 3
+
+[window]
+blur = true
+opacity = 0.95
+decorations = "Full"
+dynamic_padding = true
+dynamic_title = true
+option_as_alt = "Both"
+startup_mode = "Windowed"
+
+[window.dimensions]
+columns = 170
+lines = 50
+
+[window.padding]
+x = 5
+y = 5

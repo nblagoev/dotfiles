@@ -2,9 +2,9 @@
 
 tmux_path="$HOME/.config/tmux/tmux.conf"
 helix_path="$HOME/.config/helix/config.toml"
-alacritty_path="$HOME/.config/alacritty/alacritty.yml"
+alacritty_path="$HOME/.config/alacritty/alacritty.toml"
 
-if [[ $(defaults read -g AppleInterfaceStyle 2>/dev/null) == "Dark" ]]; then
+if [[ $(defaults read -g AppleInterfaceStyle 2>/dev/null) == "Dark" || $1 == 'dark' ]]; then
   sed -i '' 's/catppuccin-latte/catppuccin-mocha/' $alacritty_path
   sed -i '' '1s/theme = .*/theme = "catppuccin_mocha"/' $helix_path
   sed -i '' 's/latte/mocha/' $tmux_path
