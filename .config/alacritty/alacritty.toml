@@ -7,6 +7,7 @@ unfocused_hollow = true
 
 [colors]
 draw_bold_text_with_bright_colors = true
+transparent_background_colors = true
 
 [font]
 size = 13.0
@@ -32,7 +33,7 @@ x = 0
 y = 0
 
 [mouse]
-hide_when_typing = true
+hide_when_typing = false
 
 [selection]
 save_to_clipboard = true
@@ -43,7 +44,7 @@ multiplier = 3
 
 [window]
 blur = true
-opacity = 0.95
+opacity = 0.85
 decorations = "Full"
 dynamic_padding = true
 dynamic_title = true
