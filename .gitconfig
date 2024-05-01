@@ -6,6 +6,9 @@
 [init]
 	defaultBranch = main
 
+[include]
+	path = ~/.config/delta/themes/catppuccin.gitconfig
+
 [gpg]
 	format = ssh
 [gpg "ssh"]
@@ -173,7 +176,7 @@
 	followTags = true
 
 [core]
-	editor = nvim
+	editor = hx
 	excludesfile = ~/.gitignore
 	autocrlf = input
 	ignorecase = false
@@ -184,6 +187,7 @@
 
 [delta]
     navigate = true
+	features = catppuccin-mocha
 	syntax-theme = Catppuccin-mocha
 
 [merge]
@@ -191,6 +195,3 @@
 
 [diff]
     colorMoved = default
-
-[split-diffs]
-	syntax-highlighting-theme = github-dark
