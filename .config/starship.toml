@@ -40,7 +40,8 @@ Unknown = '󰠥'
 truncate_to_repo = true
 truncation_length = 4
 truncation_symbol = '…/'
-#truncation_symbol_style = 'black bold'
+repo_root_style = 'sky'
+#before_repo_root_style = 'black bold'
 format = '[$path]($style)[$read_only]($read_only_style) '
 style = 'teal'
 home_symbol = ''
@@ -72,7 +73,7 @@ tag_disabled = false
 
 [git_status]
 disabled = false
-format = '[\[ $all_status$ahead_behind\]]($style) '
+format = '[ $all_status$ahead_behind]($style) '
 style = 'bold rosewater'
 conflicted = ' ' #'🏳'
 up_to_date = ''
