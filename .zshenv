@@ -6,7 +6,6 @@ export DEFAULT_USER=$USER
 export GH_GET_WORKSPACE_PATH="$HOME/dev"
 #export TERM=xterm-256color-italic
 export EDITOR=hx
-export BAT_THEME="Catppuccin-mocha"
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 export HOMEBREW_CASK_OPTS=--require-sha
 
@@ -38,14 +37,7 @@ source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.z
 # FZF {{{
 
 export FZF_HOME=$(brew --prefix fzf)
-
-export FZF_DEFAULT_OPTS="
-  --prompt='➤ '
-  --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8
-  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc
-  --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
-"
-
+export FZF_DEFAULT_OPTS_FILE="$HOME/.config/fzfrc"
 export FZF_DEFAULT_COMMAND="rg --smart-case --files --hidden --ignore-file=$HOME/.rgignore"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 

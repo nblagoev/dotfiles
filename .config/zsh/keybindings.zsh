@@ -14,10 +14,10 @@ zle     -N   branch-widget
 bindkey '^B' branch-widget
 
 # Edit dotfile
-#bindkey -s '^[.' "\C-k \C-u dotfzf\n"
+bindkey -s '\C-e' "\C-k \C-u dotfzf\n"
 
 # Launch FZF -> vim
-bindkey -s '\C-p' "\C-k \C-u vimfzf\n"
+bindkey -s '\C-o' "\C-k \C-u vimfzf\n"
 
 # sudo-ize command
 bindkey -s '\C-s' "\C-asudo \C-e"

@@ -23,7 +23,7 @@ vimcmd_replace_symbol = "└─ [❮](bold mauve)"
 vimcmd_visual_symbol = "└─ [❮](bold yellow)"
 
 [os]
-format = '[$symbol](bold white) '   
+format = '[$symbol](bold text) '
 disabled = false
 
 [os.symbols]

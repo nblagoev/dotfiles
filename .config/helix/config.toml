@@ -1,7 +1,7 @@
 theme = "catppuccin_mocha"
 
 [editor]
-bufferline = "always"
+bufferline = "multiple"
 color-modes = true
 true-color = true
 cursorline = true
@@ -101,8 +101,7 @@ C = ["goto_line_start", "extend_to_line_bounds", "change_selection"]
     "delete_selection",
     "jump_backward",
 ]
-o = ":sh tmux popup"
-n = ":sh tmux popup -E 'lf'"
+t = ":sh tmux popup"
 F = "file_picker_in_current_buffer_directory" # useful for accessing sibling files rather than a file tree
 "." = ":toggle-option file-picker.git-ignore" # toggle seeing files hidden with the .gitignore in file pickers
 "=" = ":format"

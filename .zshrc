@@ -12,6 +12,7 @@ fi
 if [[ -n "$TMUX" || "$AUTOSTART_TMUX" = "no" || -n "$INTELLIJ_ENVIRONMENT_READER" || -n "$VSCODE_PID" ]] ; then
    #export TERM=screen-256color-italic
 else
+  echo -e "\n\nAttaching tmux..."
   tmux attach-session || exec tmux new-session;
 fi
 
@@ -75,5 +76,3 @@ eval "$(starship init zsh)"
 ~/.local/bin/cleanup-history ~/.history
 fc -R # reload history
 trap "~/.local/bin/cleanup-history ~/.history" EXIT
-
-# vim: foldmethod=marker:sw=2
