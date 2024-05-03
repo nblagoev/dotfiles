@@ -68,6 +68,7 @@ unset filename
 
 eval "$(navi widget zsh)"
 eval "$(direnv hook zsh)"
+eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 [ -f ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
