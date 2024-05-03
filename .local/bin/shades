@@ -38,4 +38,15 @@ else
   done
 fi
 
+# Signal Helix to reload its config in all tmux panes
+tmux_panes=$(tmux list-panes -a -F "#{session_id}:#{window_id}.#{pane_id};#{pane_current_command}")
+for pane in $tmux_panes; do
+    if [[ "hx" == "$(echo $pane | cut -d ";" -f2)" ]]; then
+      pane_id="$(echo $pane | cut -d ";" -f1)"
+      tmux send-keys -t "$pane_id" Escape
+      tmux send-keys -t "$pane_id" ":config-reload" Enter
+    fi
+done
+
+
 tmux source-file ~/.config/tmux/tmux.conf
