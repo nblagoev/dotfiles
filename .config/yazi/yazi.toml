@@ -1,0 +1,4 @@
+[opener]
+edit = [
+	{ run = 'hemux "$@"', block = false },
+]

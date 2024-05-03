@@ -1,0 +1,16 @@
+#!/bin/sh
+
+PANES=$(tmux list-panes -F "#P;#{pane_current_command}")
+
+for i in $PANES; do
+    if [[ "hx" == "$(echo $i | cut -d ";" -f2)" ]]; then
+      hx_pane_idx=$(echo $i | cut -d ";" -f1)
+    fi
+done
+
+if [ ! -z "$hx_pane_idx" ]
+  then
+    tmux send-keys -t 2 ":o $@" Enter
+  else
+    tmux splitw -h -l70% "hx $@"
+fi

@@ -5,14 +5,14 @@ curl -Lks https://github.com/nblagoev/dotfiles/raw/main/bootstrap.sh | /bin/bash
 # Custom key bindings
 
 ### Zsh
-| Binding        | Description                                                                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Binding     | Description |
+| ----------- | ----------- |
 | `CTRL + o`  | Search current directory with FZF and launch editor with results. Tab to select multiple. |
-| `r <val>`   | Search current directory with ripgrep for files containing `<val>`, filter with FZF and launch editor with results. Tab to select multiple. |
 | `CTRL + r`  | History search using fzf. |
 | `CTRL + s`  | Prepend `sudo` to the prompt and move the cursor back to the end of the prompt. |
-| `OPT + c`   | Use FZF to cd into a subdir of the current path |
 | `CTRL + b`  | Use FZF to show git branches  |
+| `OPT + c`   | Use FZF to cd into a subdir of the current path |
+| `r <val>`   | Search current directory with ripgrep for files containing `<val>`, filter with FZF and launch editor with results. Tab to select multiple. |
 
 
 ### Tmux
@@ -45,5 +45,6 @@ curl -Lks https://github.com/nblagoev/dotfiles/raw/main/bootstrap.sh | /bin/bash
 ### Helix
 | Binding        | Description |
 | -------------- | ----------- |
-| `space + F`    | Open file with fzf |
-| `ALT+ENTER`    | Open the selected file in background, without closing the FZF selector |
+| `space + F`    | Open file with fzf. Use `ALT+ENTER` to open in background |
+| `space + E`    | Open file with yazi (tmux popup) |
+| `space + e`    | Open file with yazi (tmux pane) |
