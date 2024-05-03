@@ -23,21 +23,16 @@
     aliases     = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
 	# Staging
 	a 			= add
-	aa 			= add --all
 
 	# Branch
 	br 			= branch
 	branch-name = rev-parse --abbrev-ref HEAD
-	branch-diff = diff master...HEAD
 	branch-files = "!git diff master...HEAD --name-status | sed '/^D/d ; s/^.\\s\\+//'"
 
 	# Commit
 	c 			= commit
 	ca 			= commit -a
 	cm 			= commit -m
-	cal 		= !git add -A && git commit              # Commit all changes
-	cam 		= commit -am
-	cne 		= commit --no-edit
 	amend 		= commit --amend
 	amend-all 	= !git add --all && git commit --amend --reuse-message=HEAD
 
@@ -64,11 +59,11 @@
 
 	# Pull
 	up 			= pull
-	plom 		= pull origin master
+	plom 		= pull origin main
 
 	# Push
 	p 			= push
-	pom 		= push origin master
+	pom 		= push origin main
 	# Push the current branch to the remote "origin", and set it to track
 	# the upstream branch
 	pub         = "!git push -u origin $(git branch-name)"
@@ -86,7 +81,7 @@
 	today   	= log --since=midnight --color --graph \
 					--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
 					--abbrev-commit
-  	yesterday 	= log --since yesterday --until=midnight --color --graph \
+  	yday 	    = log --since yesterday --until=midnight --color --graph \
 					--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
 					--abbrev-commit
 
@@ -108,23 +103,13 @@
 	unassume = update-index --no-assume-unchanged
 	assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
 
-	# Snapshots
-
-	# via http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
-  	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-	snapshots = !git stash list --grep snapshot
-
 	# Pull Requests (https://gist.github.com/gnarf/5406589)
 	pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
-	# for bitbucket/stash remotes
-	pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull-requests/$1/from:pr/$1 && git checkout pr/$1; }; f"
 	# for github remores
-	gpr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+	pr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
 
 	# Misc
 
-	# show what I did today
-    day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
     # Deletes all branches already merged into master.
 	bclean      = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
 	#via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
@@ -141,18 +126,6 @@
 
 [color]
 	ui = always
-
-[color "diff"]
-	frag = magenta
-	meta = yellow
-	new = green
-	old = red
-
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = "red bold 52"
-	newNormal = "green bold"
-	newHighlight = "green bold 22"
 
 [color "status"]
     added = green
