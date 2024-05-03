@@ -12,6 +12,8 @@ brew update
 xcode-select --install || true
 
 brew bundle install --file=~/.bootstrap/Brewfile
+bat cache --build
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 tmux source-file ~/.config/tmux/tmux.conf
 mkdir -p ~/.1password
 

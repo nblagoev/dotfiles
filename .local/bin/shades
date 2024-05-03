@@ -9,10 +9,11 @@ fzfrc_path="$HOME/.config/fzfrc"
 batconfig_path="$HOME/.config/bat/config"
 yazi_path="$HOME/.config/yazi/theme.toml"
 
-latte_colors=( "#ccd0da" "#eff1f5" "#dc8a78" "#d20f39" "#4c4f69" "#8839ef")
-mocha_colors=( "#313244" "#1e1e2e" "#f5e0dc" "#f38ba8" "#cdd6f4" "#cba6f7")
+latte_colors=( "#ccd0da" "#eff1f5" "#dc8a78" "#d20f39" "#4c4f69" "#8839ef" )
+mocha_colors=( "#313244" "#1e1e2e" "#f5e0dc" "#f38ba8" "#cdd6f4" "#cba6f7" )
 
-if [[ $(defaults read -g AppleInterfaceStyle 2>/dev/null) == "Dark" || $1 == 'dark' || $1 == 'on' ]]; then
+
+if [[ $1 == 'on' || (-z $1 && $(defaults read -g AppleInterfaceStyle 2>/dev/null) == "Dark") ]]; then
   sed -i '' 's/catppuccin-latte/catppuccin-mocha/' $alacritty_path
   sed -i '' '1s/theme = .*/theme = "catppuccin_mocha"/' $helix_path
   sed -i '' '1s/palette = .*/palette = "catppuccin_mocha"/' $starship_path
@@ -47,6 +48,5 @@ for pane in $tmux_panes; do
       tmux send-keys -t "$pane_id" ":config-reload" Enter
     fi
 done
-
 
 tmux source-file ~/.config/tmux/tmux.conf
