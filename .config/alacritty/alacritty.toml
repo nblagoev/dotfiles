@@ -1,4 +1,4 @@
-import = ["/Users/nblagoev/.config/alacritty/themes/catppuccin/catppuccin-mocha.toml"]
+import = ["~/.config/alacritty/themes/catppuccin-mocha.toml"]
 live_config_reload = true
 
 [cursor]
