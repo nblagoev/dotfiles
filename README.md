@@ -14,6 +14,13 @@ curl -Lks https://github.com/nblagoev/dotfiles/raw/main/bootstrap.sh | /bin/bash
 | `OPT + c`   | Use FZF to cd into a subdir of the current path |
 | `r <val>`   | Search current directory with ripgrep for files containing `<val>`, filter with FZF and launch editor with results. Tab to select multiple. |
 
+### Fzf
+| Binding        | Description |
+| -------------- | ----------- |
+| `tab`          | Accept selection |
+| `enter`        | Accept the whole line |
+| `,`            | Switch to previous group |
+| `.`            | Switch to next group |
 
 ### Tmux
 | Binding        | Description |
