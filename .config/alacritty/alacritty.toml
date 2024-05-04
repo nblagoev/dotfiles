@@ -11,26 +11,14 @@ transparent_background_colors = true
 
 [font]
 size = 13.0
-
-[font.bold]
-family = "JetBrainsMono Nerd Font Mono"
-style = "SemiLight"
-
-[font.glyph_offset]
-x = 0
-y = 0
-
-[font.italic]
-family = "JetBrainsMono Nerd Font Mono"
-style = "Italic"
-
-[font.normal]
-family = "JetBrainsMono Nerd Font Mono"
-style = "Light"
-
-[font.offset]
-x = 0
-y = 0
+normal.family = "Cascadia Mono NF"
+# normal.style = "Light"
+bold.style = "SemiBold"
+# italic.style = "Italic"
+# offset.x = 0
+offset.y = 1
+# glyph_offset.x = 0
+# glyph_offset.y = 0
 
 [mouse]
 hide_when_typing = false

@@ -44,11 +44,14 @@ repo_root_style = 'sky'
 #before_repo_root_style = 'black bold'
 format = '[$path]($style)[$read_only]($read_only_style) '
 style = 'teal'
-home_symbol = ''
+home_symbol = '~' # 
 read_only = '  '
 
+[cmd_duration]
+format = '[󰔛 $duration]($style) '
+
 [package]
-symbol = "📦 "
+symbol = " "
 disabled = true
 
 [sudo]
@@ -102,7 +105,7 @@ unloaded_msg = ''
 disabled = true
 
 [terraform]
-symbol = "💠 "
+symbol = "󱁢 "
 
 # palette tables should be last in the config ⚓️
 [palettes.catppuccin_macchiato]
