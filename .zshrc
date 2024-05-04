@@ -1,6 +1,4 @@
-#
 # ~/.zshrc
-#
 
 #zmodload zsh/zprof
 
@@ -60,19 +58,18 @@ fi
 #  }
 # }}}
 
+eval "$(fzf --zsh)"
+eval "$(navi widget zsh)"
+eval "$(direnv hook zsh)"
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
 
 for filename in $HOME/.config/zsh/{aliases,commands,options,completion,keybindings}.zsh; do
     source $filename
 done
 unset filename
 
-eval "$(navi widget zsh)"
-eval "$(direnv hook zsh)"
-eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
-
 [ -f ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ~/.local/bin/cleanup-history ~/.history
 fc -R # reload history
