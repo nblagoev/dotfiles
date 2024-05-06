@@ -25,13 +25,11 @@ bindkey -s '\C-s' "\C-asudo \C-e"
 # use ^F for file completion instead of ^T
 bindkey '^F' fzf-file-widget
 
-if zplug check zsh-users/zsh-history-substring-search; then
-#    zmodload zsh/terminfo
-#    bindkey "$terminfo[kcuu1]" history-substring-search-up
-#    bindkey "$terminfo[kcud1]" history-substring-search-down
-    bindkey '^[[A' history-substring-search-up
-    bindkey '^[[B' history-substring-search-down
-fi
+# zmodload zsh/terminfo
+# bindkey "$terminfo[kcuu1]" history-substring-search-up
+# bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # If we're in tmux, then ^A is our prefix. Otherwise, bind it to 'move a thing
 # into tmux'. This only works on Linux.
