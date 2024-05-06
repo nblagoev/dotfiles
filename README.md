@@ -28,7 +28,6 @@ curl -Lks https://github.com/nblagoev/dotfiles/raw/main/bootstrap.sh | /bin/bash
 | `C-a`          | tmux prefix |
 | `C-a F`        | Launch tmux-fzf |
 | `C-a ?`        | Show tmux keybindings |
-| `C-a +`        | Zoom pane |
 | `C-a r`        | Rename window |
 | `C-a R`        | Rename session |
 | `C-a x`        | Kill window |
@@ -37,17 +36,17 @@ curl -Lks https://github.com/nblagoev/dotfiles/raw/main/bootstrap.sh | /bin/bash
 | `C-a D`        | Detach others |
 | `C-a <,>`      | Move window left/right |
 | `C-a {,}`      | Swap pane left/right |
-| `C-a [,]`      | Select left/right window |
+| `C-a [,]`      | Select prev/next pane |
 | `C-a /,-`      | Split vertically/horizontally |
 | `C-a C-e`      | Edit tmux config |
 | `C-a C-r`      | Reload tmux config |
 | `C-a C-y`      | Sync panes |
 | `C-a C-u`      | Unite (merge) with another session |
 | `C-a C-x`      | Kill all other windows |
+| `C-a Tab`      | Cycle through windows |
+| `C-a S-arrows` | Prefix then Shift + arrows to resize panes |
 | `C-n`          | New window |
-| `M-arrows`     | Alt/Opt + arrows to move between panes |
-| `M-S-arrows`   | Alt/Opt + Shift + arrows to resize panes |
-| `C-left,right` | Ctrl + left/right arrows to move between windows |
+| `S-left,right` | Shift + left/right arrows to move between windows |
 
 ### Helix
 | Binding        | Description |
