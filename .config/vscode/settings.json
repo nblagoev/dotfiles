@@ -8,19 +8,37 @@
 	"[typescript]": {
 	  "editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[go]": {
+		"editor.snippetSuggestions": "none",
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit"
+		}
+	},
+	"[rust]": {
+		"editor.defaultFormatter": "rust-lang.rust-analyzer",
+		"editor.formatOnSave": true
+	},
 
 	"breadcrumbs.enabled": true,
 
+	"diffEditor.ignoreTrimWhitespace": true,
+	"diffEditor.renderSideBySide": true,
+
 	"editor.cursorBlinking": "phase",
-	"editor.cursorSmoothCaretAnimation": true,
-	"editor.fontFamily": "'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Source Code Pro', Consolas, 'Courier New', monospace",
-	"editor.fontLigatures": true,
+	"editor.cursorSmoothCaretAnimation": "on",
+	"editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Source Code Pro', Consolas, 'Courier New', monospace",
+	"editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'calt', 'dlig'",
 	"editor.formatOnPaste": true,
 	"editor.formatOnType": true,
 	"editor.insertSpaces": false,
 	"editor.minimap.maxColumn": 150,
 	"editor.minimap.renderCharacters": false,
 	"editor.minimap.showSlider": "always",
+	"editor.renderControlCharacters": false,
 	"editor.smoothScrolling": true,
 	"editor.snippetSuggestions": "bottom",
 	"editor.suggestSelection": "first",
@@ -29,9 +47,13 @@
 	// "editor.suggest.snippetsPreventQuickSuggestions": true,
 	"editor.wordWrapColumn": 120,
 	"editor.renderWhitespace": "selection",
+	"editor.fontSize": 13,
+	"editor.stickyScroll.enabled": true,
+	"editor.semanticHighlighting.enabled": true,
 
 	"explorer.autoReveal": false,
 	"explorer.openEditors.visible": 0,
+	"explorer.confirmDelete": false,
 
 	"extensions.autoUpdate": true,
 	"extensions.ignoreRecommendations": true,
@@ -46,15 +68,8 @@
 	"files.trimFinalNewlines": true,
 	"files.trimTrailingWhitespace": true,
 
-	"git.autofetch": true,
+	"git.autofetch": false,
 	"git.confirmSync": false,
-	"githubPullRequests.showInSCM": false,
-
-	"gitlens.advanced.messages": {
-	  "suppressShowKeyBindingsNotice": true
-	},
-	"gitlens.views.lineHistory.enabled": false,
-	"gitlens.views.repositories.files.layout": "tree",
 
 	"problems.decorations.enabled": true,
 	"search.exclude": {
@@ -70,60 +85,35 @@
 	  "logs/**": true
 	},
 
-	"telemetry.enableCrashReporter": false,
-	"telemetry.enableTelemetry": false,
+	"telemetry.telemetryLevel": "off",
+	"redhat.telemetry.enabled": false,
 
 	"terminal.external.osxExec": "/usr/local/bin/zsh",
+	"terminal.integrated.fontFamily": "JetBrains Mono",
 	"terminal.integrated.env.osx": {
-	  "AUTOSTART_TMUX": "no"
+		"AUTOSTART_TMUX": "no"
 	},
-	"terminal.integrated.fontFamily": "Source Code Pro for Powerline",
 
 	"typescript.updateImportsOnFileMove.enabled": "never",
 
-	"vrdev.experimental.typescript": true,
-	"vrdev.tasks.exclude": ["com.vmware.pscoe.library*"],
-	"vrdev.views.explorer.actions.layout": "compact",
-	"vrdev.buildTools.defaultVersion": "2.14.17",
-	"vrdev.log": "debug",
+	"window.commandCenter": true,
+	"window.autoDetectColorScheme": true,
+    "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
 
-	"window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
-	"window.zoomLevel": 0,
-
-	"workbench.colorCustomizations": {
-	  "[Monokai Pro]": {
-		"gitDecoration.modifiedResourceForeground": "#fc9867",
-		"gitDecoration.untrackedResourceForeground": "#a9dc76",
-		"statusBar.debuggingBackground": "#fc9867",
-		"statusBar.debuggingForeground": "#4d4c4e"
-	  }
-	},
 	"workbench.editor.closeOnFileDelete": false,
 	"workbench.settings.editor": "json",
 	"workbench.startupEditor": "newUntitledFile",
+	"workbench.colorTheme": "Catppuccin Macchiato",
+	"workbench.iconTheme": "catppuccin-macchiato",
+	"workbench.preferredDarkColorTheme": "Catppuccin Macchiato",
+	"workbench.preferredLightColorTheme": "Catppuccin Frappé",
 
-	"workbench.preferredDarkColorTheme": "Monokai Pro",
-	"workbench.preferredLightColorTheme": "Github",
-	"window.autoDetectColorScheme": true,
-
-	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-
-	"[json]": {
-	  "editor.defaultFormatter": "vscode.json-language-features"
-	},
-
-	"[go]": {
-	  "editor.snippetSuggestions": "none",
-	  "editor.formatOnSave": true,
-	  "editor.codeActionsOnSave": {
-		"source.organizeImports": true
-	  }
+	"go.alternateTools": {
+		"go": "/opt/homebrew/bin/go"
 	},
 	"go.useLanguageServer": true,
-	"go.languageServerExperimentalFeatures": {
-	  "diagnostics": true
-	},
 	"gopls": {
+	  "ui.semanticTokens": true,
 	  "usePlaceholders": true, // add parameter placeholders when completing a function
 	},
 
@@ -131,24 +121,6 @@
 	"prettier.tabWidth": 4,
 	"prettier.quoteProps": "consistent",
 	"prettier.endOfLine": "lf",
-	"explorer.confirmDelete": false,
-	"workbench.activityBar.visible": true,
-	"yaml.schemas": {
-		"file:///Users/blagoevn/.vscode-insiders/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
-	},
-	"editor.semanticHighlighting.enabled": true,
-	"workbench.iconTheme": "eq-material-theme-icons",
-	"[yaml]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"vrdev.trace": "verbose",
-	"docker.showStartPage": false,
-	"diffEditor.ignoreTrimWhitespace": false,
-	"workbench.colorTheme": "Monokai Pro",
-	"redhat.telemetry.enabled": false,
-	"go.toolsManagement.autoUpdate": true,
-	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
-	///end
+	"catppuccin.accentColor": "blue",
+	"catppuccin.bracketMode": "dimmed",
   }
