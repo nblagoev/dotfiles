@@ -1,23 +1,9 @@
-[user]
-	name = Nikolay Blagoev
-	email = nikolay.blagoev@gmail.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZDXW6dgejzBGOCKZhPews//DA+yrVniFCdIEJaOp9u
+[include]
+    path = ~/.gitconfig.local
+	path = ~/.config/delta/themes/catppuccin.gitconfig
 
 [init]
 	defaultBranch = main
-
-[include]
-	path = ~/.config/delta/themes/catppuccin.gitconfig
-
-[gpg]
-	format = ssh
-[gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-	allowedSignersFile = ~/.ssh/allowed_signers
-[commit]
-	gpgsign = true
-[tag]
-	gpgsign = true
 
 [alias]
     aliases     = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort

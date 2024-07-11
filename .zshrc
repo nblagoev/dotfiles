@@ -29,6 +29,7 @@ done
 unset filename
 
 [ -f ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
+[ -f ~/.config/zsh/localrc.zsh ] && source ~/.config/zsh/localrc.zsh
 
 ~/.local/bin/cleanup-history ~/.history
 fc -R # reload history

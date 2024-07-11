@@ -26,10 +26,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
   _extend_path $(brew --prefix)/opt/llvm/bin
 # }}}
 
-source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
-
-# export JAVA_HOME="$(/usr/libexec/java_home -v 1.8.0_281)"
-
 # FZF {{{
 export FZF_HOME=$(brew --prefix fzf)
 export FZF_DEFAULT_OPTS_FILE="$HOME/.config/fzfrc"
@@ -41,7 +37,7 @@ export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git
 
 # }}}
 
-. "$HOME/.cargo/env"
-
 # Added by Toolbox App
 export PATH="$PATH:/Users/nblagoev/Library/Application Support/JetBrains/Toolbox/scripts"
+
+[ -f ~/.config/zsh/local_profile.zsh ] && source ~/.config/zsh/local_profile.zsh

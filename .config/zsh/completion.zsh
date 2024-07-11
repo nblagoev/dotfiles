@@ -58,4 +58,3 @@ zstyle ':fzf-tab:complete:updatelocal:argument-rest' fzf-preview "git --git-dir=
 zstyle ':fzf-tab:complete:updatelocal:argument-rest' fzf-flags --preview-window=down:5:wrap
 
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
-source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc

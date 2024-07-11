@@ -1,7 +1,7 @@
 # ZSH highlighting settings
 typeset -A ZSH_HIGHLIGHT_PATTERNS
 
-ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red,bold')
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=black,bold,bg=red,bold')
 #ZSH_HIGHLIGHT_PATTERNS+=('sudo*' 'fg=white,bold,bg=red,bold')
 
 ZSH_HIGHLIGHT_PATTERNS+=('\|' 'fg=magenta,bold')
