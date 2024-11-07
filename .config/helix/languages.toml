@@ -18,3 +18,28 @@ request = "launch"
 completion = [ { name = "binary", completion = "filename" } ]
 args = { program = "{0}", runInTerminal = true , initCommands = [ "command script import ~/.config/helix/scripts/lldb_vscode_rustc_primer.py" ] }
 
+[[language]]
+name = "python"
+roots = ["pyproject.toml", "setup.py", "Poetry.lock", ".git"]
+language-servers = [ "pyright"]
+auto-format = true
+formatter = {command = 'black', args = ["--quiet", "-"]}
+
+[[language]]
+name = "json"
+formatter = { command = 'prettier', args = ["--parser", "json"] }
+
+[[language]]
+name = "markdown"
+formatter = { command = 'prettier', args = ["--parser", "markdown"] }
+auto-format = true
+
+[[language]]
+name = "hcl"
+formatter = { command = 'terraform', args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "tfvars"
+formatter = { command = 'terraform', args = ["fmt", "-"] }
+auto-format = true

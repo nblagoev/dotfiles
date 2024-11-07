@@ -30,8 +30,8 @@
 
 	"editor.cursorBlinking": "phase",
 	"editor.cursorSmoothCaretAnimation": "on",
-	"editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Source Code Pro', Consolas, 'Courier New', monospace",
-	"editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'calt', 'dlig'",
+	"editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', 'Iosevka', 'Fira Code'",
+	"editor.fontLigatures": "'ss02', 'cv14', 'zero'",
 	"editor.formatOnPaste": true,
 	"editor.formatOnType": true,
 	"editor.insertSpaces": false,
@@ -103,7 +103,7 @@
 	"workbench.editor.closeOnFileDelete": false,
 	"workbench.settings.editor": "json",
 	"workbench.startupEditor": "newUntitledFile",
-	"workbench.colorTheme": "Catppuccin Macchiato",
+	"workbench.colorTheme": "Catppuccin Frappé",
 	"workbench.iconTheme": "catppuccin-macchiato",
 	"workbench.preferredDarkColorTheme": "Catppuccin Macchiato",
 	"workbench.preferredLightColorTheme": "Catppuccin Frappé",
@@ -123,4 +123,7 @@
 	"prettier.endOfLine": "lf",
 	"catppuccin.accentColor": "blue",
 	"catppuccin.bracketMode": "dimmed",
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
   }
