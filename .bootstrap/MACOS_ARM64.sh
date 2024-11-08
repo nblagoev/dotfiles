@@ -195,15 +195,6 @@ defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
 
-# Don’t display the prompt when quitting iTerm
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
-
-# Specify the preferences directory
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.config/iterm2"
-
-# Tell iTerm2 to use the custom preferences in the directory
-defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-
 ###############################################################################
 # Time Machine                                                                #
 ###############################################################################
