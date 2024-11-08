@@ -13,9 +13,9 @@ xcode-select --install || true
 
 brew bundle install --file=~/.bootstrap/Brewfile
 bat cache --build
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+test ! -d $HOME/.tmux/plugins/tpm && git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 tmux source-file ~/.config/tmux/tmux.conf
-mkdir -p ~/.1password
+mkdir -p $HOME/.1password
 
 ONEPASS_AGENT=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 if [ -f "$ONEPASS_AGENT" ]; then
