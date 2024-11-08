@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ORIGIN=git@github.com:nblagoev/dotfiles.git
+ORIGIN=https://github.com/nblagoev/dotfiles.git
 
 # exit on error
 set -e
