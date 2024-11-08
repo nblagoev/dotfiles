@@ -36,6 +36,7 @@ brew "helix", args: ["HEAD"]
 brew "hugo"
 brew "hyperfine"
 brew "inetutils"
+brew "istat-menus"
 brew "ipcalc"
 brew "iperf3"
 brew "jq"
@@ -91,7 +92,5 @@ cask "tiles"
 mas "1Password for Safari", id: 1569813296
 mas "Hidden Bar", id: 1452453066
 mas "Infuse", id: 1136220934
-mas "iStat Menus", id: 1319778037
 mas "Things", id: 904280696
 mas "WireGuard", id: 1451685025
-mas "Xcode", id: 497799835
