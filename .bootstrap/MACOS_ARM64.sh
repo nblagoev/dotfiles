@@ -185,8 +185,8 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 ###############################################################################
 
 # Privacy: don’t send search queries to Apple
-defaults write com.apple.Safari UniversalSearchEnabled -bool false
-defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+#defaults write com.apple.Safari UniversalSearchEnabled -bool false
+#defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
 ###############################################################################
 # Terminal & iTerm 2                                                          #
@@ -245,7 +245,7 @@ defaults write com.apple.screencapture location ~/Screenshots
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
     "Dock" "Finder" "Mail" "Messages" "Photos" "Safari" "SystemUIServer" \
-    "Terminal" "Tweetbot" "iCal"; do
+    "Terminal" "iCal"; do
     killall "${app}" &> /dev/null
 done
 
