@@ -2,3 +2,9 @@
 edit = [
 	{ run = 'hemux "$@"', block = false },
 ]
+[manager]
+ratio = [1,4,4]
+show_hidden = true
+sort_by = "natural"
+sort_dir_first = true
+linemode = "size"

@@ -14,3 +14,5 @@ if [ ! -z "$hx_pane_idx" ]
   else
     tmux splitw -h -l70% "hx $@"
 fi
+
+# ya emit-to "$YAZI_ID" plugin hide-preview
