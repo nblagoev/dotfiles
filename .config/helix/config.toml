@@ -1,6 +1,7 @@
 theme = "catppuccin_mocha"
 
 [editor]
+line-number = "relative"
 bufferline = "multiple"
 color-modes = true
 true-color = true
@@ -16,7 +17,7 @@ select = "underline"
 [editor.statusline]
 left = ["mode", "spacer", "spinner", "spacer", "version-control"]
 center = ["file-name", "file-modification-indicator", "read-only-indicator"]
-right = ["diagnostics", "workspace-diagnostics", "selections", "register", "position", "file-encoding", "file-line-ending" ]
+right = ["diagnostics", "workspace-diagnostics", "selections", "register", "position", "file-encoding", "file-line-ending", "file-type" ]
 separator = "│"
 mode.normal = "NOR"
 mode.insert = "INS"
@@ -28,6 +29,7 @@ display-messages = true
 
 [editor.indent-guides]
 render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "╎"
 
 [editor.whitespace.render]
 space = "none"
@@ -41,26 +43,51 @@ tab = "→"
 hidden = false # show hidden files as in starting with a dot
 git-global = false # show files hidden by git globally
 
+# [editor.sticky-context]
+# enable = true
+# indicator = true
+# max-lines = 10
+
 [keys.normal]
 "y" = "yank_joined_to_clipboard"
 "Y" = ["extend_to_line_bounds", "yank_joined_to_clipboard"]
 "p" = "paste_clipboard_after"
 
-"d" = "delete_selection"
 "D" = ["extend_to_line_bounds", "delete_selection"]
 "R" = ":clipboard-paste-replace" 
 
+"C-," = "goto_previous_buffer"
+"C-." = "goto_next_buffer"
 "{" = ["goto_prev_paragraph", "collapse_selection"]
 "}" = ["goto_next_paragraph", "collapse_selection"]
 0 = "goto_line_start"
 "$" = "goto_line_end"
 "^" = "goto_first_nonwhitespace"
 
+# Move line up/down using A-k, A-j
+"A-k" = [
+  "extend_to_line_bounds",
+  "delete_selection",
+  "move_line_up",
+  "paste_before"
+]
+"A-j" = [
+  "extend_to_line_bounds",
+  "delete_selection",
+  "move_line_down",
+  "paste_before"
+]
+
 "V" = ["extend_to_line_bounds", "select_mode"]
+"C" = "@vglc" # same as t<CR>c
 
 # Search for word under cursor
 "*" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 "#" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_prev"]
+
+[keys.insert]
+# VSCode-like auto-completeion (pretty much all IDEs do it on C-space)
+"C-space" = "completion"
 
 [keys.select]
 "y" = "yank_joined_to_clipboard"

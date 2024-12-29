@@ -1,10 +1,15 @@
 [[language]]
 name = "rust"
+formatter = { command = "rustfmt" }
+auto-format = true
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
 
 [language.debugger]
-name = "lldb-vscode"
+name = "lldb-dap"
 transport = "stdio"
-command = "lldb-vscode"
+command = "lldb-dap"
 
 [[language.debugger.templates]]
 name = "binary"
