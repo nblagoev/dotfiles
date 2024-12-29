@@ -30,8 +30,11 @@
 
 	"editor.cursorBlinking": "phase",
 	"editor.cursorSmoothCaretAnimation": "on",
-	"editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', 'Iosevka', 'Fira Code'",
-	"editor.fontLigatures": "'ss02', 'cv14', 'zero'",
+	"editor.fontFamily": "'Monaspace Neon', 'JetBrains Mono', 'Menlo', 'Cascadia Code', 'Iosevka'",
+	// Ligatures for Monaspace Neon  --- j f r t **** @ @_
+	"editor.fontLigatures": "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'cv01' 4, 'cv31' 1",
+	// Ligatures for JetBrains Mono
+	// "editor.fontLigatures": "'ss02', 'cv14', 'zero'",
 	"editor.formatOnPaste": true,
 	"editor.formatOnType": true,
 	"editor.insertSpaces": false,
@@ -63,6 +66,10 @@
 	"files.exclude": {
 	  "**/.DS_Store": true,
 	  ".git": true
+	},
+	"files.readonlyInclude": {
+		"**/.cargo/registry/src/**/*.rs": true,
+		"**/lib/rustlib/src/rust/library/**/*.rs": true,
 	},
 	"files.insertFinalNewline": true,
 	"files.trimFinalNewlines": true,
@@ -103,10 +110,9 @@
 	"workbench.editor.closeOnFileDelete": false,
 	"workbench.settings.editor": "json",
 	"workbench.startupEditor": "newUntitledFile",
-	"workbench.colorTheme": "Catppuccin Frappé",
-	"workbench.iconTheme": "catppuccin-macchiato",
-	"workbench.preferredDarkColorTheme": "Catppuccin Macchiato",
-	"workbench.preferredLightColorTheme": "Catppuccin Frappé",
+    "workbench.iconTheme": "catppuccin-mocha",
+	"workbench.preferredDarkColorTheme": "Catppuccin Mocha",
+	"workbench.preferredLightColorTheme": "Catppuccin Latte",
 
 	"go.alternateTools": {
 		"go": "/opt/homebrew/bin/go"
