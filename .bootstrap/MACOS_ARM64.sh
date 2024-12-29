@@ -22,6 +22,11 @@ if [ -f "$ONEPASS_AGENT" ]; then
     ln -s $ONEPASS_AGENT ~/.1password/agent.sock
 fi
 
+rustup install nightly
+rustup default nightly
+source $HOME/.cargo/env
+rustup component add rust-analyzer
+
 cp -R ~/.config/kbl/ ~/Library/Keyboard\ Layouts
 
 ###############################################################################

@@ -6,10 +6,8 @@ if [[ $TERM = dumb ]]; then
   unset zle_bracketed_paste
 fi
 
-# Start tmux by default and exit terminal if tmux exits.
-if [[ -n "$TMUX" || "$AUTOSTART_TMUX" = "no" || -n "$INTELLIJ_ENV" || -n "$VSCODE_PID" ]] ; then
-   #export TERM=screen-256color-italic
-else
+# Start tmux by default in Alacritty and exit terminal if tmux exits.
+if [[ -n "$ALACRITTY_SOCKET" && -z "$TMUX" ]] ; then
   echo -e "\n\nAttaching tmux..."
   tmux attach-session || exec tmux new-session;
 fi
@@ -31,6 +29,8 @@ unset filename
 [ -f ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
 [ -f ~/.config/zsh/localrc.zsh ] && source ~/.config/zsh/localrc.zsh
 
-~/.local/bin/cleanup-history ~/.history
-fc -R # reload history
-trap "~/.local/bin/cleanup-history ~/.history" EXIT
+source $HOME/.cargo/env
+
+# ~/.local/bin/cleanup-history ~/.history
+# fc -R # reload history
+# trap "~/.local/bin/cleanup-history ~/.history" EXIT
