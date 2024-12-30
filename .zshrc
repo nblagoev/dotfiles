@@ -12,7 +12,7 @@ if [[ -n "$ALACRITTY_SOCKET" && -z "$TMUX" ]] ; then
   tmux attach-session || exec tmux new-session;
 fi
 
-source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 antidote load $HOME/.zplugins
 
 eval "$(fzf --zsh)"

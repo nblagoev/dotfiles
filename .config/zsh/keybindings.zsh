@@ -31,21 +31,6 @@ bindkey '^F' fzf-file-widget
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-# If we're in tmux, then ^A is our prefix. Otherwise, bind it to 'move a thing
-# into tmux'. This only works on Linux.
-function ctrla() {
-    if [[ -e "$TMUX" ]] && (( $+commands[reptyr] )); then
-        kill -TSTP $$
-        bg >/dev/null 2>&1
-        disown
-        tmux new-window "$SHELL -c 'reptyr $$'"
-        tmux attach
-    else
-        zle push-input
-    fi
-}
-
-
 function zle-keymap-select zle-line-init
 {
        # change cursor shape in xterm

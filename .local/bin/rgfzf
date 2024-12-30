@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 if [ $# -eq 0 ]; then
-    echo "Open files that contain given matches in vim-wrapper, selected by fzf"
+    echo "Open files that contain given matches in helix, selected by fzf"
     echo
     # arguments are given directly to ripgrep, so use its help page
     rg 2>&1 | sed "s+rg +rgfzf +g"
@@ -13,4 +13,4 @@ rg --smart-case --hidden --vimgrep --ignore-file=$HOME/.rgignore --color=always 
     | fzf --cycle --multi --ansi \
     | cut -d ':' -f 1-3 \
     | tr '\n' '\0' \
-    | exec xargs -0 sh -c 'exec $0 "$@" </dev/tty' ~/.local/bin/vim-wrapper
+    | exec xargs -0 sh -c 'exec $0 "$@" </dev/tty' $EDITOR
