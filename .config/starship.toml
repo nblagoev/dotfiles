@@ -1,32 +1,45 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 palette = "catppuccin_mocha"
-format = """$env_var$os/ $shlvl$singularity$kubernetes$directory\
-$git_branch$git_commit$git_state$git_metrics$git_status\
-$docker_context$package$golang$java$nodejs$python$rust$terraform$gcloud$sudo$cmd_duration$fill$direnv\
-$line_break$jobs$status$container$shell$character
-"""
-add_newline = false
-
-[fill]
-symbol = ' '
-
-[env_var]
-symbol = "┌─ "
-variable = 'SHELL'
-format = "$symbol"
-disabled = false
+format = """
+[](surface0)\
+$os\
+$sudo\
+[](fg:overlay2 bg:surface0)\
+$directory\
+[](fg:overlay2 bg:surface2)\
+$git_branch\
+$git_status\
+$package\
+$rust\
+$golang\
+$nodejs\
+$terraform\
+$java\
+$python\
+$gcloud\
+$cmd_duration\
+[](fg:surface2 bg:surface0)\
+$direnv\
+[](fg:surface0)\
+$line_break$jobs$status$container$character"""
+# format = """$env_var$os/ $shlvl$singularity$kubernetes$directory\
+# $git_branch$git_commit$git_state$git_metrics$git_status\
+# $docker_context$package$golang$java$nodejs$python$rust$terraform$gcloud$sudo$cmd_duration$fill$direnv\
+# $line_break$jobs$status$container$shell$character
+# """
+add_newline = true
 
 [character]
-success_symbol = "└─ [❯](bold green)"
-error_symbol = "└─ [❯](bold red)"
-vimcmd_symbol = "└─ [❮](bold green)"
-vimcmd_replace_one_symbol = "└─ [❮](bold mauve)"
-vimcmd_replace_symbol = "└─ [❮](bold mauve)"
-vimcmd_visual_symbol = "└─ [❮](bold yellow)"
+success_symbol = " [󱞩](bold green)"
+error_symbol = " [󱞩](bold red)"
+vimcmd_symbol = " [󱞥](bold green)"
+vimcmd_replace_one_symbol = " [󱞥](bold mauve)"
+vimcmd_replace_symbol = " [󱞥](bold mauve)"
+vimcmd_visual_symbol = " [󱞥](bold yellow)"
 
 [os]
-format = '[$symbol](bold text) '
+format = '[$symbol](bold text bg:surface0)[ ](bg:surface0)'
 disabled = false
 
 [os.symbols]
@@ -39,48 +52,36 @@ Debian = "󰣚"
 Redhat = "󱄛"
 Unknown = '󰠥'
 
+[sudo]
+symbol = "🧙"
+format ="[$symbol]($style)"
+style = 'bg:surface0'
+disabled = false
+
 [directory]
 truncate_to_repo = true
 truncation_length = 4
 truncation_symbol = '…/'
-repo_root_style = 'sky'
+repo_root_style = 'bold fg:base bg:overlay2'
 #before_repo_root_style = 'black bold'
-format = '[$path]($style)[$read_only]($read_only_style) '
-style = 'teal'
+format = "[$path]($style)[$read_only]($read_only_style)"
+repo_root_format ="[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)"
+style = 'fg:mantle bg:overlay2'
 home_symbol = '~' # 
 read_only = '  '
 
-[cmd_duration]
-format = '[󰔛 $duration]($style) '
-
-[package]
-symbol = " "
-disabled = true
-
-[sudo]
-symbol = "🧙 "
-disabled = false
-
-[status]
-format = '[$symbol$maybe_int]($style) '
-map_symbol = true
-disabled = true
-
-[nodejs]
-symbol = " "
-disabled = true
-
 [git_branch]
 symbol = ' '
-style = 'bold maroon'
+format ="[ $symbol$branch(:$remote_branch)]($style)"
+style = 'fg:mantle bg:surface2'
 
 [git_commit]
 tag_disabled = false
 
 [git_status]
 disabled = false
-format = '[ $all_status$ahead_behind]($style) '
-style = 'bold rosewater'
+format = '[ $all_status$ahead_behind]($style)'
+style = 'fg:mantle bg:surface2'
 conflicted = ' ' #'🏳'
 up_to_date = ''
 untracked = ' '
@@ -93,10 +94,55 @@ staged = '[\($count\)](green)'
 renamed = '» '
 deleted = ' '
 
+[package]
+symbol = "  "
+format ="[$symbol$version]($style) "
+style = 'fg:mantle bg:surface2'
+disabled = true
+
+[rust]
+symbol = " 󱘗 "
+format ="[$symbol($version)]($style)"
+style = 'fg:mantle bg:surface2'
+disabled = false
+
+[golang]
+disabled = false
+
+[nodejs]
+symbol = "  "
+format ="[$symbol($version)]($style)"
+style = 'fg:mantle bg:surface2'
+disabled = true
+
+[terraform]
+symbol = " 󱁢 "
+format ="[$symbol$workspace]($style)"
+style = 'fg:mantle bg:surface2'
+
+[java]
+symbol = "  "
+format = "[$symbol($version)]($style)"
+style = 'fg:mantle bg:surface2'
+disabled = false
+
+[python]
+symbol =" 󰌠 "
+format ="[${symbol}${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style)"
+style = 'fg:mantle bg:surface2'
+disabled = false
+
+[gcloud]
+disabled = true
+
+[cmd_duration]
+format = '[  󰔛 $duration]($style)'
+style = "fg:mantle bg:surface2"
+
 [direnv]
 disabled = false
-format = '[$symbol $loaded $allowed]($style) '
-style = 'bold sky'
+format = '[$symbol $loaded $allowed ]($style)'
+style = 'bold text bg:surface0'
 symbol = '' # '󰌪'
 allowed_msg = ''
 not_allowed_msg = ''
@@ -104,11 +150,10 @@ denied_msg = ''
 loaded_msg = '󰄯'
 unloaded_msg = ''
 
-[gcloud]
+[status]
+format = '[$symbol$maybe_int]($style) '
+map_symbol = true
 disabled = true
-
-[terraform]
-symbol = "󱁢 "
 
 # palette tables should be last in the config ⚓️
 [palettes.catppuccin_macchiato]
