@@ -2,7 +2,6 @@
 
 tmux_path="$HOME/.config/tmux/tmux.conf"
 helix_path="$HOME/.config/helix/config.toml"
-alacritty_path="$HOME/.config/alacritty/alacritty.toml"
 starship_path="$HOME/.config/starship.toml"
 gitconfig_path="$HOME/.gitconfig"
 fzfrc_path="$HOME/.config/fzfrc"
@@ -11,13 +10,11 @@ yazi_path="$HOME/.config/yazi/theme.toml"
 btop_path="$HOME/.config/btop/btop.conf"
 
 latte_colors=( "#ccd0da" "#eff1f5" "#dc8a78" "#d20f39" "#4c4f69" "#8839ef" )
-mocha_colors=( "#313244" "#1e1e2e" "#f5e0dc" "#f38ba8" "#cdd6f4" "#cba6f7" )
-
+mocha_colors=( "#313244" "#181825" "#f5e0dc" "#f38ba8" "#cdd6f4" "#cba6f7" )
 
 if [[ $1 == 'on' || (-z $1 && $(defaults read -g AppleInterfaceStyle 2>/dev/null) == "Dark") ]]; then
-  sed -i '' 's/catppuccin-latte/catppuccin-mocha/' $alacritty_path
   sed -i '' '1s/theme = .*/theme = "catppuccin_mocha"/' $helix_path
-  sed -i '' '1s/palette = .*/palette = "catppuccin_mocha"/' $starship_path
+  sed -i '' 's/palette = .*/palette = "catppuccin_mocha"/' $starship_path
   sed -i '' 's/latte/mocha/' $tmux_path
   sed -i '' 's/latte/mocha/' $gitconfig_path
   sed -i '' 's/latte/mocha/' $batconfig_path
@@ -28,9 +25,8 @@ if [[ $1 == 'on' || (-z $1 && $(defaults read -g AppleInterfaceStyle 2>/dev/null
       sed -i '' "s/${latte_colors[i]}/${mocha_colors[i]}/" $fzfrc_path
   done
 else
-  sed -i '' 's/catppuccin-mocha/catppuccin-latte/' $alacritty_path
   sed -i '' '1s/theme = .*/theme = "catppuccin_latte"/' $helix_path
-  sed -i '' '1s/palette = .*/palette = "catppuccin_latte"/' $starship_path
+  sed -i '' 's/palette = .*/palette = "catppuccin_latte"/' $starship_path
   sed -i '' 's/mocha/latte/' $tmux_path
   sed -i '' 's/mocha/latte/' $gitconfig_path
   sed -i '' 's/mocha/latte/' $batconfig_path

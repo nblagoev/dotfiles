@@ -23,11 +23,6 @@ $cmd_duration\
 $direnv\
 [](fg:surface0)\
 $line_break$jobs$status$container$character"""
-# format = """$env_var$os/ $shlvl$singularity$kubernetes$directory\
-# $git_branch$git_commit$git_state$git_metrics$git_status\
-# $docker_context$package$golang$java$nodejs$python$rust$terraform$gcloud$sudo$cmd_duration$fill$direnv\
-# $line_break$jobs$status$container$shell$character
-# """
 add_newline = true
 
 [character]
