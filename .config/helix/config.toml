@@ -6,7 +6,7 @@ bufferline = "multiple"
 color-modes = true
 true-color = true
 cursorline = true
-auto-save = true # save when window looses focus
+auto-save = true
 rulers = [120]
 
 [editor.cursor-shape]
@@ -24,12 +24,17 @@ mode.insert = "INS"
 mode.select = "SEL"
 
 [editor.lsp]
+auto-signature-help = true
 display-inlay-hints = true
 display-messages = true
 
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "error"
+
 [editor.indent-guides]
 render = true
-character = "╎" # Some characters that work well: "▏", "┆", "┊", "╎"
+character = "┊" # Some characters that work well: "▏", "┆", "┊", "╎"
 
 [editor.whitespace.render]
 space = "none"
@@ -49,20 +54,16 @@ git-global = false # show files hidden by git globally
 # max-lines = 10
 
 [keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]
 "y" = "yank_joined_to_clipboard"
 "Y" = ["extend_to_line_bounds", "yank_joined_to_clipboard"]
 "p" = "paste_clipboard_after"
-
-"D" = ["extend_to_line_bounds", "delete_selection"]
 "R" = ":clipboard-paste-replace" 
 
-"C-," = "goto_previous_buffer"
-"C-." = "goto_next_buffer"
 "{" = ["goto_prev_paragraph", "collapse_selection"]
 "}" = ["goto_next_paragraph", "collapse_selection"]
 0 = "goto_line_start"
 "$" = "goto_line_end"
-"^" = "goto_first_nonwhitespace"
 
 # Move line up/down using A-k, A-j
 "A-k" = [
@@ -85,6 +86,12 @@ git-global = false # show files hidden by git globally
 "*" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 "#" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_prev"]
 
+[keys.normal."["]
+"[" = "goto_previous_buffer"
+
+[keys.normal."]"]
+"]" = "goto_next_buffer"
+
 [keys.insert]
 # VSCode-like auto-completeion (pretty much all IDEs do it on C-space)
 "C-space" = "completion"
@@ -97,24 +104,13 @@ git-global = false # show files hidden by git globally
 "}" = ["extend_to_line_bounds", "goto_next_paragraph"]
 0 = "goto_line_start"
 "$" = "goto_line_end"
-"^" = "goto_first_nonwhitespace"
-D = ["extend_to_line_bounds", "delete_selection", "normal_mode"]
 
 [keys.normal.space]
-# Add comma to the end of the line
-"," = [
-  "save_selection", "goto_line_end", ":append-output echo ','", 
-  "collapse_selection", "delete_selection", "jump_backward"
-]
-# Add semicolumn to the end of the line
-";" = [
-  "save_selection", "goto_line_end", ":append-output echo ';'",
-  "collapse_selection", "delete_selection", "jump_backward",
-]
 t = ":sh tmux popup"
 e = ":sh tmux splitw -bh -l30% yazi"
 E = ":sh tmux popup -E yazi"
 F = "file_picker_in_current_buffer_directory" # useful for accessing sibling files rather than a file tree
+l = ":toggle lsp.display-inlay-hints"
 "." = ":toggle-option file-picker.git-ignore" # toggle seeing files hidden with the .gitignore in file pickers
 "=" = ":format"
 "q" = ":wqa!" 

@@ -1,28 +1,5 @@
 theme = light:catppuccin-latte,dark:catppuccin-mocha
 
-font-family-italic       = Monaspace Radon Var
-font-family-bold-italic  = Monaspace Radon Var
-
-font-variation-italic      = wght=450
-font-variation-italic      = slnt=0
-font-variation-bold-italic = wght=700
-font-variation-bold-italic = slnt=0
-
-font-size = 12
-font-feature = calt
-font-feature = liga
-font-feature = zero
-font-feature = ss19
-font-feature = cv02
-font-feature = cv06
-font-feature = cv07
-font-feature = cv11
-font-feature = cv12
-font-feature = cv14
-font-feature = cv18
-font-feature = cv19
-font-feature = cv20
-
 window-height = 50
 window-width = 170
 window-padding-x = 5,1
@@ -49,3 +26,5 @@ keybind = ctrl+\=new_split:right
 
 # custom-shader = shaders/glitchy.glsl
 # custom-shader = shaders/bettercrt.glsl
+
+config-file = fonts/mixed.conf

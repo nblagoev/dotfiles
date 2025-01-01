@@ -115,6 +115,20 @@ rules = [
 ]
 
 [icon]
+dirs  = [
+	{ name = ".config", text = "" },
+	{ name = ".git", text = "" },
+	{ name = "Desktop", text = "" },
+	{ name = "Development", text = "" },
+	{ name = "Documents", text = "" },
+	{ name = "Downloads", text = "" },
+	{ name = "Library", text = "" },
+	{ name = "Movies", text = "" },
+	{ name = "Music", text = "" },
+	{ name = "Pictures", text = "" },
+	{ name = "Public", text = "" },
+	{ name = "Videos", text = "" },
+]
 files = [
   { name = "kritadisplayrc", text = "", fg = "#cba6f7" },
   { name = ".gtkrc-2.0", text = "", fg = "#f5e0dc" },

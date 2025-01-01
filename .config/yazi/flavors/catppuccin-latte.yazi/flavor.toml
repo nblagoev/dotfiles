@@ -115,6 +115,20 @@ rules = [
 ]
 
 [icon]
+dirs  = [
+	{ name = ".config", text = "" },
+	{ name = ".git", text = "" },
+	{ name = "Desktop", text = "" },
+	{ name = "Development", text = "" },
+	{ name = "Documents", text = "" },
+	{ name = "Downloads", text = "" },
+	{ name = "Library", text = "" },
+	{ name = "Movies", text = "" },
+	{ name = "Music", text = "" },
+	{ name = "Pictures", text = "" },
+	{ name = "Public", text = "" },
+	{ name = "Videos", text = "" },
+]
 files = [
   { name = "kritadisplayrc", text = "", fg = "#ea76cb" },
   { name = ".gtkrc-2.0", text = "", fg = "#eff1f5" },
@@ -548,7 +562,7 @@ exts = [
   { name = "ifc", text = "󰻫", fg = "#40a02b" },
   { name = "spec.js", text = "", fg = "#40a02b" },
   { name = "so", text = "", fg = "#e6e9ef" },
-  { name = "desktop", text = "", fg = "#4c4f69" },
+  { name = "desktop", text = "", fg = "#4c4f69" },
   { name = "sml", text = "λ", fg = "#fe640b" },
   { name = "slvs", text = "󰻫", fg = "#40a02b" },
   { name = "pp", text = "", fg = "#df8e1d" },
