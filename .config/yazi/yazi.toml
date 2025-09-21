@@ -3,7 +3,7 @@ edit = [
 	{ run = 'hemux "$@"', block = false },
 ]
 
-[manager]
+[mgr]
 ratio = [1,4,4]
 show_hidden = true
 sort_by = "natural"
