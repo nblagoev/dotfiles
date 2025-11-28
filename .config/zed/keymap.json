@@ -1,0 +1,106 @@
+// Zed keymap
+// https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap` from the command palette.
+[
+  // Disabled
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-p": null
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-w": null
+    }
+  },
+  {
+    "context": "(Editor && mode == full)",
+    "bindings": {
+      "cmd-e": null
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "space": null
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "cmd-1": null
+    }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-1": null
+    }
+  },
+
+  // Custom keybinds
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift shift": "command_palette::Toggle"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-w i": "terminal_panel::ToggleFocus",
+      "ctrl-w p": "agent::ToggleFocus",
+      "ctrl-w o": "project_panel::ToggleFocus",
+      "ctrl-w q": "workspace::CloseActiveDock",
+      "ctrl-w z": "workspace::ToggleZoom"
+      // "cmd-1": ["window::ActivateWindowTab", 0],
+      // "cmd-2": ["window::ActivateWindowTab", 1],
+      // "cmd-3": ["window::ActivateWindowTab", 2],
+      // "cmd-4": ["window::ActivateWindowTab", 3],
+      // "cmd-5": ["window::ActivateWindowTab", 4],
+      // "cmd-6": ["window::ActivateWindowTab", 5],
+      // "cmd-7": ["window::ActivateWindowTab", 6],
+      // "cmd-8": ["window::ActivateWindowTab", 7],
+      // "cmd-9": ["window::ActivateWindowTab", 8]
+    }
+  },
+  {
+    // Add these here because it seems like setting them to null doesn't
+    // really do anything. Duplicating the workspace panel focus works.
+    "context": "((VimControl && !menu) || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-w i": "terminal_panel::ToggleFocus",
+      "ctrl-w p": "agent::ToggleFocus",
+      "ctrl-w o": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-p": "editor::ShowSignatureHelp"
+    }
+  },
+  {
+    "context": "((vim_mode == helix_normal || vim_mode == helix_select) && !menu)",
+    "bindings": {
+      "] ]": "pane::ActivateNextItem"
+    }
+  },
+  {
+    "context": "((vim_mode == helix_normal || vim_mode == helix_select) && !menu)",
+    "bindings": {
+      "[ [": "pane::ActivatePreviousItem"
+    }
+  },
+  {
+    "context": "vim_mode == helix_insert",
+    "bindings": {
+      "ctrl-x o": "editor::ShowCompletions",
+      "ctrl-x a": "assistant::InlineAssist", // zed specific
+      "ctrl-x p": "editor::ShowEditPrediction" // zed specific
+    }
+  }
+]
