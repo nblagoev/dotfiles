@@ -1,9 +1,9 @@
 # Vi mode
-bindkey -v
+# bindkey -v
 export KEYTIMEOUT=1
 
 # Fix zsh not deleting non-inserted character in vi mode
-bindkey "^?" backward-delete-char
+# bindkey "^?" backward-delete-char
 
 # Move between words with Alt-arrows
 # bindkey "^[[1;3C" forward-word
@@ -30,6 +30,7 @@ bindkey '^F' fzf-file-widget
 # bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+bindkey '^R' fzf-history-widget
 
 function zle-keymap-select zle-line-init
 {

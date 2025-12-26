@@ -33,6 +33,11 @@ vimcmd_replace_one_symbol = " [󱞥](bold mauve)"
 vimcmd_replace_symbol = " [󱞥](bold mauve)"
 vimcmd_visual_symbol = " [󱞥](bold yellow)"
 
+[custom.helix_mode]
+format="[$output]($style) "
+command = 'echo $ZHM_MODE'
+when = 'test -n "$ZHM_MODE"'
+
 [os]
 format = '[$symbol](bold text bg:surface0)[ ](bg:surface0)'
 disabled = false
