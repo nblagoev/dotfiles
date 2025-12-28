@@ -29,15 +29,9 @@
     },
   },
   {
-    "context": "ProjectPanel",
-    "bindings": {
-      "cmd-1": null,
-    },
-  },
-  {
     "context": "Pane",
     "bindings": {
-      "cmd-1": null,
+      "ctrl--": null,
     },
   },
 
@@ -45,26 +39,20 @@
   {
     "context": "Workspace",
     "bindings": {
-      "shift shift": "command_palette::Toggle",
-    },
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
-      "ctrl-w i": "terminal_panel::ToggleFocus",
+      "ctrl-w t": "terminal_panel::ToggleFocus",
       "ctrl-w p": "agent::ToggleFocus",
       "ctrl-w o": "project_panel::ToggleFocus",
       "ctrl-w q": "workspace::CloseActiveDock",
       "ctrl-w z": "workspace::ToggleZoom",
-      // "cmd-1": ["window::ActivateWindowTab", 0],
-      // "cmd-2": ["window::ActivateWindowTab", 1],
-      // "cmd-3": ["window::ActivateWindowTab", 2],
-      // "cmd-4": ["window::ActivateWindowTab", 3],
-      // "cmd-5": ["window::ActivateWindowTab", 4],
-      // "cmd-6": ["window::ActivateWindowTab", 5],
-      // "cmd-7": ["window::ActivateWindowTab", 6],
-      // "cmd-8": ["window::ActivateWindowTab", 7],
-      // "cmd-9": ["window::ActivateWindowTab", 8]
+      // "alt-1": ["window::ActivateWindowTab", 0],
+      // "alt-2": ["window::ActivateWindowTab", 1],
+      // "alt-3": ["window::ActivateWindowTab", 2],
+      // "alt-4": ["window::ActivateWindowTab", 3],
+      // "alt-5": ["window::ActivateWindowTab", 4],
+      // "alt-6": ["window::ActivateWindowTab", 5],
+      // "alt-7": ["window::ActivateWindowTab", 6],
+      // "alt-8": ["window::ActivateWindowTab", 7],
+      // "alt-9": ["window::ActivateWindowTab", 8],
     },
   },
   {
@@ -72,7 +60,7 @@
     // really do anything. Duplicating the workspace panel focus works.
     "context": "((VimControl && !menu) || (!Editor && !Terminal))",
     "bindings": {
-      "ctrl-w i": "terminal_panel::ToggleFocus",
+      "ctrl-w t": "terminal_panel::ToggleFocus",
       "ctrl-w p": "agent::ToggleFocus",
       "ctrl-w o": "project_panel::ToggleFocus",
     },
@@ -81,6 +69,8 @@
     "context": "Editor",
     "bindings": {
       "cmd-p": "editor::ShowSignatureHelp",
+      "ctrl--": "pane::SplitDown",
+      "ctrl-\\": "pane::SplitRight",
     },
   },
   {
