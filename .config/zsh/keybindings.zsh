@@ -9,6 +9,10 @@ export KEYTIMEOUT=1
 # bindkey "^[[1;3C" forward-word
 # bindkey "^[[1;3D" backward-word
 
+# fix fzf-tab in helix mode
+zhm_wrap_widget fzf-tab-complete zhm_fzf_tab_complete
+bindkey '^I' zhm_fzf_tab_complete
+
 # list branches
 zle     -N   branch-widget
 bindkey '^B' branch-widget
