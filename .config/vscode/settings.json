@@ -31,7 +31,7 @@
 	"editor.cursorBlinking": "phase",
 	"editor.cursorSmoothCaretAnimation": "on",
 	"editor.fontFamily": "'Monaspace Neon', 'JetBrains Mono', 'Menlo', 'Cascadia Code', 'Iosevka'",
-	// Ligatures for Monaspace Neon  --- j f r t **** @ @_
+	// Ligatures for Monaspace Neon
 	"editor.fontLigatures": "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'cv01' 4, 'cv31' 1",
 	// Ligatures for JetBrains Mono
 	// "editor.fontLigatures": "'ss02', 'cv14', 'zero'",
@@ -132,4 +132,5 @@
 	"[html]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
+	"editor.unicodeHighlight.ambiguousCharacters": false,
   }
