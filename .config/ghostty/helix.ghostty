@@ -1,0 +1,77 @@
+# Helix-mode keybindings for Ghostty.
+#
+
+# Entry point
+keybind = alt+a=activate_key_table:helix
+keybind = ctrl+w=activate_key_table:window
+
+# Key table definition
+keybind = window/
+
+keybind = window/d=new_split:down
+keybind = window/v=new_split:down
+keybind = window/r=new_split:right
+keybind = window/s=new_split:right
+keybind = window/h=goto_split:left
+keybind = window/left=goto_split:left
+keybind = window/j=goto_split:down
+keybind = window/down=goto_split:down
+keybind = window/k=goto_split:up
+keybind = window/up=goto_split:up
+keybind = window/l=goto_split:right
+keybind = window/right=goto_split:right
+keybind = window/q=close_surface
+keybind = window/z=toggle_split_zoom
+
+# Exit
+keybind = window/escape=deactivate_key_table
+
+# Catch unbound keys
+keybind = window/catch_all=ignore
+
+# Key table definition
+keybind = helix/
+
+keybind = helix/space>slash=start_search
+
+keybind = helix/space>w>d=new_split:down
+keybind = helix/space>w>v=new_split:down
+keybind = helix/space>w>r=new_split:right
+keybind = helix/space>w>s=new_split:right
+keybind = helix/space>w>h=goto_split:left
+keybind = helix/space>w>j=goto_split:down
+keybind = helix/space>w>k=goto_split:up
+keybind = helix/space>w>l=goto_split:right
+keybind = helix/space>w>q=close_surface
+keybind = helix/space>w>z=toggle_split_zoom
+
+keybind = window/ctrl+w>d=new_split:down
+keybind = window/ctrl+w>v=new_split:down
+keybind = window/ctrl+w>r=new_split:right
+keybind = window/ctrl+w>s=new_split:right
+keybind = window/ctrl+w>h=goto_split:left
+keybind = window/ctrl+w>j=goto_split:down
+keybind = window/ctrl+w>k=goto_split:up
+keybind = window/ctrl+w>l=goto_split:right
+keybind = window/ctrl+w>q=close_surface
+keybind = window/ctrl+w>z=toggle_split_zoom
+
+# Jump to top/bottom
+keybind = helix/g>g=scroll_to_top
+keybind = helix/g>e=scroll_to_bottom
+
+# Search (if you want vim-style search entry)
+keybind = helix/slash=start_search
+keybind = helix/n=navigate_search:next
+
+# Copy mode / selection
+keybind = helix/v=copy_to_clipboard
+keybind = helix/y=copy_to_clipboard
+
+# Exit
+keybind = helix/escape=deactivate_key_table
+keybind = helix/q=deactivate_key_table
+keybind = helix/i=deactivate_key_table
+
+# Catch unbound keys
+keybind = helix/catch_all=ignore

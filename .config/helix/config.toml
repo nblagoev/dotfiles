@@ -115,9 +115,9 @@ C-y = [
 "$" = "goto_line_end"
 
 [keys.normal.space]
-t = ":sh tmux popup"
-e = ":sh tmux splitw -bh -l30% yazi"
-E = ":sh tmux popup -E yazi"
+# t = ":sh tmux popup"
+# e = ":sh tmux splitw -bh -l30% yazi"
+# E = ":sh tmux popup -E yazi"
 F = "file_picker_in_current_buffer_directory" # useful for accessing sibling files rather than a file tree
 l = ":toggle lsp.display-inlay-hints"
 "." = ":toggle-option file-picker.git-ignore" # toggle seeing files hidden with the .gitignore in file pickers
