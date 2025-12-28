@@ -10,12 +10,22 @@ rclone sync -P -v --ask-password=false --fast-list --exclude-from ~/.config/rclo
 	 ~/Library/Mobile\ Documents/iCloud~com~apple~iBooks/Documents \
 	 "gcs:nblagoev-europe-north1-glacier/nbl/Books"
 
+
 rclone sync -P -v --ask-password=false --fast-list --exclude-from ~/.config/rclone/filter.txt \
 	 ~/Library/Mobile\ Documents/com~apple~CloudDocs/misc \
 	 "gcs:nblagoev-europe-north1-glacier/nbl/Misc"
 
+rclone sync --dry-run -P -v --ask-password=false --fast-list --exclude-from ~/.config/rclone/filter.txt \
+	 ~/Library/Mobile\ Documents/com~apple~CloudDocs/misc \
+	 "ironforge:Personal-Drive/Nikolay Blagoev/misc"
+
+
 rclone sync -P -v --ask-password=false --fast-list --exclude-from ~/.config/rclone/filter.txt \
 	 ~/Library/Mobile\ Documents/com~apple~CloudDocs/docs \
 	 "sec:Docs"
+
+rclone sync --dry-run -P -v --ask-password=false --fast-list --exclude-from ~/.config/rclone/filter.txt \
+	 ~/Library/Mobile\ Documents/com~apple~CloudDocs/docs \
+	 "ironforge:Personal-Drive/Nikolay Blagoev/docs"
 
 rm -rf ~/.config/rclone/rclone.conf
