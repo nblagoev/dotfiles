@@ -30,6 +30,7 @@ unset filename
 [ -f ~/.config/zsh/localrc.zsh ] && source ~/.config/zsh/localrc.zsh
 
 source $HOME/.cargo/env
+source $HOME/.local/share/bob/env/env.sh
 
 # ~/.local/bin/cleanup-history ~/.history
 # fc -R # reload history

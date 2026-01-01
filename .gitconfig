@@ -1,12 +1,12 @@
 [include]
-    path = ~/.gitconfig.local
+  path = ~/.gitconfig.local
 	path = ~/.config/delta/themes/catppuccin.gitconfig
 
 [init]
 	defaultBranch = main
 
 [alias]
-    aliases     = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
+  aliases     = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
 	# Staging
 	a 			= add
 
@@ -67,7 +67,7 @@
 	today   	= log --since=midnight --color --graph \
 					--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
 					--abbrev-commit
-  	yday 	    = log --since yesterday --until=midnight --color --graph \
+  yday 	  = log --since yesterday --until=midnight --color --graph \
 					--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
 					--abbrev-commit
 
@@ -75,10 +75,10 @@
 	uncommit	= reset HEAD~1 --mixed # Resets the previous commit, but keeps all the changes from that commit in the WD
 	untrack 	= rm --cached --
 	unpushed = log --branches --not --remotes --simplify-by-decoration --decorate --oneline
-    untracked = "!git ls-files . --exclude-standard --others"
+  untracked = "!git ls-files . --exclude-standard --others"
 
 	# Remote
-    r 			= remote -v
+  r 			= remote -v
 
     # Submodules
 	subpull 	= submodule update --init --recursive
@@ -114,8 +114,8 @@
 	ui = always
 
 [color "status"]
-    added = green
-    changed = yellow
+  added = green
+  changed = yellow
 	untracked = red
 
 [color "branch"]
@@ -135,11 +135,11 @@
 	followTags = true
 
 [core]
-	editor = hx
+	editor = nvim
 	excludesfile = ~/.gitignore
 	autocrlf = input
 	ignorecase = false
-    pager = delta
+  pager = delta
 
 [interactive]
     diffFilter = delta --color-only

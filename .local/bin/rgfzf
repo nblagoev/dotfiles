@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 if [ $# -eq 0 ]; then
-    echo "Open files that contain given matches in helix, selected by fzf"
+    echo "Open files that contain given matches in vim, selected by fzf"
     echo
     # arguments are given directly to ripgrep, so use its help page
     rg 2>&1 | sed "s+rg +rgfzf +g"

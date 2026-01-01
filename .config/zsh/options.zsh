@@ -15,24 +15,6 @@ ZSH_HIGHLIGHT_PATTERNS+=(' [0-9]##.[0-9]##.[0-9]##.[0-9]##' 'fg=yellow')
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root line)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
-  zhm_history_prev
-  zhm_history_next
-  zhm_prompt_accept
-  zhm_accept
-  zhm_accept_or_insert_newline
-)
-ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(
-  zhm_move_right
-  zhm_clear_selection_move_right
-)
-ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(
-  zhm_move_next_word_start
-  zhm_move_next_word_end
-)
-
-zhm-add-update-region-highlight-hook
-
 # History options
 HISTFILE=~/.history
 HISTSIZE=50000

@@ -3,7 +3,7 @@
 export DEFAULT_USER=$USER
 export GH_GET_WORKSPACE_PATH="$HOME/dev"
 #export TERM=xterm-256color-italic
-export EDITOR=hx
+export EDITOR=nvim
 export PAGER=less
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 export HOMEBREW_CASK_OPTS=--require-sha

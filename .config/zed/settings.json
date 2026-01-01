@@ -21,7 +21,7 @@
     },
   },
   "base_keymap": "JetBrains",
-  "helix_mode": true,
+  "vim_mode": true,
   "sticky_scroll": {
     "enabled": true,
   },
@@ -50,7 +50,7 @@
   "buffer_font_size": 13,
   "theme": {
     "mode": "system",
-    "light": "Fleet Light",
+    "light": "Dayfox - opaque",
     "dark": "Fleet Dark Purple",
   },
   "terminal": {
@@ -80,7 +80,7 @@
   "rounded_selection": true,
   "minimap": {
     "max_width_columns": 120,
-    "show": "always",
+    "show": "never",
   },
   "indent_guides": {
     "enabled": true,
