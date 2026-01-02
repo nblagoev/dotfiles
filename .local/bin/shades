@@ -9,44 +9,44 @@ batconfig_path="$HOME/.config/bat/config"
 yazi_path="$HOME/.config/yazi/theme.toml"
 btop_path="$HOME/.config/btop/btop.conf"
 
-latte_colors=( "#ccd0da" "#eff1f5" "#dc8a78" "#d20f39" "#4c4f69" "#8839ef" )
-mocha_colors=( "#313244" "#181825" "#f5e0dc" "#f38ba8" "#cdd6f4" "#cba6f7" )
+terafox_colors=("#2d4f56" "#e6eaea" "#0f1c1e" "#4d7d90" "#293e40" "#73a3b7" "#afd4de" "#934e69" "#d96f3e" "#8eb2af" "#587b7b")
+dayfox_colors=("#aab0ad" "#3d2b5a" "#e4dcd4" "#223d90" "#4863b6" "#e7d2be" "#287980" "#5e2baf" "#7f5152" "#577f63" "#824d5b")
 
 if [[ $1 == 'on' || (-z $1 && $(defaults read -g AppleInterfaceStyle 2>/dev/null) == "Dark") ]]; then
   sed -i '' '1s/theme = .*/theme = "catppuccin_mocha"/' $helix_path
-  sed -i '' 's/palette = .*/palette = "catppuccin_mocha"/' $starship_path
-  sed -i '' 's/latte/mocha/' $tmux_path
-  sed -i '' 's/latte/mocha/' $gitconfig_path
-  sed -i '' 's/latte/mocha/' $batconfig_path
-  sed -i '' 's/latte/mocha/' $yazi_path
-  sed -i '' 's/latte/mocha/' $btop_path
+  sed -i '' 's/palette = .*/palette = "terafox"/' $starship_path
+  sed -i '' 's/dayfox/terafox/' $tmux_path
+  sed -i '' 's/dayfox/terafox/' $gitconfig_path
+  sed -i '' 's/dayfox/terafox/' $batconfig_path
+  sed -i '' 's/dayfox/terafox/' $yazi_path
+  sed -i '' 's/dayfox/terafox/' $btop_path
 
-  for i in "${!mocha_colors[@]}"; do
-      sed -i '' "s/${latte_colors[i]}/${mocha_colors[i]}/" $fzfrc_path
+  for i in "${!terafox_colors[@]}"; do
+    sed -i '' "s/${dayfox_colors[i]}/${terafox_colors[i]}/" $fzfrc_path
   done
 else
   sed -i '' '1s/theme = .*/theme = "catppuccin_latte"/' $helix_path
-  sed -i '' 's/palette = .*/palette = "catppuccin_latte"/' $starship_path
-  sed -i '' 's/mocha/latte/' $tmux_path
-  sed -i '' 's/mocha/latte/' $gitconfig_path
-  sed -i '' 's/mocha/latte/' $batconfig_path
-  sed -i '' 's/mocha/latte/' $yazi_path
-  sed -i '' 's/mocha/latte/' $btop_path
-  
-  for i in "${!latte_colors[@]}"; do
-      sed -i '' "s/${mocha_colors[i]}/${latte_colors[i]}/" $fzfrc_path
+  sed -i '' 's/palette = .*/palette = "dayfox"/' $starship_path
+  sed -i '' 's/terafox/dayfox/' $tmux_path
+  sed -i '' 's/terafox/dayfox/' $gitconfig_path
+  sed -i '' 's/terafox/dayfox/' $batconfig_path
+  sed -i '' 's/terafox/dayfox/' $yazi_path
+  sed -i '' 's/terafox/dayfox/' $btop_path
+
+  for i in "${!dayfox_colors[@]}"; do
+    sed -i '' "s/${terafox_colors[i]}/${dayfox_colors[i]}/" $fzfrc_path
   done
 fi
 
-if pgrep -x "tmux" > /dev/null; then
+if pgrep -x "tmux" >/dev/null; then
   # Signal Helix to reload its config in all tmux panes
   tmux_panes=$(tmux list-panes -a -F "#{session_id}:#{window_id}.#{pane_id};#{pane_current_command}")
   for pane in $tmux_panes; do
-      if [[ "hx" == "$(echo $pane | cut -d ";" -f2)" ]]; then
-        pane_id="$(echo $pane | cut -d ";" -f1)"
-        tmux send-keys -t "$pane_id" Escape
-        tmux send-keys -t "$pane_id" ":config-reload" Enter
-      fi
+    if [[ "hx" == "$(echo $pane | cut -d ";" -f2)" ]]; then
+      pane_id="$(echo $pane | cut -d ";" -f1)"
+      tmux send-keys -t "$pane_id" Escape
+      tmux send-keys -t "$pane_id" ":config-reload" Enter
+    fi
   done
 
   tmux source-file ~/.config/tmux/tmux.conf

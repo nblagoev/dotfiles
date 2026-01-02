@@ -1,6 +1,6 @@
-theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+# theme = light:Catppuccin Latte,dark:Catppuccin Mocha
 # theme = light:Rose Pine Dawn,dark:Rose Pine Moon
-# theme = light:Dayfox,dark:Terafox
+theme = light:Dayfox,dark:Terafox
 
 window-height = 50
 window-width = 170
@@ -8,15 +8,23 @@ window-padding-x = 5,1
 window-padding-y = 1,3
 window-save-state = always
 
-background-opacity = 0.6
-background-blur = macos-glass-regular
-# background-blur-radius = 20
-# unfocused-split-opacity = 0.4
+# Liquid Glass
+# background-opacity = 0.6
+# background-blur = macos-glass-regular
+
+# Non-Glass
+background-opacity = 0.95
+background-blur-radius = 20
+unfocused-split-opacity = 0.6
 
 macos-titlebar-style = tabs
 macos-option-as-alt = left
-# macos-icon = custom-style
-# macos-icon-frame = aluminum
+macos-icon = custom-style
+macos-icon-frame = beige
+# Terafox
+macos-icon-ghost-color = orange
+macos-icon-screen-color = #2d4f56,#254147,#1d3337,#152528,#0f1c1e
+# Catppuccin
 # macos-icon-ghost-color = #89b4fa
 # macos-icon-screen-color = #45475a,#585b70
 

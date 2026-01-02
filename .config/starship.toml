@@ -1,13 +1,13 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-palette = "catppuccin_mocha"
+palette = "terafox"
 format = """
 [](surface0)\
 $os\
 $sudo\
-[](fg:overlay2 bg:surface0)\
+[](fg:surface2 bg:surface0)\
 $directory\
-[](fg:overlay2 bg:surface2)\
+[](fg:surface2 bg:surface1)\
 $git_branch\
 $git_status\
 $package\
@@ -19,7 +19,7 @@ $java\
 $python\
 $gcloud\
 $cmd_duration\
-[](fg:surface2 bg:surface0)\
+[](fg:surface1 bg:surface0)\
 $direnv\
 [](fg:surface0)\
 $line_break$jobs$status$container$character"""
@@ -29,12 +29,12 @@ add_newline = true
 success_symbol = " [󱞩](bold green)"
 error_symbol = " [󱞩](bold red)"
 vimcmd_symbol = " [󱞥](bold green)"
-vimcmd_replace_one_symbol = " [󱞥](bold mauve)"
-vimcmd_replace_symbol = " [󱞥](bold mauve)"
+vimcmd_replace_one_symbol = " [󱞥](bold purple)"
+vimcmd_replace_symbol = " [󱞥](bold purple)"
 vimcmd_visual_symbol = " [󱞥](bold yellow)"
 
 [os]
-format = '[$symbol](bold text bg:surface0)[ ](bg:surface0)'
+format = '[$symbol](bold surface0_text bg:surface0)[ ](bg:surface0)'
 disabled = false
 
 [os.symbols]
@@ -57,18 +57,18 @@ disabled = false
 truncate_to_repo = true
 truncation_length = 4
 truncation_symbol = '…/'
-repo_root_style = 'bold fg:base bg:overlay2'
+repo_root_style = 'bold fg:repo_fg bg:surface2'
 #before_repo_root_style = 'black bold'
 format = "[$path]($style)[$read_only]($read_only_style)"
 repo_root_format ="[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)"
-style = 'fg:mantle bg:overlay2'
+style = 'fg:surface2_text bg:surface2'
 home_symbol = '~' # 
 read_only = '  '
 
 [git_branch]
 symbol = ' '
 format ="[ $symbol$branch(:$remote_branch)]($style)"
-style = 'fg:mantle bg:surface2'
+style = 'fg:surface1_text bg:surface1'
 
 [git_commit]
 tag_disabled = false
@@ -76,7 +76,7 @@ tag_disabled = false
 [git_status]
 disabled = false
 format = '[ $all_status$ahead_behind]($style)'
-style = 'fg:mantle bg:surface2'
+style = 'fg:surface1_text bg:surface1'
 conflicted = ' ' #'🏳'
 up_to_date = ''
 untracked = ' '
@@ -85,20 +85,20 @@ diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
 stashed = ' '
 modified = ' '
-staged = '[\($count\)](green bg:surface2)'
+staged = '[\($count\)](green bg:surface1)'
 renamed = '» '
 deleted = ' '
 
 [package]
 symbol = "  "
 format ="[$symbol$version]($style) "
-style = 'fg:mantle bg:surface2'
+style = 'fg:surface1_text bg:surface1'
 disabled = true
 
 [rust]
 symbol = " 󱘗 "
 format ="[$symbol($version)]($style)"
-style = 'fg:mantle bg:surface2'
+style = 'fg:surface1_text bg:surface1'
 disabled = false
 
 [golang]
@@ -107,24 +107,24 @@ disabled = false
 [nodejs]
 symbol = "  "
 format ="[$symbol($version)]($style)"
-style = 'fg:mantle bg:surface2'
+style = 'fg:surface1_text bg:surface1'
 disabled = true
 
 [terraform]
 symbol = " 󱁢 "
 format ="[$symbol$workspace]($style)"
-style = 'fg:mantle bg:surface2'
+style = 'fg:surface1_text bg:surface1'
 
 [java]
 symbol = "  "
 format = "[$symbol($version)]($style)"
-style = 'fg:mantle bg:surface2'
+style = 'fg:surface1_text bg:surface1'
 disabled = false
 
 [python]
 symbol =" 󰌠 "
 format ="[${symbol}${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style)"
-style = 'fg:mantle bg:surface2'
+style = 'fg:surface1_text bg:surface1'
 disabled = false
 
 [gcloud]
@@ -132,12 +132,12 @@ disabled = true
 
 [cmd_duration]
 format = '[  󰔛 $duration]($style)'
-style = "fg:mantle bg:surface2"
+style = "fg:surface1_text bg:surface1"
 
 [direnv]
 disabled = false
 format = '[$symbol $loaded $allowed ]($style)'
-style = 'bold text bg:surface0'
+style = 'bold surface0_text bg:surface0'
 symbol = '' # '󰌪'
 allowed_msg = ''
 not_allowed_msg = ''
@@ -151,114 +151,33 @@ map_symbol = true
 disabled = true
 
 # palette tables should be last in the config ⚓️
-[palettes.catppuccin_macchiato]
-rosewater = "#f4dbd6"
-flamingo = "#f0c6c6"
-pink = "#f5bde6"
-mauve = "#c6a0f6"
-red = "#ed8796"
-maroon = "#ee99a0"
-peach = "#f5a97f"
-yellow = "#eed49f"
-green = "#a6da95"
-teal = "#8bd5ca"
-sky = "#91d7e3"
-sapphire = "#7dc4e4"
-blue = "#8aadf4"
-lavender = "#b7bdf8"
-text = "#cad3f5"
-subtext1 = "#b8c0e0"
-subtext0 = "#a5adcb"
-overlay2 = "#939ab7"
-overlay1 = "#8087a2"
-overlay0 = "#6e738d"
-surface2 = "#5b6078"
-surface1 = "#494d64"
-surface0 = "#363a4f"
-base = "#24273a"
-mantle = "#1e2030"
-crust = "#181926"
+[palettes.terafox]
+pink = "#cb7985"
+purple= "#ad5c7c"
+red = "#e85c51"
+yellow = "#fda47f"
+green = "#7aa4a1"
+blue = "#5a93aa"
+surface0_text = "#eaeeee"
+surface1_text = "#cbd9d8"
+surface2_text = "#152528"
+surface0 = "#254147"
+surface1 = "#425e5e"
+surface2 = "#587b7b"
+repo_fg = "#1d3337"
 
-[palettes.catppuccin_frappe]
-rosewater = "#f2d5cf"
-flamingo = "#eebebe"
-pink = "#f4b8e4"
-mauve = "#ca9ee6"
-red = "#e78284"
-maroon = "#ea999c"
-peach = "#ef9f76"
-yellow = "#e5c890"
-green = "#a6d189"
-teal = "#81c8be"
-sky = "#99d1db"
-sapphire = "#85c1dc"
-blue = "#8caaee"
-lavender = "#babbf1"
-text = "#c6d0f5"
-subtext1 = "#b5bfe2"
-subtext0 = "#a5adce"
-overlay2 = "#949cbb"
-overlay1 = "#838ba7"
-overlay0 = "#737994"
-surface2 = "#626880"
-surface1 = "#51576d"
-surface0 = "#414559"
-base = "#303446"
-mantle = "#292c3c"
-crust = "#232634"
+[palettes.dayfox]
+pink = "#a440b5"
+purple= "#6e33ce"
+red = "#a5222f"
+yellow = "#AC5402"
+green = "#396847"
+blue = "#2848a9"
+surface1_text = "#302b5d"
+surface0_text = "#643f61"
+surface2_text = "#f6f2ee"
+surface0 = "#e7d2be"
+surface1 = "#d3c7bb"
+surface2 = "#824d5b"
+repo_fg = "#f4ece6"
 
-[palettes.catppuccin_latte]
-rosewater = "#dc8a78"
-flamingo = "#dd7878"
-pink = "#ea76cb"
-mauve = "#8839ef"
-red = "#d20f39"
-maroon = "#e64553"
-peach = "#fe640b"
-yellow = "#df8e1d"
-green = "#40a02b"
-teal = "#179299"
-sky = "#04a5e5"
-sapphire = "#209fb5"
-blue = "#1e66f5"
-lavender = "#7287fd"
-text = "#4c4f69"
-subtext1 = "#5c5f77"
-subtext0 = "#6c6f85"
-overlay2 = "#7c7f93"
-overlay1 = "#8c8fa1"
-overlay0 = "#9ca0b0"
-surface2 = "#acb0be"
-surface1 = "#bcc0cc"
-surface0 = "#ccd0da"
-base = "#eff1f5"
-mantle = "#e6e9ef"
-crust = "#dce0e8"
-
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"

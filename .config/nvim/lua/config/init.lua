@@ -73,4 +73,4 @@ require("lazy").setup({
 })
 
 -- Load colorscheme
-vim.cmd("colorscheme catppuccin")
+vim.cmd("colorscheme terafox")

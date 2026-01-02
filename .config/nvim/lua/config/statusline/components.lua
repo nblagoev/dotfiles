@@ -129,10 +129,10 @@ local function get_theme_color(mode)
   elseif vim.g.colors_name == "catppuccin-mocha" then
     local cp = require("catppuccin.palettes").get_palette("mocha")
     return mode == "insert" and cp.mauve or cp.blue
-  elseif string.match(vim.g.colors_name, "^github%-monochrome%-(.+)$") then
-    local style = string.match(vim.g.colors_name, "^github%-monochrome%-(.+)$")
-    local colors = require("github-monochrome.colors").setup({ style = style })
-    return mode == "insert" and colors.magenta or colors.blue
+  elseif string.match(vim.g.colors_name, "^(.+)fox$") then
+    local fox = require("nightfox.config").fox
+    local palette = require("nightfox.palette").load(fox)
+    return mode == "insert" and palette.magenta.base or palette.blue.base
   end
 
   if mode == "insert" then

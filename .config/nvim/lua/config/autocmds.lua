@@ -7,6 +7,21 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("nbl/" .. name, { clear = true })
 end
 
+-- Switch theme based on background color
+aucmd("OptionSet", {
+    pattern = "background",
+    callback = function()
+        if vim.o.background == "light" and vim.g.fox_theme ~= "dayfox" then
+            vim.g.fox_theme = "dayfox"
+            vim.cmd.colorscheme("dayfox")
+        end
+        if vim.o.background == "dark" and vim.g.fox_theme ~= "terafox" then
+            vim.g.fox_theme = "terafox"
+            vim.cmd.colorscheme("terafox")
+        end
+    end,
+})
+
 -- Autospelling and zen mode for tex and md files
 aucmd("BufRead", {
   pattern = { "*.tex", "*.typ", "*.qmd" },
