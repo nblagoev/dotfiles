@@ -12,7 +12,6 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim",
     },
     opts = {
       display = {
@@ -57,7 +56,6 @@ return {
     },
     dependencies = {
       "MunifTanjim/nui.nvim",
-      "nvim-telescope/telescope.nvim",
     },
   },
 }

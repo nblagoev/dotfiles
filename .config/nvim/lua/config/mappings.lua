@@ -302,36 +302,6 @@ keyset("n", "<leader>X", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 keyset("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]], { desc = "Substitute selection" })
 --: }}}
 
---: Quickfix and location list {{{
-keyset("n", "[q", "<cmd>cprev<cr>zvzz", { desc = "Previous quickfix item" })
-keyset("n", "]q", "<cmd>cnext<cr>zvzz", { desc = "Next quickfix item" })
-keyset("n", "[l", "<cmd>lprev<cr>zvzz", { desc = "Previous loclist item" })
-keyset("n", "]l", "<cmd>lnext<cr>zvzz", { desc = "Next loclist item" })
-keyset("n", "<C-q>", function()
-  local qf_exists = false
-  local loc_exists = false
-  for _, win in pairs(vim.fn.getwininfo()) do
-    if win["quickfix"] == 1 then
-      qf_exists = true
-    elseif win["loclist"] == 1 then
-      loc_exists = true
-    end
-  end
-  if qf_exists or loc_exists then
-    vim.cmd("cclose")
-    vim.cmd("lclose")
-  else
-    if vim.fn.getloclist(0, { size = 0 }).size > 0 then
-      vim.cmd("lopen 10")
-    elseif vim.fn.getqflist({ size = 0 }).size > 0 then
-      vim.cmd("copen 10")
-    else
-      vim.cmd("copen 10")
-    end
-  end
-end, { desc = "Toggle quickfix/location list" })
---: }}}
-
 --: Replace the easy-clip plugin {{{
 keyset({ "n", "v", "o" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
 keyset({ "n", "v", "o" }, "<leader>P", '"+P', { desc = "Paste from clipboard" })

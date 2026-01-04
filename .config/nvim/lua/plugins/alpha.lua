@@ -44,11 +44,8 @@ return {
       end),
       dashboard.button("s", "  Restore session", ':lua require("sessions").load_session() <CR>'),
       dashboard.button("l", "󰒲  Lazy", ":Lazy<CR>"),
-      dashboard.button("t", "󰄉  File History", ":Telescope oldfiles<cr>"),
-      dashboard.button("n", "  File Explorer", function()
-        require("mini.files").open()
-      end),
-      dashboard.button("c", "  Configuration", "<cmd>lcd ~/.config/nvim | Telescope find_files<cr>"),
+      dashboard.button("r", "󰄉  Recent Files", function() require("snacks").picker.recent() end),
+      dashboard.button("n", "  File Explorer", function() require("mini.files").open() end),
       -- dashboard.button("d", "  Dotfiles", "<cmd>lcd ~/dotfiles | echo 'Directory:' getcwd()<cr>"),
       dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
       { type = "padding", val = 1 },
