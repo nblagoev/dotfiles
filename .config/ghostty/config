@@ -20,20 +20,23 @@ unfocused-split-opacity = 0.6
 macos-titlebar-style = tabs
 macos-option-as-alt = left
 macos-icon = custom-style
-macos-icon-frame = beige
+# macos-icon-frame = beige
 # Terafox
-macos-icon-ghost-color = orange
+macos-icon-ghost-color = #688b89
 macos-icon-screen-color = #2d4f56,#254147,#1d3337,#152528,#0f1c1e
 # Catppuccin
 # macos-icon-ghost-color = #89b4fa
 # macos-icon-screen-color = #45475a,#585b70
 
+cursor-color = cell-foreground
+cursor-text = cell-background
+selection-foreground = cell-foreground
 copy-on-select = true
 confirm-close-surface = false
 
 auto-update-channel = tip
-command-palette-entry = title:"Dark Mode", action:"text:shades on\n"
-command-palette-entry = title:"Light Mode", action:"text:shades off\n"
+command-palette-entry = title:Dark,action:text:"shades on\n"
+command-palette-entry = title:Light,action:text:"shades off\n"
 
 keybind = global:ctrl+;=toggle_quick_terminal
 keybind = ctrl+-=new_split:down
@@ -45,4 +48,5 @@ keybind = ctrl+\=new_split:right
 # custom-shader = shaders/bettercrt.glsl
 custom-shader = shaders/cursor_smear.glsl
 
-config-file = fonts/mixed.conf
+# config-file = fonts/mixed.conf
+config-file = fonts/iosevka.conf
