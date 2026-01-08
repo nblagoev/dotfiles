@@ -145,12 +145,16 @@
     diffFilter = delta --color-only
 
 [delta]
-    navigate = true
+  navigate = true
 	features = catppuccin-mocha
 	syntax-theme = Catppuccin-mocha
 
 [merge]
-    conflictstyle = diff3
+  conflictstyle = diff3
+	tool = codediff
 
 [diff]
-    colorMoved = default
+  colorMoved = default
+
+[mergetool "codediff"]
+	cmd = nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\"
