@@ -28,16 +28,16 @@ vim.api.nvim_set_hl(0, "SLDecorator", { fg = "#414868", bg = "#7AA2F7", bold = t
 function Status_line()
   local filetype = vim.bo.filetype
 
-  local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil", "TelescopePrompt", "fzf", "snacks_picker_input" }
-  if vim.tbl_contains(filetypes, filetype) then
-    local home_dir = os.getenv("HOME")
-    local api = require("nvim-tree.api")
-    local node = api.tree.get_node_under_cursor()
-    local dir = filetype == "NvimTree" and node.absolute_path or vim.fn.getcwd()
-    dir = dir:gsub("^" .. home_dir, "~")
-    local ft = filetype:sub(1, 1):upper() .. filetype:sub(2)
-    return c.decorator({ name = ft .. ": " .. dir, align = "left" })
-  end
+  -- local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil", "TelescopePrompt", "fzf", "snacks_picker_input" }
+  -- if vim.tbl_contains(filetypes, filetype) then
+  --   local home_dir = os.getenv("HOME")
+  --   local api = require("nvim-tree.api")
+  --   local node = api.tree.get_node_under_cursor()
+  --   local dir = filetype == "NvimTree" and node.absolute_path or vim.fn.getcwd()
+  --   dir = dir:gsub("^" .. home_dir, "~")
+  --   local ft = filetype:sub(1, 1):upper() .. filetype:sub(2)
+  --   return c.decorator({ name = ft .. ": " .. dir, align = "left" })
+  -- end
 
   local components = {
     -- "%#SLNormal#",
@@ -64,7 +64,7 @@ function Status_line()
     c.get_position(),
     c.padding(2),
     -- c.file_icon() .. " ",
-    vim.bo.filetype:upper(),
+    filetype:upper(),
     c.padding(2),
     c.scrollbar2(),
     c.padding(),

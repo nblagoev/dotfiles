@@ -10,7 +10,7 @@ return {
       end,
       desc = "Namu - Buffer Symbols",
     },
-    { "gw", ":Namu watchtower<cr>", silent = true, desc = "Namu - Open buffers Symbols" },
+    { "gS", ":Namu watchtower<cr>", silent = true, desc = "Namu - Open buffers Symbols" },
     { "<leader>lS", ":Namu workspace<cr>", silent = true, desc = "Namu - LSP workspace symbols" },
     { "<leader>zd", ":Namu diagnostics<cr>", silent = true, desc = "Namu - Diagnostics Buffer" },
     { "<leader>zx", ":Namu diagnostics workspace<cr>", silent = true, desc = "Namu - Diagnostics Project" },

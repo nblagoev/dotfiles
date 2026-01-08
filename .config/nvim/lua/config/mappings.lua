@@ -415,6 +415,36 @@ end
 keyset("x", "<Space>D", compare_to_clipboard, { desc = "Compare to clipboard" })
 --: }}}
 
+--: Dotfiles {{{
+local function pick_dotfiles()
+  local home = os.getenv("HOME")
+
+  Snacks.picker({
+      finder = "proc",
+      title = "Dotfiles",
+      cmd = "/opt/homebrew/bin/git",
+      args = {
+          "--git-dir=" .. home .. "/.dotfiles/",
+          "--work-tree=" .. home,
+          "ls-tree",
+          "--full-tree",
+          "--name-only",
+          "-r",
+          "HEAD",
+      },
+      -- This handles the sed logic: prepending $HOME to the git output
+      transform = function(item)
+          item.file = home .. "/" .. item.text
+          return item
+      end,
+      -- Tells Snacks to show icons and handle file opening
+      format = "file",
+  })
+end
+
+keyset({ "n", "v", "o" }, "<leader>pd", pick_dotfiles, { desc = "Pick dotfiles" })
+--: }}}
+
 --: Utility mappings {{{
 keyset("n", "<space>y", "<cmd>let @+ = expand('%:p')<CR>")
 keyset("n", "<C-P>", function()

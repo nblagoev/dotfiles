@@ -36,8 +36,8 @@ return {
     }
 
     dashboard.section.buttons.val = {
-      dashboard.button("e", "󰈔  New file", ":ene <BAR> startinsert <CR>"),
-      dashboard.button("a", "󰱼  Find file", function()
+      dashboard.button("n", "󰈔  New file", ":ene <BAR> startinsert <CR>"),
+      dashboard.button("f", "󰱼  Find file", function()
         require("snacks").picker.files({
           layout = { preset = "select", layout = { width = 0.6, min_width = 100, height = 0.4, min_height = 17 } },
         })
@@ -45,8 +45,7 @@ return {
       dashboard.button("s", "  Restore session", ':lua require("sessions").load_session() <CR>'),
       dashboard.button("l", "󰒲  Lazy", ":Lazy<CR>"),
       dashboard.button("r", "󰄉  Recent Files", function() require("snacks").picker.recent() end),
-      dashboard.button("n", "  File Explorer", function() require("mini.files").open() end),
-      -- dashboard.button("d", "  Dotfiles", "<cmd>lcd ~/dotfiles | echo 'Directory:' getcwd()<cr>"),
+      dashboard.button("e", "  File Explorer", function() require("mini.files").open() end),
       dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
       { type = "padding", val = 1 },
     }
@@ -89,7 +88,7 @@ return {
     --   command = "set showtabline=0 | set laststatus=0",
     -- })
 
-    local alpha_group = vim.api.nvim_create_augroup("idr4n/alpha", { clear = true })
+    local alpha_group = vim.api.nvim_create_augroup("nbl/alpha", { clear = true })
     vim.api.nvim_create_autocmd("User", {
       group = alpha_group,
       desc = "Minimal UI in Alpha dashboard",

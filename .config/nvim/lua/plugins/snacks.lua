@@ -73,10 +73,11 @@ return {
     return {
       { "<leader>ff", function() snacks.picker.files() end, desc = "Find Files" },
       { "<C-Space>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
-      { "s", function() snacks.picker.buffers(buffers_opts) end, desc = "Buffers" },
+      -- { "s", function() snacks.picker.buffers(buffers_opts) end, desc = "Buffers" },
       { "<leader>:", function() snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>'", function() snacks.picker.resume() end, desc = "Resume" },
       { "<leader>u", function() snacks.picker.undo() end, desc = "Undo Tree" },
+      { "<leader>e", function() Snacks.explorer({follow_file=true}) end, desc = "File Explorer" },
       -- { "<C-P>", function() snacks.picker() end, desc = "Show all pickers" },
       -- find
       { "<leader>fb", function() snacks.picker.buffers() end, desc = "Buffers" },
@@ -105,6 +106,7 @@ return {
       { "<leader>qp", function() snacks.picker.projects() end, desc = "Projects" },
       -- misc
       { "<leader>pt", function() snacks.picker.colorschemes() end, desc = "Pick theme" },
+      { "<leader>zz", function() snacks.zen.zoom() end, desc = "Zoom window" },
       -- LSP
       { "gd", function() snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
       { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
