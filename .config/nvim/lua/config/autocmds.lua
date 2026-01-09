@@ -19,6 +19,9 @@ aucmd("OptionSet", {
     end,
 })
 
+-- Prevent accidental writes to buffers that shouldn't be edited
+aucmd("BufRead", { pattern = {'*.orig', '*.bak'}, command = 'set readonly' })
+
 -- Autospelling and zen mode for tex and md files
 aucmd("BufRead", {
   pattern = { "*.tex", "*.typ", "*.qmd" },
@@ -171,13 +174,13 @@ aucmd("User", {
 })
 
 -- Reset cursor shape on exit (needed in Fish within Tmux somehow)
-aucmd("VimLeave", {
-  group = augroup("CursorShape"),
-  pattern = "*",
-  callback = function()
-    vim.cmd("set guicursor=a:ver100")
-  end,
-})
+-- aucmd("VimLeave", {
+--   group = augroup("CursorShape"),
+--   pattern = "*",
+--   callback = function()
+--     vim.cmd("set guicursor=a:ver100")
+--   end,
+-- })
 
 -- Auto-save session on exit
 aucmd("VimLeavePre", {

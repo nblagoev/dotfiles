@@ -8,9 +8,8 @@ return {
       },
     },
     groups = {
-      duskfox = {
-        LineNr = { fg = "sel0" },
-        -- StatusLine = { fg = "palette.white.dim", bg = "NONE", style = "underline" },
+      all = {
+        TreesitterContextBottom = { style = "underline", sp = "bg4" },
       },
     },
   },
