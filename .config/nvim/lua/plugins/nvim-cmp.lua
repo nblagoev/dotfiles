@@ -10,18 +10,6 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lua",
     { "Gelio/cmp-natdat", config = true },
-    {
-      "js-everts/cmp-tailwind-colors",
-      opts = {
-        format = function(itemColor)
-          return {
-            fg = itemColor,
-            bg = nil, -- or nil if you dont want a background color
-            text = "󱓻 ", -- or use an icon
-          }
-        end,
-      },
-    },
     { "saecki/crates.nvim", event = { "BufRead Cargo.toml" } },
   },
   opts = function()
@@ -115,32 +103,6 @@ return {
       formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
-          -- START extra config for cmp-tailwind-colors (remove if not used)
-          if vim_item.kind == "Color" then
-            vim_item = require("cmp-tailwind-colors").format(entry, vim_item)
-
-            -- source nvchad/ui
-            local entryItem = entry:get_completion_item()
-            local color = entryItem.documentation
-            if color and type(color) == "string" and color:match("^#%x%x%x%x%x%x$") then
-              local hl = "hex-" .. color:sub(2)
-
-              if #vim.api.nvim_get_hl(0, { name = hl }) == 0 then
-                vim.api.nvim_set_hl(0, hl, { fg = color })
-              end
-
-              vim_item.kind_hl_group = hl
-              vim_item.menu_hl_group = hl
-            end
-
-            if vim_item.kind ~= "Color" then
-              vim_item.menu = "Color"
-              vim_item.kind = string.format(" %s", vim_item.kind)
-              return vim_item
-            end
-          end
-          -- END extra config for cmp-tailwind-colors
-
           vim_item.menu = vim_item.kind
           if nvchad_icons[vim_item.kind] then
             vim_item.kind = string.format(" %s ", nvchad_icons[vim_item.kind])

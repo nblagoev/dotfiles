@@ -22,7 +22,6 @@ M.ensure_installed = {
   "sqlls",
   "stylelint-lsp",
   "stylua",
-  "tailwindcss-language-server",
   "texlab",
   "tinymist",
   "vim-language-server",
