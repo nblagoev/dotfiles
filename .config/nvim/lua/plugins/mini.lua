@@ -5,6 +5,89 @@ return {
   },
 
   {
+    "echasnovski/mini.clue",
+    version = false,
+    event = "VeryLazy",
+    config = function()
+      local miniclue = require('mini.clue')
+      miniclue.setup({
+        triggers = {
+          -- Leader triggers
+          { mode = { 'n', 'x' }, keys = '<Leader>' },
+
+          -- `[` and `]` keys
+          { mode = 'n', keys = '[' },
+          { mode = 'n', keys = ']' },
+
+          -- Built-in completion
+          { mode = 'i', keys = '<C-x>' },
+
+          -- `g` key
+          { mode = { 'n', 'x' }, keys = 'g' },
+
+          -- Marks
+          { mode = { 'n', 'x' }, keys = "'" },
+          { mode = { 'n', 'x' }, keys = '`' },
+
+          -- Registers
+          { mode = { 'n', 'x' }, keys = '"' },
+          { mode = { 'i', 'c' }, keys = '<C-r>' },
+
+          -- Window commands
+          { mode = 'n', keys = '<C-w>' },
+
+          -- `z` key
+          { mode = { 'n', 'x' }, keys = 'z' },
+        },
+
+        clues = {
+          miniclue.gen_clues.square_brackets(),
+          miniclue.gen_clues.builtin_completion(),
+          miniclue.gen_clues.g(),
+          miniclue.gen_clues.marks(),
+          miniclue.gen_clues.registers(),
+          miniclue.gen_clues.windows(),
+          miniclue.gen_clues.z(),
+
+          { mode = 'n', keys = '<Leader>b', desc = '+Buffers' },
+          { mode = 'n', keys = '<Leader>c', desc = '+Code' },
+          { mode = 'n', keys = '<Leader>d', desc = '+Debug' },
+          { mode = 'n', keys = '<Leader>f', desc = '+File/Fold' },
+          { mode = 'n', keys = '<Leader>g', desc = '+Git/Glance' },
+          { mode = 'n', keys = '<Leader>h', desc = '+Gitsigns/Harpoon' },
+          { mode = 'n', keys = '<Leader>j', desc = '+AI' },
+          { mode = 'n', keys = '<Leader>l', desc = '+LSP' },
+          { mode = 'n', keys = '<Leader>m', desc = '+Markdown' },
+          { mode = 'n', keys = '<Leader>o', desc = '+Open' },
+          { mode = 'n', keys = '<Leader>n', desc = '+Notifications' },
+          { mode = 'n', keys = '<Leader>p', desc = '+Misc' },
+          { mode = 'n', keys = '<Leader>q', desc = '+Quit' },
+          { mode = 'n', keys = '<Leader>s', desc = '+Search/Replace' },
+          { mode = 'n', keys = '<Leader>t', desc = '+Toggle' },
+          { mode = 'n', keys = '<Leader>z', desc = '+Zoom' },
+          { mode = 'n', keys = '<Leader>/', desc = '+Multicursor' },
+
+          { mode = 'v', keys = '<Leader>c', desc = '+Code' },
+          { mode = 'v', keys = '<Leader>d', desc = '+Debug' },
+          { mode = 'v', keys = '<Leader>h', desc = '+Gitsigns' },
+          { mode = 'v', keys = '<Leader>j', desc = '+AI' },
+          { mode = 'v', keys = '<Leader>l', desc = '+LSP' },
+          { mode = 'v', keys = '<Leader>o', desc = '+Open' },
+          { mode = 'v', keys = '<Leader>s', desc = '+Search/Replace' },
+        },
+
+        window = {
+          delay = 250,
+          config = {
+            width = 'auto',
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+          },
+        },
+      })
+    end,
+  },
+
+  {
     "echasnovski/mini.files",
     keys = {
       {

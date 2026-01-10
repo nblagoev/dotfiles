@@ -2,11 +2,6 @@ return {
   "jake-stewart/multicursor.nvim",
   branch = "1.0",
   keys = function()
-    local wk = require("which-key")
-    wk.add({
-      { "<leader>/", group = "Multicursor" },
-    })
-
     local mc = require("multicursor-nvim")
       -- stylua: ignore
       return {
