@@ -24,6 +24,8 @@ vim.api.nvim_create_autocmd("User", {
 require("config.commands")
 require("config.autocmds")
 
+require("config.marks")
+
 --: load lazy.nvim and plugins
 -- Automatically install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

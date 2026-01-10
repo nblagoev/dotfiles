@@ -1,3 +1,6 @@
+-- Inspired by https://github.com/idr4n/nvim-lua/blob/9c36eed2a3b751994c96718136c9165e38387f20/lua/config/statusline/init.lua
+-- and https://github.com/mcauley-penney/nvim/blob/d1e11271246b55461a61c9f860e6843ff5a7a438/lua/ui/statusline.lua
+
 local ut = require("utils")
 local c = require("config.statusline.components")
 local colors = c.colors

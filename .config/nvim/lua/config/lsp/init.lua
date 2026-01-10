@@ -1,3 +1,5 @@
+# TODO: check the goodies in https://github.com/MariaSolOs/dotfiles/blob/main/.config/nvim/lua/lsp.lua
+
 local M = {}
 
 ---@param method string
@@ -53,6 +55,10 @@ M.on_attach = function(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
 
   lsp_keymaps(client, bufnr)
+
+  if client:supports_method 'textDocument/codeAction' then
+    require('config.lsp.lightbulb').attach_lightbulb(bufnr, client)
+  end
 
   if vim.fn.has("nvim-0.10.0") == 1 then
     -- inlay_hints

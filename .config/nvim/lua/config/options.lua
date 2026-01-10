@@ -123,6 +123,7 @@ vim.o.grepformat = "%f:%l:%c:%m"
 -- Recommended to disable by nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.g.netrw_nogx = 1
 
 -- Disable health checks for these providers.
 vim.g.loaded_ruby_provider = 0

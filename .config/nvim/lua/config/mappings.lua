@@ -233,6 +233,10 @@ keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
 --: }}}
 
+--: Redo {{{
+keymap('n', 'U', '<C-r>', { desc = 'Redo' })
+--- }}}
+
 --: Comment {{{
 -- toggle comment in normal mode
 keyset("n", "<C-c>", function()
@@ -387,6 +391,9 @@ keyset(
   { desc = "Set fold treesitter" }
 )
 keyset("n", "zm", ":set foldmethod=marker<cr>:set foldlevel=0<cr>", { desc = "Set fold marker" })
+keyset({ 'n', 'x' }, 'zV', function()
+  vim.cmd.normal({ 'zMzv', bang = true })
+end, { desc = 'Close all folds except current' })
 --: }}}
 
 --: Diff selection agains clipboard {{{
@@ -463,6 +470,7 @@ keyset("n", "<leader>qs", require("sessions").load_session, { desc = "Session - 
 --: }}}
 
 --: Delete default mappings {{{
+keyset({ "n", "v" }, "gx", "<Nop>", { remap = false })
 -- vim.kezmap.del({ "n" }, "crn")
 -- vim.keymap.del({ "n", "v" }, "crr")
 -- vim.keymap.del({ "n" }, "grr")
