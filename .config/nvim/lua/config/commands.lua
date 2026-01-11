@@ -67,7 +67,7 @@ vim.api.nvim_create_user_command("StatusMoreInfo", function()
   -- vim.g.show_more_info = not vim.g.show_more_info
   vim.cmd("redrawstatus!")
 end, {})
-keymap("n", "<leader>ti", ":StatusMoreInfo<cr>", { desc = "Custom command: Status more info" })
+keymap("n", "<leader>ti", ":StatusMoreInfo<cr>", { desc = "Status: more info" })
 
 -- Other Commands
 command("YankCwd", function()
@@ -253,7 +253,7 @@ command("ToggleSpellCheck", function()
     vim.notify("Spell checking enabled", vim.log.levels.INFO)
   end
 end, {})
-keymap("n", "<leader>tS", ":ToggleSpellCheck<cr>", { desc = "Toggle spell checking" })
+keymap("n", "<leader>tS", ":ToggleSpellCheck<cr>", { desc = "Spell checking" })
 
 -- Command to remove trailing whitespace
 command("TrimTrailingWhitespace", function(cmd_opts)

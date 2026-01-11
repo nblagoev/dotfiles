@@ -66,7 +66,7 @@ M.on_attach = function(client, bufnr)
       -- vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       vim.keymap.set("n", "<leader>th", function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
-      end, { buffer = bufnr, desc = "Toggle inlay hints" })
+      end, { buffer = bufnr, desc = "Inlay hints" })
     end
 
     -- Refresh inlay hints when file is changed externally or LSP reattaches

@@ -69,7 +69,7 @@ return {
         function()
           require("treesitter-context").toggle()
         end,
-        desc = "Toggle Treesitter Context",
+        desc = "Treesitter Context",
       },
       {
         "<leader>lc",

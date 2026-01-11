@@ -142,7 +142,7 @@ keyset("n", "<leader>tl", function()
     set invrelativenumber
     set invcursorline
     ]])
-end, { desc = "Toggle Line Numbers" })
+end, { desc = "Line Numbers" })
 --: }}}
 
 --: search for word under cursor and stays there {{{
@@ -285,6 +285,9 @@ keyset("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 keyset("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 keyset("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 keyset("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+keyset("n", "<leader>tD", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = "Diagnostic" })
 --: }}}
 
 --: paste and replace selection {{{

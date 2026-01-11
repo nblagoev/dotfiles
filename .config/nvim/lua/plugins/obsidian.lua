@@ -59,7 +59,7 @@ return {
         action = function()
           return require("obsidian").util.toggle_checkbox()
         end,
-        opts = { buffer = true, desc = "Toggle check-box (Obsidian)" },
+        opts = { buffer = true, desc = "Check-box (Obsidian)" },
       },
     },
 
