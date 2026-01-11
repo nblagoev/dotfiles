@@ -54,7 +54,10 @@ return {
       },
     },
     views = {
-      cmdline = { position = { row = "100%", col = 0 }, size = { height = "auto", width = "70%" } },
+      cmdline = {
+        position = { row = "100%", col = 0 },
+        size = { height = "auto", width = "70%"},
+      },
       cmdline_input = {
         position = { row = "25%", col = "50%" },
         -- size = { width = "65%" },

@@ -10,6 +10,7 @@ return {
     groups = {
       all = {
         TreesitterContextBottom = { style = "underline", sp = "bg4" },
+        NoiceCmdlinePopUp = { bg = "bg0" },
       },
     },
   },
