@@ -77,7 +77,7 @@ return {
       { "<leader>:", function() snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>'", function() snacks.picker.resume() end, desc = "Resume" },
       { "<leader>u", function() snacks.picker.undo() end, desc = "Undo Tree" },
-      { "<leader>e", function() Snacks.explorer({follow_file=true}) end, desc = "File Explorer" },
+      { "<leader>e", function() snacks.explorer({follow_file=true}) end, desc = "File Explorer" },
       -- { "<C-P>", function() snacks.picker() end, desc = "Show all pickers" },
       -- find
       { "<leader>fb", function() snacks.picker.buffers() end, desc = "Buffers" },
@@ -87,10 +87,10 @@ return {
       { "<leader>gc", function() snacks.picker.git_log() end, desc = "Git Log" },
       { "<leader>gs", function() snacks.picker.git_status({ on_show = function() vim.cmd.stopinsert() end }) end, desc = "Git Status" },
       -- Grep
-      { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
-      { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
-      { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
-      { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+      { "<leader>sb", function() snacks.picker.lines() end, desc = "Buffer Lines" },
+      { "<leader>sB", function() snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+      { "<leader>sg", function() snacks.picker.grep({ dirs = { vim.fn.getcwd() }}) end, desc = "Grep" },
+      { "<leader>sw", function() snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
       -- search
       { '<leader>s"', function() snacks.picker.registers() end, desc = "Registers" },
       { "<leader>sa", function() snacks.picker.autocmds() end, desc = "Autocmds" },
@@ -109,11 +109,11 @@ return {
       { "<leader>zz", function() snacks.zen.zoom() end, desc = "Zoom window" },
       -- LSP
       { "gd", function() snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
-      { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+      { "gD", function() snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
       { "<leader>gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
       { "gI", function() snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
       { "gy", function() snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-      { "<leader>ls", function() Snacks.picker.lsp_symbols() end, desc = "LSP Document Symbols" },
+      { "<leader>ls", function() snacks.picker.lsp_symbols() end, desc = "LSP Document Symbols" },
     }
   end,
 }

@@ -41,8 +41,8 @@ end
 --: }}}
 
 --: Press jj/jk fast to kick out of insert/command/terminal mode {{{
-keyset({"i", "c"}, "jj", "<ESC>")
-keyset({"i", "c"}, "jk", "<ESC>")
+keyset({ "i", "c" }, "jj", "<ESC>")
+keyset({ "i", "c" }, "jk", "<ESC>")
 keymap("t", "<Esc>", [[<C-\><C-n>]])
 keymap("t", "jj", [[<C-\><C-n>]])
 keymap("t", "jk", [[<C-\><C-n>]])
@@ -234,7 +234,7 @@ keymap("v", ">", ">gv")
 --: }}}
 
 --: Redo {{{
-keymap('n', 'U', '<C-r>', { desc = 'Redo' })
+keymap("n", "U", "<C-r>", { desc = "Redo" })
 --- }}}
 
 --: Comment {{{
@@ -391,9 +391,9 @@ keyset(
   { desc = "Set fold treesitter" }
 )
 keyset("n", "zm", ":set foldmethod=marker<cr>:set foldlevel=0<cr>", { desc = "Set fold marker" })
-keyset({ 'n', 'x' }, 'zV', function()
-  vim.cmd.normal({ 'zMzv', bang = true })
-end, { desc = 'Close all folds except current' })
+keyset({ "n", "x" }, "zV", function()
+  vim.cmd.normal({ "zMzv", bang = true })
+end, { desc = "Close all folds except current" })
 --: }}}
 
 --: Diff selection agains clipboard {{{
@@ -427,25 +427,25 @@ local function pick_dotfiles()
   local home = os.getenv("HOME")
 
   Snacks.picker({
-      finder = "proc",
-      title = "Dotfiles",
-      cmd = "/opt/homebrew/bin/git",
-      args = {
-          "--git-dir=" .. home .. "/.dotfiles/",
-          "--work-tree=" .. home,
-          "ls-tree",
-          "--full-tree",
-          "--name-only",
-          "-r",
-          "HEAD",
-      },
-      -- This handles the sed logic: prepending $HOME to the git output
-      transform = function(item)
-          item.file = home .. "/" .. item.text
-          return item
-      end,
-      -- Tells Snacks to show icons and handle file opening
-      format = "file",
+    finder = "proc",
+    title = "Dotfiles",
+    cmd = "/opt/homebrew/bin/git",
+    args = {
+      "--git-dir=" .. home .. "/.dotfiles/",
+      "--work-tree=" .. home,
+      "ls-tree",
+      "--full-tree",
+      "--name-only",
+      "-r",
+      "HEAD",
+    },
+    -- This handles the sed logic: prepending $HOME to the git output
+    transform = function(item)
+      item.file = home .. "/" .. item.text
+      return item
+    end,
+    -- Tells Snacks to show icons and handle file opening
+    format = "file",
   })
 end
 

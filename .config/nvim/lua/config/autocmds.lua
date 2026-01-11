@@ -182,6 +182,11 @@ vim.api.nvim_create_autocmd('VimEnter', {
       return
     end
 
+    local ok, inside_dev = pcall(vim.startswith, vim.fn.getcwd(), vim.env.HOME .. "/dev")
+    if not ok or inside_dev then
+      return
+    end
+
     -- Configure git environment.
     vim.env.GIT_WORK_TREE = vim.env.HOME
     vim.env.GIT_DIR = vim.env.HOME .. '/.dotfiles'
