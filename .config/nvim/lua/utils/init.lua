@@ -94,10 +94,10 @@ M.git_icons = {
 }
 
 M.diagnostic_icons = {
-  Error = " ",
-  Warn = " ",
-  Info = " ",
-  Hint = "󰌵 ",
+  Error = " ",
+  Warn = " ",
+  Info = " ",
+  Hint = " ",
 }
 
 M.devicons_override = {

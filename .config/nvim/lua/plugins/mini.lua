@@ -118,8 +118,9 @@ return {
           -- Window commands
           { mode = 'n', keys = '<C-w>' },
 
-          -- `z` key
+          -- `z` and `,` keys
           { mode = { 'n', 'x' }, keys = 'z' },
+          { mode = { 'n', 'x' }, keys = ',' },
         },
 
         clues = {
