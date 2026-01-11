@@ -24,6 +24,8 @@ return {
       bt_ignore = { "terminal" },
       segments = {
         { sign = { namespace = { "diagnostic" }, name = { "Dap*" } }, click = "v:lua.ScSa" },
+        { sign = { namespace = { "nbl/lightbulb" }, auto = true}, click = "v:lua.ScSa" },
+        { sign = { namespace = { "nbl/marks" }, auto = true }, click = "v:lua.ScSa" },
         {
           -- text = { "", builtin.lnumfunc, "" },
           condition = { true, builtin.not_empty },

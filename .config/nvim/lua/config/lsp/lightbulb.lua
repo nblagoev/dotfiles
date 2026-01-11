@@ -34,6 +34,11 @@ local function update_extmark(bufnr, line)
         virt_text = { { ' ' .. lb_icon, 'DiagnosticSignHint' } },
         hl_mode = 'combine',
     })
+    -- uncomment if the lightbulb should be shown in the status column
+    -- pcall(vim.api.nvim_buf_set_extmark, bufnr, lb_namespace, line, 0, {
+    --     sign_text = lb_icon,
+    --     sign_hl_group = 'DiagnosticSignHint',
+    -- })
 
     updated_bufnr = bufnr
 end
