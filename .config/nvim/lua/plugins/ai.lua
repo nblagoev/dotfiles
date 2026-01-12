@@ -67,11 +67,11 @@ return {
     },
     keys = {
       {
-        "<leader>cp",
+        "<leader>tP",
         function()
           vim.cmd("Copilot toggle")
         end,
-        desc = "Copilot Toggle",
+        desc = "Copilot",
       },
     },
     opts = {
@@ -101,7 +101,7 @@ return {
     -- stylua: ignore
     keys = {
       {
-        "<leader>cx",
+        "<leader>tC",
         function()
           if vim.g.codeium_enabled then
             vim.cmd("CodeiumDisable")

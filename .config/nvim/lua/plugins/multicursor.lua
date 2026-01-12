@@ -8,8 +8,8 @@ return {
         -- Add or skip cursor above/below the main cursor.
         { "<up>", function() mc.lineAddCursor(-1) end, mode = { "n", "x" }, desc = "Multicursor" },
         { "<down>", function() mc.lineAddCursor(1) end, mode = { "n", "x" }, desc = "Multicursor" },
-        { "<leader><up>", function() mc.lineSkipCursor(-1) end, mode = { "n", "x" }, desc = "Multicursor" },
-        { "<leader><down>", function() mc.lineSkipCursor(1) end, mode = { "n", "x" }, desc = "Multicursor" },
+        -- { "<leader><up>", function() mc.lineSkipCursor(-1) end, mode = { "n", "x" }, desc = "Multicursor" },
+        -- { "<leader><down>", function() mc.lineSkipCursor(1) end, mode = { "n", "x" }, desc = "Multicursor" },
 
         { "<C-N>", function() mc.matchAddCursor(1) end, mode = { "n", "x" }, desc = "Multicursor" },
         { "<leader>/n", function() mc.matchAddCursor(1) end, mode = { "n", "x" }, desc = "Multicursor - Add next match" },

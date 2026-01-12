@@ -2,7 +2,7 @@ return {
   {
     "mason-org/mason.nvim",
     cmd = "Mason",
-    keys = { { "<leader>om", "<cmd>Mason<cr> " } },
+    keys = { { "<leader>om", "<cmd>Mason<cr> ", desc = "Mason" } },
     build = ":MasonUpdate",
     opts = {
       ensure_installed = require("config.lsp.server_names").ensure_installed,
@@ -70,12 +70,12 @@ return {
     },
     keys = {
       {
-        "<leader>cD",
+        "<leader>td",
         function()
           local new_config = not vim.diagnostic.config().virtual_lines
           vim.diagnostic.config({ virtual_lines = new_config })
         end,
-        desc = "Toggle diagnostic virtual_lines",
+        desc = "Diagnostic virtual lines",
       },
     },
     config = function()
@@ -265,12 +265,12 @@ return {
         function()
           require("namu.namu_symbols").show()
         end,
-        desc = "Namu - Buffer Symbols",
+        desc = "Buffer Symbols",
       },
-      { "gS", ":Namu watchtower<cr>", silent = true, desc = "Namu - Open buffers Symbols" },
-      { "<leader>lS", ":Namu workspace<cr>", silent = true, desc = "Namu - LSP workspace symbols" },
-      { "<leader>zd", ":Namu diagnostics<cr>", silent = true, desc = "Namu - Diagnostics Buffer" },
-      { "<leader>zx", ":Namu diagnostics workspace<cr>", silent = true, desc = "Namu - Diagnostics Project" },
+      { "gS", ":Namu watchtower<cr>", silent = true, desc = "Buffer Symbols" },
+      { "<leader>lS", ":Namu workspace<cr>", silent = true, desc = "Workspace Symbols" },
+      { "<leader>ld", ":Namu diagnostics<cr>", silent = true, desc = "Buffer Diagnostics" },
+      { "<leader>lD", ":Namu diagnostics workspace<cr>", silent = true, desc = "Workspace Diagnostics" },
     },
     config = function()
       require("namu").setup({

@@ -74,8 +74,7 @@ return {
       { "<leader>ff", function() snacks.picker.files() end, desc = "Find Files" },
       { "<C-Space>", function() snacks.picker.files(default_opts) end, desc = "Find Files" },
       -- { "s", function() snacks.picker.buffers(buffers_opts) end, desc = "Buffers" },
-      { "<leader>:", function() snacks.picker.command_history() end, desc = "Command History" },
-      { "<leader>'", function() snacks.picker.resume() end, desc = "Resume" },
+      { "<leader>'", function() snacks.picker.resume() end, desc = "Resume picker" },
       { "<leader>u", function() snacks.picker.undo() end, desc = "Undo Tree" },
       { "<leader>e", function() snacks.explorer({follow_file=true}) end, desc = "File Explorer" },
       -- { "<C-P>", function() snacks.picker() end, desc = "Show all pickers" },
@@ -105,15 +104,15 @@ return {
       { "<leader>sR", function() snacks.picker.resume() end, desc = "Resume Snacks Picker" },
       { "<leader>qp", function() snacks.picker.projects() end, desc = "Projects" },
       -- misc
-      { "<leader>pt", function() snacks.picker.colorschemes() end, desc = "Pick theme" },
-      { "<leader>zz", function() snacks.zen.zoom() end, desc = "Zoom window" },
+      { "<leader>tt", function() snacks.picker.colorschemes() end, desc = "Pick theme" },
+      { "<leader>tz", function() snacks.zen.zoom() end, desc = "Zoom window" },
       -- LSP
       { "gd", function() snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
       { "gD", function() snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
       { "<leader>gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
       { "gI", function() snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
       { "gy", function() snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-      { "<leader>ls", function() snacks.picker.lsp_symbols() end, desc = "LSP Document Symbols" },
+      { "<leader>ls", function() snacks.picker.lsp_symbols() end, desc = "Buffer Symbols" },
     }
   end,
 }

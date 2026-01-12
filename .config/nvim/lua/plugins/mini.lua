@@ -125,28 +125,26 @@ return {
 
         clues = {
           { mode = 'n', keys = '<Leader>b', desc = '+Buffers' },
-          { mode = 'n', keys = '<Leader>c', desc = '+Code' },
           { mode = 'n', keys = '<Leader>d', desc = '+Debug' },
           { mode = 'n', keys = '<Leader>f', desc = '+File/Fold' },
           { mode = 'n', keys = '<Leader>g', desc = '+Git/Glance' },
           { mode = 'n', keys = '<Leader>h', desc = '+Gitsigns/Harpoon' },
           { mode = 'n', keys = '<Leader>j', desc = '+AI' },
-          { mode = 'n', keys = '<Leader>l', desc = '+LSP' },
-          { mode = 'n', keys = '<Leader>m', desc = '+Markdown' },
-          { mode = 'n', keys = '<Leader>o', desc = '+Open' },
+          { mode = 'n', keys = '<Leader>l', desc = '+Language' },
+          { mode = 'n', keys = '<Leader>L', desc = '+Lua' },
           { mode = 'n', keys = '<Leader>n', desc = '+Notifications' },
-          { mode = 'n', keys = '<Leader>p', desc = '+Misc' },
+          { mode = 'n', keys = '<Leader>o', desc = '+Open' },
           { mode = 'n', keys = '<Leader>q', desc = '+Quit' },
           { mode = 'n', keys = '<Leader>s', desc = '+Search/Replace' },
           { mode = 'n', keys = '<Leader>t', desc = '+Toggle' },
-          { mode = 'n', keys = '<Leader>z', desc = '+Zoom' },
           { mode = 'n', keys = '<Leader>/', desc = '+Multicursor' },
+          { mode = 'n', keys = '<Leader><Tab>', desc = '+Tabs' },
 
           { mode = 'v', keys = '<Leader>c', desc = '+Code' },
           { mode = 'v', keys = '<Leader>d', desc = '+Debug' },
           { mode = 'v', keys = '<Leader>h', desc = '+Gitsigns' },
           { mode = 'v', keys = '<Leader>j', desc = '+AI' },
-          { mode = 'v', keys = '<Leader>l', desc = '+LSP' },
+          { mode = 'v', keys = '<Leader>l', desc = '+Language' },
           { mode = 'v', keys = '<Leader>o', desc = '+Open' },
           { mode = 'v', keys = '<Leader>s', desc = '+Search/Replace' },
 
@@ -429,7 +427,9 @@ return {
     "echasnovski/mini.splitjoin",
     event = { "BufReadPost", "BufNewFile" },
     version = false,
-    opts = {},
+    opts = {
+      mappings = { toggle = ',S'}
+    },
   },
 
   {

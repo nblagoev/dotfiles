@@ -18,9 +18,6 @@ return {
       server = {
         on_attach = function(client, bufnr)
           require("config.lsp").on_attach(client, bufnr)
-          vim.keymap.set("n", "<leader>ca", function()
-            vim.cmd.RustLsp("codeAction")
-          end, { desc = "Code Action (Rust)", buffer = bufnr })
           vim.keymap.set("n", "<leader>dR", function()
             vim.cmd.RustLsp("debuggables")
           end, { desc = "Rust Debuggables", buffer = bufnr })

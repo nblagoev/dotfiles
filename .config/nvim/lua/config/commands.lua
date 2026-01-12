@@ -45,21 +45,10 @@ command("MarkdownPreviewToggle", function()
 end, {})
 vim.keymap.set(
   "n",
-  "<leader>mp",
+  "<leader>tp",
   "<cmd>MarkdownPreviewToggle<cr>",
-  { desc = "Custom Command: Toggle markdown preview" }
+  { desc = "Markdown preview" }
 )
-
--- Reveal file in finder without changing the working dir in vim
-command("RevealInFinder", "execute 'silent !open -R \"%\"'", {})
-keymap("n", "<leader>;", ":RevealInFinder<cr>", { desc = "Custom command: Reveal in Finder" })
-
--- Code Run Script
-command("CodeRun", function()
-  vim.cmd("execute '!~/scripts/code_run \"%\"'")
-  -- require("noice").redirect("execute '!~/scripts/code_run \"%\"'")
-end, {})
-keymap("n", "<leader>cr", ":CodeRun<cr>", { desc = "Custom command: Run code - own script" })
 
 -- toggle more in the SimpleStatusline
 vim.api.nvim_create_user_command("StatusMoreInfo", function()
@@ -75,30 +64,7 @@ command("YankCwd", function()
   vim.cmd(string.format("call setreg('*', '%s')", cwd))
   print("Cwd copied to clipboard!")
 end, {})
-keymap("n", "<leader>cP", "<cmd>YankCwd<cr>", { desc = "Custom command: Yank current dir" })
-
--- open same file in nvim in a new tmux pane
-vim.api.nvim_create_user_command("NewTmuxNvim", function()
-  if os.getenv("TERM_PROGRAM") == "tmux" and vim.fn.expand("%"):len() > 0 then
-    -- vim.cmd("execute 'silent !tmux new-window nvim %'")
-    vim.cmd("execute 'silent !tmux split-window -h nvim %'")
-  else
-    print("Nothing to open...")
-  end
-end, {})
-keymap("n", "<leader>on", "<cmd>NewTmuxNvim<cr>", { desc = "Custom command: Same file in TMUX window" })
-
--- new (tmux or terminal) window at current working directory
-command("NewTerminalWindow", function()
-  local cwd = vim.fn.getcwd()
-  vim.cmd(
-    string.format(
-      "execute 'silent !open -na alacritty --args -o window.dimensions.columns=102 -o window.dimensions.lines=48 -o window.position.y=0 -o window.position.x=1600 --working-directory \"%s\"'",
-      cwd
-    )
-  )
-end, {})
-keymap("n", "<leader>\\", "<cmd>NewTerminalWindow<cr>", { desc = "Custom command: Open Terminal in cwd" })
+keymap("n", "<leader>oy", "<cmd>YankCwd<cr>", { desc = "Yank current dir" })
 
 command("OpenGithubRepo", function()
   local mode = vim.api.nvim_get_mode().mode
@@ -123,7 +89,7 @@ command("OpenGithubRepo", function()
   print("Opening", url)
   vim.ui.open(url)
 end, {})
-vim.keymap.set({ "n", "v" }, "<leader>og", "<cmd>OpenGithubRepo<cr>", { desc = "Custom command: Open Github Repo" })
+vim.keymap.set({ "n", "v" }, "<leader>og", "<cmd>OpenGithubRepo<cr>", { desc = "Open Github Repo" })
 
 -- Command to preview files using macOS Quick Look
 command("QuickLookPreview", function()
@@ -160,9 +126,9 @@ command("QuickLookPreview", function()
 end, {})
 vim.keymap.set(
   { "n", "v" },
-  "<leader>pv",
+  "<leader>ov",
   "<cmd>QuickLookPreview<cr>",
-  { desc = "Custom command: Quick Look File Preview" }
+  { desc = "Quick Look File Preview" }
 )
 
 command("LuaInspect", function()
@@ -184,7 +150,7 @@ command("LuaInspect", function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true), "n", true)
   end
 end, {})
-vim.keymap.set({ "n", "v" }, "<leader>pi", "<cmd>LuaInspect<cr>", { desc = "Custom command: Lua Inspect" })
+vim.keymap.set({ "n", "v" }, "<leader>Li", "<cmd>LuaInspect<cr>", { desc = "Lua Inspect" })
 
 command("LuaPrint", function()
   if vim.fn.mode() == "v" then
@@ -194,7 +160,7 @@ command("LuaPrint", function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Left>", true, false, true), "n", true)
   end
 end, {})
-vim.keymap.set({ "n", "v" }, "<leader>pp", "<cmd>LuaPrint<cr>", { desc = "Custom command: Lua Print" })
+vim.keymap.set({ "n", "v" }, "<leader>Lp", "<cmd>LuaPrint<cr>", { desc = "Lua Print" })
 
 -- Function to shuffle lines
 local function shuffle_lines()
@@ -218,30 +184,11 @@ end
 
 command("ShuffleLines", shuffle_lines, { range = true })
 
--- Command to copy bullet list without bullets
-command("CopyNoBullets", function(cmd_opts)
-  local lines = vim.fn.getline(cmd_opts.line1, cmd_opts.line2)
-  -- if type(lines) ~= "table" then
-  if type(lines) == "string" then
-    lines = { lines }
-  end
-  local text = table.concat(lines, "\n")
-
-  if #text > 0 then
-    -- Remove "- " from each line while preserving indentation
-    local cleaned_text = text:gsub("(%s*)%- ?", "%1")
-    vim.fn.setreg("+", cleaned_text)
-    print("Bullet list copied without bullets!")
-  end
-end, { range = true })
-
-keymap("v", "<leader>cb", ":CopyNoBullets<CR>", { desc = "Custom Command: Copy without bullets" })
-
 command("ConvertHEXtoUpper", function()
   vim.cmd("'<,'>s/#[0-9A-Fa-f]\\{3,8}\\(\"\\)\\?/\\=toupper(submatch(0))")
 end, { range = true })
 
-keymap("v", "<leader>ch", ":ConvertHEXtoUpper<cr>", { desc = "Custom Command: Covert HEX color to Uppercase" })
+keymap("v", ",h", ":ConvertHEXtoUpper<cr>", { desc = "Covert HEX color to Uppercase" })
 
 command("ToggleSpellCheck", function()
   if vim.wo.spell then
@@ -277,7 +224,7 @@ command("TrimTrailingWhitespace", function(cmd_opts)
   vim.notify(message, vim.log.levels.INFO)
 end, { range = true })
 
-vim.keymap.set({ "n", "v" }, "<leader>cw", ":TrimTrailingWhitespace<cr>", { desc = "Trim trailing whitespace" })
+vim.keymap.set({ "n", "v" }, ",w", ":TrimTrailingWhitespace<cr>", { desc = "Trim trailing whitespace" })
 
 -- Command to shuffle paragraphs within a visual selection
 command("ShuffleParagraphs", function(cmd_opts)
@@ -341,35 +288,6 @@ command("CloseAllTerminals", function()
 
   vim.notify("Closed " .. closed_count .. " terminal buffers", vim.log.levels.INFO)
 end, {})
-
-vim.keymap.set("n", "<leader>ct", ":CloseAllTerminals<cr>", { desc = "Close all opened terminals" })
-
-command("OpenDashLang", function()
-  local ft_to_key = { python = "py" }
-  local ft = vim.bo.filetype
-  local key = ft_to_key[ft] or ft
-
-  local query
-  if vim.fn.mode():match("[vV]") then
-    local start_pos = vim.fn.getpos("'<")
-    local end_pos = vim.fn.getpos("'>")
-    local lines = vim.fn.getregion(start_pos, end_pos, { type = vim.fn.mode() })
-    query = table.concat(lines, "\n")
-  else
-    -- Normal mode: word under cursor
-    query = vim.fn.expand("<cword>")
-  end
-
-  query = vim.trim(query)
-  if query == "" then
-    vim.notify("Nothing to search for", vim.log.levels.WARN)
-    return
-  end
-
-  vim.fn.system(string.format('open -g "dash-plugin://keys=%s&query=%s"', key, query))
-end, { range = true })
-
-vim.keymap.set({ "n", "v" }, "<leader>sd", ":OpenDashLang<cr>", { desc = "Open Dash Docs" })
 
 -- Follow internal markdown links
 command("FollowMarkdownLink", function()

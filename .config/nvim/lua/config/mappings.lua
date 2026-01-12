@@ -108,7 +108,7 @@ keymap("n", "ga", "<cmd>e#<cr>zz", { desc = "Reopen buffer" })
 --: }}}
 
 --: Close current buffer {{{
-keyset("n", "<leader>x", function()
+keyset("n", "<leader>bx", function()
   if vim.bo.filetype == "gitcommit" then
     vim.cmd("bdelete")
   else
@@ -278,7 +278,6 @@ local diagnostic_goto = function(next, severity)
     go({ count = count, float = true, severity = severity })
   end
 end
-keyset("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 keyset("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 keyset("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 keyset("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
@@ -287,7 +286,7 @@ keyset("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 keyset("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 keyset("n", "<leader>tD", function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, { desc = "Diagnostic" })
+end, { desc = "Diagnostics" })
 --: }}}
 
 --: paste and replace selection {{{
@@ -301,19 +300,19 @@ keymap("v", "g*", "y/\\V\\C<C-R>=escape(@\",'/')<CR><CR>N", { desc = "Search sel
 
 --: substitute word previously searched {{{
 -- on selection only
-keymap("v", "<leader>R", ":s///g<LEFT><LEFT>", { desc = "Replace search" })
+keymap("v", ",R", ":s///g<LEFT><LEFT>", { desc = "Replace search" })
 -- on entire buffer
-keymap("n", "<leader>R", ":%s///g<LEFT><LEFT>", { desc = "Replace search" })
+keymap("n", ",R", ":%s///g<LEFT><LEFT>", { desc = "Replace search" })
 -- substitute current word
-keyset("n", "<leader>X", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute current word" })
-keyset("v", "<leader>X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]], { desc = "Substitute selection" })
+keyset("n", ",X", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute current word" })
+keyset("v", ",X", [[y:%s/<C-r>0/<C-r>0/gI<Left><Left><Left>]], { desc = "Substitute selection" })
 --: }}}
 
 --: Replace the easy-clip plugin {{{
-keyset({ "n", "v", "o" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
-keyset({ "n", "v", "o" }, "<leader>P", '"+P', { desc = "Paste from clipboard" })
-keyset({ "n", "v", "o" }, "<leader>y", '"+y', { desc = "Yank to clipboard" })
-keymap("n", "<leader>Y", '"+Y', { noremap = false, desc = "Yank to clipboard line-end" })
+keyset({ "n", "v", "o" }, ",p", '"+p', { desc = "Paste from clipboard" })
+keyset({ "n", "v", "o" }, ",P", '"+P', { desc = "Paste from clipboard" })
+keyset({ "n", "v", "o" }, ",y", '"+y', { desc = "Yank to clipboard" })
+keymap("n", ",Y", '"+Y', { noremap = false, desc = "Yank to clipboard line-end" })
 keymap("x", "p", '"_dP')
 keymap("n", "d", '"_d')
 keymap("n", "D", '"_D')
@@ -321,7 +320,7 @@ keymap("v", "d", '"_d')
 keyset("n", "gm", "m", { desc = "Add mark" })
 keymap("", "m", "d")
 keymap("", "M", "D")
-keymap("", "<leader>m", '"+d', { desc = "Cut to clipboard" })
+keymap("", ",m", '"+d', { desc = "Cut to clipboard" })
 keymap("n", "x", '"_x')
 keymap("n", "X", '"_X')
 keyset({ "n", "x", "o" }, "c", '"_c')
@@ -340,8 +339,8 @@ keyset("n", "<leader>op", "<cmd>e#<cr>", { desc = "Reopen buffer" })
 --: }}}
 
 --: Transpose {{{
-keymap("n", ",t", '"zx"zph', { desc = "Transpose/Swap characters" })
-keymap("n", ",w", '"zdiwxea<space><esc>"zpbb', { desc = "Transpose/Swap words" })
+keymap("n", ",T", '"zx"zph', { desc = "Transpose/Swap characters" })
+keymap("n", ",W", '"zdiwxea<space><esc>"zpbb', { desc = "Transpose/Swap words" })
 --: }}}
 
 --: Add undo break-points {{{
@@ -452,23 +451,14 @@ local function pick_dotfiles()
   })
 end
 
-keyset({ "n", "v", "o" }, "<leader>pd", pick_dotfiles, { desc = "Pick dotfiles" })
+keyset({ "n", "v", "o" }, "<leader>fd", pick_dotfiles, { desc = "Dotfiles" })
 --: }}}
 
 --: Utility mappings {{{
-keyset("n", "<space>y", "<cmd>let @+ = expand('%:p')<CR>")
-keyset("n", "<C-P>", function()
+keyset("n", "<Leader>lp", function()
   local peek = require("utils").lazy_require("peek")
   peek().peek_definition()
 end, { desc = "Peek Definition" })
-keyset("n", ",d", function()
-  local peek = require("utils").lazy_require("peek")
-  peek().peek_diagnostics()
-end, { desc = "Peek Diagnostics" })
-keyset("n", ",f", function()
-  local peek = require("utils").lazy_require("peek")
-  peek().peek_symbols("Function")
-end, { desc = "Peek Functions" })
 keyset("n", "<leader>qs", require("sessions").load_session, { desc = "Session - Load" })
 --: }}}
 

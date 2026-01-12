@@ -4,11 +4,11 @@ return {
   cmd = { "ConformInfo" },
   keys = {
     {
-      "<leader>cf",
+      "<leader>lf",
       function()
         require("conform").format({ async = true, lsp_fallback = true })
       end,
-      desc = "File format",
+      desc = "Format",
     },
   },
   opts = {

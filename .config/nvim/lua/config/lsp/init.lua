@@ -16,15 +16,18 @@ local function lsp_keymaps(client, bufnr)
 
   local keys = {
     { "K", vim.lsp.buf.hover, desc = "Hover" },
-    -- { "gd", vim.lsp.buf.definition, desc = "Go to definition" },
-    { "<F2>", vim.lsp.buf.rename, desc = "LSP Rename" },
-    { "<leader>cR", vim.lsp.buf.rename, desc = "LSP Rename" },
-    -- { "<leader>cf", vim.lsp.buf.format, desc = "Format" },
     { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-    { "<c-y>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-    { "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action", has = "codeAction" },
-    { "<leader>cl", vim.lsp.codelens.run, mode = { "n", "v" }, desc = "Run Codelens", has = "codeLens" },
-    { "<leader>cL", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", has = "codeLens" },
+    { "<c-p>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+    -- { "gd", vim.lsp.buf.definition, desc = "Go to definition" },
+
+    { "<leader>li", vim.lsp.buf.hover, desc = "Hover" },
+    { "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
+    { "<leader>lR", vim.lsp.buf.references, desc = "References" },
+    { "<leader>lx", vim.diagnostic.open_float, desc = "Line Diagnostic popup" },
+    -- { "<leader>lf", vim.lsp.buf.format, desc = "Format" },
+    { "<leader>la", vim.lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Actions", has = "codeAction" },
+    { "<leader>ll", vim.lsp.codelens.run, mode = { "n", "v" }, desc = "Run Codelens", has = "codeLens" },
+    { "<leader>lL", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", has = "codeLens" },
   }
 
   for _, key in pairs(keys) do
