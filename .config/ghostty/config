@@ -35,8 +35,8 @@ copy-on-select = true
 confirm-close-surface = false
 
 auto-update-channel = tip
-command-palette-entry = title:Dark,action:text:"shades on\n"
-command-palette-entry = title:Light,action:text:"shades off\n"
+command-palette-entry = title:"Toggle Shades", action:"text:shades\n"
+command-palette-entry = title:Neovim, action:"text:nvim\n"
 
 keybind = global:ctrl+;=toggle_quick_terminal
 keybind = ctrl+-=new_split:down
@@ -46,7 +46,7 @@ keybind = ctrl+\=new_split:right
 
 # custom-shader = shaders/glitchy.glsl
 # custom-shader = shaders/bettercrt.glsl
-custom-shader = shaders/cursor_smear.glsl
+# custom-shader = shaders/cursor_smear.glsl
 
 # config-file = fonts/mixed.conf
 config-file = fonts/iosevka.conf

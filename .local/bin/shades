@@ -8,46 +8,60 @@ fzfrc_path="$HOME/.config/fzfrc"
 batconfig_path="$HOME/.config/bat/config"
 yazi_path="$HOME/.config/yazi/theme.toml"
 btop_path="$HOME/.config/btop/btop.conf"
+nvim_path="$HOME/.config/nvim/lua/config/init.lua"
 
 terafox_colors=("#2d4f56" "#e6eaea" "#0f1c1e" "#4d7d90" "#293e40" "#73a3b7" "#afd4de" "#934e69" "#d96f3e" "#8eb2af" "#587b7b")
 dayfox_colors=("#aab0ad" "#3d2b5a" "#e4dcd4" "#223d90" "#4863b6" "#e7d2be" "#287980" "#5e2baf" "#7f5152" "#577f63" "#824d5b")
 
-if [[ $1 == 'on' || (-z $1 && $(defaults read -g AppleInterfaceStyle 2>/dev/null) == "Dark") ]]; then
-  sed -i '' '1s/theme = .*/theme = "catppuccin_mocha"/' $helix_path
-  sed -i '' 's/palette = .*/palette = "terafox"/' $starship_path
-  sed -i '' 's/dayfox/terafox/' $tmux_path
-  sed -i '' 's/dayfox/terafox/' $gitconfig_path
-  sed -i '' 's/dayfox/terafox/' $batconfig_path
-  sed -i '' 's/dayfox/terafox/' $yazi_path
-  sed -i '' 's/dayfox/terafox/' $btop_path
-
-  for i in "${!terafox_colors[@]}"; do
-    sed -i '' "s/${dayfox_colors[i]}/${terafox_colors[i]}/" $fzfrc_path
-  done
+open -g raycast://extensions/raycast/system/toggle-system-appearance
+sleep 0.5
+if [[ $(defaults read -g AppleInterfaceStyle == "Dark" 2>/dev/null) ]]; then
+  # Dark Mode
+  from_theme="dayfox"
+  to_theme="terafox"
+  from_colors=("${dayfox_colors[@]}")
+  to_colors=("${terafox_colors[@]}")
+  helix_theme="catppuccin_mocha"
+  nvim_background="dark"
 else
-  sed -i '' '1s/theme = .*/theme = "catppuccin_latte"/' $helix_path
-  sed -i '' 's/palette = .*/palette = "dayfox"/' $starship_path
-  sed -i '' 's/terafox/dayfox/' $tmux_path
-  sed -i '' 's/terafox/dayfox/' $gitconfig_path
-  sed -i '' 's/terafox/dayfox/' $batconfig_path
-  sed -i '' 's/terafox/dayfox/' $yazi_path
-  sed -i '' 's/terafox/dayfox/' $btop_path
-
-  for i in "${!dayfox_colors[@]}"; do
-    sed -i '' "s/${terafox_colors[i]}/${dayfox_colors[i]}/" $fzfrc_path
-  done
+  # Light Mode
+  from_theme="terafox"
+  to_theme="dayfox"
+  from_colors=("${terafox_colors[@]}")
+  to_colors=("${dayfox_colors[@]}")
+  helix_theme="catppuccin_latte"
+  nvim_background="light"
 fi
+
+sed -i '' "1s/theme = .*/theme = \"$helix_theme\"/" "$helix_path"
+sed -i '' "s/palette = .*/palette = \"$to_theme\"/" "$starship_path"
+sed -i '' "s/colorscheme $from_theme/colorscheme $to_theme/" "$nvim_path"
+
+files_to_update=("$tmux_path" "$gitconfig_path" "$batconfig_path" "$yazi_path" "$btop_path")
+sed -i '' "s/$from_theme/$to_theme/" "${files_to_update[@]}"
+
+# Update fzf colors
+fzf_sed_args=()
+for i in "${!to_colors[@]}"; do
+  fzf_sed_args+=(-e "s/${from_colors[i]}/${to_colors[i]}/")
+done
+sed -i '' "${fzf_sed_args[@]}" "$fzfrc_path"
+
+# Refresh running Neovim instances
+for socket in $(find "$TMPDIR" -name "nvim*" -type s 2>/dev/null); do
+  ~/.local/share/bob/nvim-bin/nvim --server "$socket" --remote-send "<Esc><Cmd>set background=$nvim_background<cr>"
+done
 
 if pgrep -x "tmux" >/dev/null; then
   # Signal Helix to reload its config in all tmux panes
   tmux_panes=$(tmux list-panes -a -F "#{session_id}:#{window_id}.#{pane_id};#{pane_current_command}")
   for pane in $tmux_panes; do
-    if [[ "hx" == "$(echo $pane | cut -d ";" -f2)" ]]; then
-      pane_id="$(echo $pane | cut -d ";" -f1)"
+    if [[ "hx" == "$(echo "$pane" | cut -d ";" -f2)" ]]; then
+      pane_id="$(echo "$pane" | cut -d ";" -f1)"
       tmux send-keys -t "$pane_id" Escape
       tmux send-keys -t "$pane_id" ":config-reload" Enter
     fi
   done
 
-  tmux source-file ~/.config/tmux/tmux.conf
+  tmux source-file "$HOME/.config/tmux/tmux.conf"
 fi

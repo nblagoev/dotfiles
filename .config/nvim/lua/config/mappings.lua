@@ -64,6 +64,10 @@ keymap("n", "j", "gj")
 keymap("n", "k", "gk")
 --: }}}
 
+--: Keep cursor position when joining lines {{{
+keymap("n", "J", "mzJ`z")
+--: }}}
+
 --: new line above {{{
 -- "<C-o>O" is equivalent to "<esc>O" while in insert mode
 keyset("i", "<C-O>", "<C-o>O", { desc = "Insert line above" })
