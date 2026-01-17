@@ -340,6 +340,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
 
         on_attach(client, args.buf)
+        require("mini.clue").ensure_buf_triggers(args.buf)
     end,
 })
 

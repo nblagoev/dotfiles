@@ -71,6 +71,7 @@ return {
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+        require("mini.clue").ensure_buf_triggers(bufnr)
       end,
     }
   end,
