@@ -78,11 +78,8 @@ local function lsp_keymaps(client, bufnr)
     { "<leader>lC", vim.lsp.document_color.color_presentation, mode = { 'n', 'x' },
       desc = "Color presentation", has = "documentColor"},
 
-    { "<leader>th", function()
-      local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
-      vim.lsp.inlay_hint.enable(not is_enabled, { bufnr = bufnr })
-    end, desc = "Inlay hints", has = "inlayHint" },
-
+    { "<leader>tf", "<cmd>ToggleFormat<cr>", desc = "Auto-format" },
+    { "<leader>th", "<cmd>ToggleInlayHints<cr>", desc = "Inlay hints", has = "inlayHint" },
     { "<leader>td", function()
       local new_config = not vim.diagnostic.config().virtual_lines
       vim.diagnostic.config({ virtual_lines = new_config })

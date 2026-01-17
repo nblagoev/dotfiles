@@ -163,7 +163,7 @@ aucmd("User", {
   end,
 })
 
-vim.api.nvim_create_autocmd('VimEnter', {
+aucmd('VimEnter', {
   group = vim.api.nvim_create_augroup('nbl/dotfiles_setup', { clear = true }),
   desc = 'Special dotfiles setup',
   callback = function()
@@ -181,6 +181,33 @@ vim.api.nvim_create_autocmd('VimEnter', {
     vim.env.GIT_WORK_TREE = vim.env.HOME
     vim.env.GIT_DIR = vim.env.HOME .. '/.dotfiles'
   end,
+})
+
+local line_numbers_group = vim.api.nvim_create_augroup('nbl/toggle_line_numbers', {})
+aucmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'CmdlineLeave', 'WinEnter' }, {
+    group = line_numbers_group,
+    desc = 'Toggle relative line numbers on',
+    callback = function()
+        if vim.wo.nu and not vim.startswith(vim.api.nvim_get_mode().mode, 'i') then
+            vim.wo.relativenumber = true
+        end
+    end,
+})
+aucmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'CmdlineEnter', 'WinLeave' }, {
+    group = line_numbers_group,
+    desc = 'Toggle relative line numbers off',
+    callback = function(args)
+        if vim.wo.nu then
+            vim.wo.relativenumber = false
+        end
+
+        -- Redraw here to avoid having to first write something for the line numbers to update.
+        if args.event == 'CmdlineEnter' then
+            if not vim.tbl_contains({ '@', '-' }, vim.v.event.cmdtype) then
+                vim.cmd.redraw()
+            end
+        end
+    end,
 })
 
 -- Reset cursor shape on exit (needed in Fish within Tmux somehow)
@@ -254,11 +281,3 @@ aucmd("VimLeavePre", {
     end
   end,
 })
-
--- Convert JSON filetype to JSON with comments (jsonc)
-vim.cmd([[
-  augroup jsonFtdetect
-  autocmd!
-  autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
-  augroup END
-]])

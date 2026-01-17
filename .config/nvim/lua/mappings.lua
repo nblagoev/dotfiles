@@ -82,16 +82,19 @@ keymap("n", "[<space>", "<cmd>call append(line('.')-1, repeat([''], v:count1))<c
 --: }}}
 
 --: Quicksave command {{{
--- keyset({ "n", "i" }, "<C-S>", "<cmd>w<CR><esc>", { desc = "Save file" })
--- keyset("n", "<leader>fs", "<cmd>w<CR>", { desc = "Save file" })
--- keymap("n", "<Leader>S", "<cmd>w!<CR>", { desc = "Save file override" })
 keymap("n", "<Leader>w", "<cmd>noa w<CR>", { desc = "Save file no formatting" })
+keyset({ 's', 'i', 'n', 'v' }, '<C-s>', '<esc>:w<cr>', { desc = 'Exit insert mode and save changes' })
+keyset({ 's', 'i', 'n', 'v' }, '<C-S-s>', function()
+    vim.g.skip_formatting = true
+    return '<esc>:w<cr>'
+end, { desc = 'Exit insert mode and save changes (without formatting)', expr = true })
 --: }}}
 
 --: Quit current window {{{
 keymap("n", "<leader>qq", ":qa<CR>", { desc = "Quit all" })
 keymap("n", "<leader>qw", ":q<CR>", { desc = "Quit window" })
 keymap("n", "<leader>qQ", ":q!<CR>", { desc = "Force Quit" })
+keyset('n', '<leader>qR', '<cmd>restart<cr>', { desc = 'Restart Neovim' })
 --: }}}
 
 --: Easy select thw whole file {{{

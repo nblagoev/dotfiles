@@ -2,7 +2,7 @@
 -- and https://github.com/mcauley-penney/nvim/blob/d1e11271246b55461a61c9f860e6843ff5a7a438/lua/ui/statusline.lua
 
 local ut = require("utils")
-local c = require("config.statusline.components")
+local c = require("statusline.components")
 local colors = c.colors
 
 local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })

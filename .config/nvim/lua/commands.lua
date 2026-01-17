@@ -9,6 +9,34 @@ local keymap = function(mode, keys, cmd, options)
   vim.api.nvim_set_keymap(mode, keys, cmd, options)
 end
 
+command('ToggleFormat', function()
+    vim.g.autoformat = not vim.g.autoformat
+    vim.notify(string.format('%s formatting...', vim.g.autoformat and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
+end, { desc = 'Toggle conform.nvim auto-formatting', nargs = 0 })
+
+command('ToggleInlayHints', function()
+    vim.g.inlay_hints = not vim.g.inlay_hints
+    vim.notify(string.format('%s inlay hints...', vim.g.inlay_hints and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
+
+    local mode = vim.api.nvim_get_mode().mode
+    vim.lsp.inlay_hint.enable(vim.g.inlay_hints and (mode == 'n' or mode == 'v'))
+end, { desc = 'Toggle inlay hints', nargs = 0 })
+
+command('Scratch', function()
+    vim.cmd 'bel 10new'
+    local buf = vim.api.nvim_get_current_buf()
+    for name, value in pairs {
+        filetype = 'scratch',
+        buftype = 'nofile',
+        bufhidden = 'wipe',
+        swapfile = false,
+        modifiable = true,
+    } do
+        vim.api.nvim_set_option_value(name, value, { buf = buf })
+    end
+end, { desc = 'Open a scratch buffer', nargs = 0 })
+
+
 -- Markdown preview commands using `gh-markdown-preview`
 command("MarkdownPreviewStart", function()
   vim.cmd("MarkdownPreviewStop")

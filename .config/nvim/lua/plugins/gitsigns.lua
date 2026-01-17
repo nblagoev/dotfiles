@@ -62,6 +62,13 @@ return {
           gs.diffthis("~")
         end, { desc = "Diff this (~ last commit)" })
 
+        map("n", '<leader>gl', function()
+          require('float_term').float_term('lazygit', {
+            size = { width = 0.85, height = 0.8 },
+            cwd = vim.b.gitsigns_status_dict.root,
+          })
+        end, { desc = 'Lazygit' })
+
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
       end,
