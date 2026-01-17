@@ -52,6 +52,7 @@ local M = {
     Diff = " ",
     Repo = " ",
     Octoface = " ",
+    Branch = " " -- 
   },
   ui = {
     ArrowClosed = "",
@@ -62,13 +63,13 @@ local M = {
     BigUnfilledCircle = " ",
     Close = " ",
     NewFile = " ",
-    Search = " ",
+    Search = " ", -- 
     Lightbulb = " ",
     Project = " ",
     Dashboard = " ",
     History = " ",
     Comment = " ",
-    Bug = " ",
+    Bug = " ", -- 
     Code = " ",
     Telescope = " ",
     Gear = " ",
@@ -95,14 +96,33 @@ local M = {
     Hint = " ",
   },
   misc = {
-    Robot = " ",
+    Palette = '󰏘',
+    Robot = " ", -- 󰚩
     Squirrel = " ",
     Tag = " ",
     Watch = " ",
     Smiley = " ",
     Package = " ",
     CircuitBoard = " ",
+    Terminal = '',
   },
+  dap = {
+  	Breakpoint = "",
+  	BreakpointDisabled = "",
+  	BreakpointConditional = "",
+  	BreakpointLog = "",
+  	BreakpointRejected = "",
+  	Stopped = "",
+  	Disconnect = "",
+  	Pause = "",
+  	Play = "",
+  	Run_last = "",
+  	Step_back = "",
+  	Step_into = "",
+  	Step_out = "",
+  	Step_over = "",
+  	Terminate = "",
+  }
 }
 
 -- from https://github.com/NvChad/ui/blob/main/lua/nvchad_ui/icons.lua

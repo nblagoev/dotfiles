@@ -35,18 +35,6 @@ end
 ---@return string
 function Status_line()
   local filetype = vim.bo.filetype
-
-  -- local filetypes = { "neo-tree", "minifiles", "NvimTree", "oil", "TelescopePrompt", "fzf", "snacks_picker_input" }
-  -- if vim.tbl_contains(filetypes, filetype) then
-  --   local home_dir = os.getenv("HOME")
-  --   local api = require("nvim-tree.api")
-  --   local node = api.tree.get_node_under_cursor()
-  --   local dir = filetype == "NvimTree" and node.absolute_path or vim.fn.getcwd()
-  --   dir = dir:gsub("^" .. home_dir, "~")
-  --   local ft = filetype:sub(1, 1):upper() .. filetype:sub(2)
-  --   return c.decorator({ name = ft .. ": " .. dir, align = "left" })
-  -- end
-
   local components = {
     -- "%#SLNormal#",
     -- c.padding(),
@@ -55,7 +43,7 @@ function Status_line()
     "%=",
     c.maximized_status(),
     c.show_macro_recording(),
-    c.lsp_progress(),
+    c.dap() or c.lsp_progress(),
     "%=",
     _G.show_more_info and c.lang_version() or "",
     _G.show_more_info and c.LSP() or "",
@@ -85,4 +73,21 @@ function Status_line()
   return table.concat(components)
 end
 
+---@return string
+function Status_line_inactive()
+  local filetype = vim.bo.filetype
+  local components = {
+    -- "%#SLNormal#",
+    -- c.padding(),
+    -- c.mode(),
+    c.fileinfo({ add_icon = true }),
+    "%=",
+    c.maximized_status(),
+  }
+
+  return table.concat(components)
+end
+
 vim.o.statusline = '%!luaeval("Status_line()")'
+-- vim.go.statusline = '%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.Status_line() : v:lua.Status_line_inactive()%}'
+-- vim.o.statusline = "%{%(nvim_get_current_win()==#g:actual_curwin) ? luaeval('Status_line()') : luaeval('Status_line_inactive()')%}"

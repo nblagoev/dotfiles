@@ -1,5 +1,6 @@
 -- Statusline components
 
+local icons = require("icons")
 local utils = require("utils")
 local get_opt = vim.api.nvim_get_option_value
 local hl_str = utils.hl_str
@@ -234,39 +235,53 @@ function M.reload_colors()
 end
 
 ---@return string
----@param opts? {mono:boolean}
-function M.file_icon(opts)
-  opts = opts or { mono = true }
+function M.file_icon()
   local devicons = require("nvim-web-devicons")
-  local icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
-  if icon == nil then
-    icon, icon_highlight_group = devicons.get_icon_by_filetype(vim.bo.filetype)
-  end
+  -- Special icons for some filetypes.
+  local special_icons = {
+    DiffviewFileHistory = { icons.git.Branch, 'Number' },
+    DiffviewFiles = { icons.git.Branch, 'Number' },
+    ['dap-view'] = { icons.ui.Bug, 'Special' },
+    codecompanion = { icons.misc.Robot, 'Conditional' },
+    fzf = { icons.misc.Terminal, 'Special' },
+    gitcommit = { icons.git.Branch, 'Number' },
+    gitrebase = { icons.git.Brancht, 'Number' },
+    lazy = { icons.kind.Method, 'Special' },
+    lazyterm = { icons.misc.Rerminal, 'Special' },
+    minifiles = { icons.kind.Folder, 'Directory' },
+  }
 
-  if icon == nil and icon_highlight_group == nil then
-    icon = "󰈚"
-    icon_highlight_group = "DevIconDefault"
-  end
-
+  local filetype = vim.bo.filetype or '[No Name]'
+  local icon, icon_hl
   if not vim.bo.modifiable then
     icon = ""
-    icon_highlight_group = "SLNotModifiable"
+    icon_hl = "SLNotModifiable"
+  elseif special_icons[filetype] then
+    icon, icon_hl = unpack(special_icons[filetype])
+  else
+    local buf_name = vim.api.nvim_buf_get_name(0)
+    local name, ext = vim.fn.fnamemodify(buf_name, ':t'), vim.fn.fnamemodify(buf_name, ':e')
+
+    icon, icon_hl = devicons.get_icon(name, ext)
+    if not icon then
+      icon, icon_hl = devicons.get_icon_by_filetype(filetype, { default = true })
+    end
   end
 
-  return hl_str(icon_highlight_group, icon)
+  return hl_str(icon_hl, icon)
 end
 
 ---@return string
 ---@param opts? {add_icon:boolean}
 function M.fileinfo(opts)
   opts = opts or { add_icon = true }
-  local icon = M.file_icon({ mono = false })
+  local icon = M.file_icon()
   local dir = utils.pretty_dirpath()()
   local pretty_dir = "╼ " .. dir
   local path = vim.fn.expand("%:t")
   local name = (path == "" and "Empty ") or path:match("([^/\\]+)[/\\]*$")
 
-  local modified = vim.bo.modified and hl_str("DiagnosticError", " •") or ""
+  local modified = vim.bo.modified and hl_str("DiagnosticError", " ") or "" -- •
 
   -- .. "╾ ╼"
   return " "
@@ -437,7 +452,7 @@ end
 
 function M.git_branch()
   local branch = vim.b.gitsigns_status_dict or { head = "" }
-  local git_icon = " "
+  local git_icon = icons.git.Branch
   local is_head_empty = (branch.head ~= "")
   return is_head_empty and string.format(" %s%s ", git_icon, (branch.head or "")) or ""
 end
@@ -573,6 +588,16 @@ function M.get_copilot_status()
     end
   end
   return status
+end
+
+--- The current debugging status (if any).
+---@return string?
+function M.dap()
+    if not package.loaded['dap'] or require('dap').status() == '' then
+        return nil
+    end
+
+    return M.get_or_create_hl('Special', 'StatusLine') .. icons.ui.Bug .. " " .. require('dap').status()
 end
 
 return M

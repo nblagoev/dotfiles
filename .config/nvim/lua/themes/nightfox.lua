@@ -11,6 +11,9 @@ return {
       all = {
         TreesitterContextBottom = { style = "underline", sp = "bg4" },
         NoiceCmdlinePopUp = { bg = "bg0" },
+        -- Dap UI.
+        DapStoppedLine = { bg = "bg3" },
+        NvimDapVirtualText = { style = "underline,italic", fg = "palette.comment" },
       },
     },
   },
