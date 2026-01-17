@@ -8,7 +8,7 @@ fzfrc_path="$HOME/.config/fzfrc"
 batconfig_path="$HOME/.config/bat/config"
 yazi_path="$HOME/.config/yazi/theme.toml"
 btop_path="$HOME/.config/btop/btop.conf"
-nvim_path="$HOME/.config/nvim/lua/config/init.lua"
+nvim_path="$HOME/.config/nvim/init.lua"
 
 terafox_colors=("#2d4f56" "#e6eaea" "#0f1c1e" "#4d7d90" "#293e40" "#73a3b7" "#afd4de" "#934e69" "#d96f3e" "#8eb2af" "#587b7b")
 dayfox_colors=("#aab0ad" "#3d2b5a" "#e4dcd4" "#223d90" "#4863b6" "#e7d2be" "#287980" "#5e2baf" "#7f5152" "#577f63" "#824d5b")
