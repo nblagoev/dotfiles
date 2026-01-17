@@ -24,7 +24,8 @@ vim.api.nvim_create_autocmd("User", {
 require("config.commands")
 require("config.autocmds")
 
-require("config.marks")
+require("marks")
+require("lsp")
 
 --: load lazy.nvim and plugins
 -- Automatically install lazy.nvim
@@ -75,4 +76,4 @@ require("lazy").setup({
 })
 
 -- Load colorscheme
-vim.cmd("colorscheme terafox")
+vim.cmd("colorscheme dayfox")

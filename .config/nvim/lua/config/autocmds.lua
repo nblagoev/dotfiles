@@ -56,16 +56,6 @@ aucmd({ "BufRead", "BufNewFile" }, {
   group = augroup("golang"),
 })
 
--- SQL
-aucmd("FileType", {
-  pattern = { "sql" },
-  callback = function()
-    vim.api.nvim_buf_set_keymap(0, "n", ",e", ":SqlsExecuteQuery<cr>", { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(0, "v", ",e", ":SqlsExecuteQuery<cr>", { noremap = true, silent = true })
-  end,
-  group = augroup("sql"),
-})
-
 -- Fix conceallevel for json files
 aucmd({ "FileType" }, {
   group = augroup("json_conceal"),

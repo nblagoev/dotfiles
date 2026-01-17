@@ -25,6 +25,7 @@ return {
           latex = { font_size = "large" },
         },
       },
+      scroll = { enabled = false },
       picker = {
         prompt = "   ",
         ui_select = true,
@@ -107,12 +108,12 @@ return {
       { "<leader>tt", function() snacks.picker.colorschemes() end, desc = "Pick theme" },
       { "<leader>tz", function() snacks.zen.zoom() end, desc = "Zoom window" },
       -- LSP
-      { "gd", function() snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
-      { "gD", function() snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
-      { "<leader>gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-      { "gI", function() snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
-      { "gy", function() snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-      { "<leader>ls", function() snacks.picker.lsp_symbols() end, desc = "Buffer Symbols" },
+      -- { "gd", function() snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+      -- { "gD", function() snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+      -- { "<leader>gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+      -- { "gI", function() snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+      -- { "gy", function() snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+      -- { "<leader>ls", function() snacks.picker.lsp_symbols() end, desc = "Buffer Symbols" },
     }
   end,
 }

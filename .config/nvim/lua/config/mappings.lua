@@ -273,21 +273,6 @@ keymap("v", "gy", ":t'><cr>gvgcgv<esc>", { noremap = false, desc = "Duplicate an
 --: }}}
 
 --: diagnostics {{{
--- souce: https://github.com/LazyVim/LazyVim
-local diagnostic_goto = function(next, severity)
-  local go = vim.diagnostic.jump
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    local count = next and 1 or -1
-    go({ count = count, float = true, severity = severity })
-  end
-end
-keyset("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-keyset("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-keyset("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-keyset("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-keyset("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-keyset("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 keyset("n", "<leader>tD", function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = "Diagnostics" })
@@ -459,10 +444,6 @@ keyset({ "n", "v", "o" }, "<leader>fd", pick_dotfiles, { desc = "Dotfiles" })
 --: }}}
 
 --: Utility mappings {{{
-keyset("n", "<Leader>lp", function()
-  local peek = require("utils").lazy_require("peek")
-  peek().peek_definition()
-end, { desc = "Peek Definition" })
 keyset("n", "<leader>qs", require("sessions").load_session, { desc = "Session - Load" })
 --: }}}
 

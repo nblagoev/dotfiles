@@ -128,7 +128,7 @@ return {
           { mode = 'n', keys = '<Leader>d', desc = '+Debug' },
           { mode = 'n', keys = '<Leader>f', desc = '+File/Fold' },
           { mode = 'n', keys = '<Leader>g', desc = '+Git/Glance' },
-          { mode = 'n', keys = '<Leader>h', desc = '+Gitsigns/Harpoon' },
+          { mode = 'n', keys = '<Leader>h', desc = '+Git hunks' },
           { mode = 'n', keys = '<Leader>j', desc = '+AI' },
           { mode = 'n', keys = '<Leader>l', desc = '+Language' },
           { mode = 'n', keys = '<Leader>L', desc = '+Lua' },
