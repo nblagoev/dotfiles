@@ -78,4 +78,4 @@ require("lazy").setup({
 })
 
 -- Load colorscheme
-vim.cmd("colorscheme dayfox")
+vim.cmd("colorscheme terafox")

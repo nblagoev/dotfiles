@@ -27,6 +27,11 @@ vim.api.nvim_set_hl(0, "SLModified", { fg = "#FF7EB6", bg = statusline_hl.bg })
 vim.api.nvim_set_hl(0, "SLMatches", { fg = colors.bg_hl, bg = colors.fg_hl })
 vim.api.nvim_set_hl(0, "SLDecorator", { fg = "#414868", bg = "#7AA2F7", bold = true })
 
+local function is_python()
+  return vim.startswith(vim.bo.ft, 'python')
+    or vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':e') == 'ipynb'
+end
+
 ---@return string
 function Status_line()
   local filetype = vim.bo.filetype
@@ -56,6 +61,7 @@ function Status_line()
     _G.show_more_info and c.LSP() or "",
     _G.show_more_info and " Ux%04B " or "",
     c.terminal_status(),
+    _G.show_more_info and is_python() and c.venv() or "",
     _G.show_more_info and c.git_branch() or "",
     _G.show_more_info and c.separator() or "",
     c.codeium_status(),

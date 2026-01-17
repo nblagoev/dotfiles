@@ -44,6 +44,10 @@ local function lsp_keymaps(client, bufnr)
         -- if require('blink.cmp.completion.windows.menu').win:is_open() then
         --     require('blink.cmp').hide()
         -- end
+        local cmp = require("cmp")
+        if cmp.visible() then
+          cmp.close()
+        end
 
         vim.lsp.buf.signature_help()
     end, mode = "i", desc = "Signature Help", has = "signatureHelp" },

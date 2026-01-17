@@ -76,7 +76,7 @@ return {
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
         -- ["<C-l>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-l>"] = cmp.mapping(function()
+        ["<CR>"] = cmp.mapping(function()
           if cmp.visible() then
             cmp.confirm({ select = true })
           else

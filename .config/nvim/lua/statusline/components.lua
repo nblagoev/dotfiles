@@ -442,6 +442,15 @@ function M.git_branch()
   return is_head_empty and string.format(" %s%s ", git_icon, (branch.head or "")) or ""
 end
 
+---Name of python virtual environment
+---@return string
+function M.venv()
+  local venv_name = vim.env.VIRTUAL_ENV
+    and vim.fn.fnamemodify(vim.env.VIRTUAL_ENV, ':~:.')
+    or vim.env.CONDA_DEFAULT_ENV
+  return venv_name and string.format('venv: %s', venv_name) or ''
+end
+
 function M.lang_version()
   local filetype = vim.bo.filetype
   local lang_v = _G.lang_versions[filetype]
