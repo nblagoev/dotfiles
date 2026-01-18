@@ -10,8 +10,14 @@ yazi_path="$HOME/.config/yazi/theme.toml"
 btop_path="$HOME/.config/btop/btop.conf"
 nvim_path="$HOME/.config/nvim/init.lua"
 
-terafox_colors=("#2d4f56" "#e6eaea" "#0f1c1e" "#4d7d90" "#293e40" "#73a3b7" "#afd4de" "#934e69" "#d96f3e" "#8eb2af" "#587b7b")
-dayfox_colors=("#aab0ad" "#3d2b5a" "#e4dcd4" "#223d90" "#4863b6" "#e7d2be" "#287980" "#5e2baf" "#7f5152" "#577f63" "#824d5b")
+terafox_colors=(
+  "border:#2d4f56" "fg:#e6eaea" "bg:#0f1c1e" "hl:#4d7d90" "fg+:#e6eaea" "bg+:#293e40" "hl+:#73a3b7"
+  "info:#afd4de" "prompt:#934e69" "pointer:#d96f3e" "marker:#8eb2af" "spinner:#d96f3e" "header:#587b7b"
+)
+dayfox_colors=(
+  "border:#aab0ad" "fg:#3d2b5a" "bg:#e4dcd4" "hl:#8b369a" "fg+:#3d2b5a" "bg+:#e7d2be" "hl+:#8b369a"
+  "info:#30583c" "prompt:#5e2baf" "pointer:#643f61" "marker:#ac5402" "spinner:#643f61" "header:#824d5b"
+)
 
 open -g raycast://extensions/raycast/system/toggle-system-appearance
 sleep 0.5

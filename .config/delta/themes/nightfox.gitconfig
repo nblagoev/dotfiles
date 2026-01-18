@@ -1,0 +1,67 @@
+[delta "terafox"]
+  dark = true
+  # Should match the name of the bat theme
+  syntax-theme = "terafox"
+  blame-palette = "#0f1c1e" "#152528" "#1d3337" "#254147" "#2d4f56" "#293e40"
+	commit-decoration-style = "box ul"
+	file-decoration-style = "#e6eaea"
+	file-style = "#e6eaea"
+
+	hunk-header-decoration-style = "box ul"
+	hunk-header-file-style = "bold"
+	hunk-header-line-number-style = "bold #6d7f8b"
+	hunk-header-style = "file line-number syntax"
+
+  line-numbers = true
+	line-numbers-left-style = "#587b7b"
+	line-numbers-minus-style = "bold #eb746b"
+	line-numbers-plus-style = "bold #8eb2af"
+	line-numbers-right-style = "#587b7b"
+	line-numbers-zero-style = "#587b7b"
+
+  minus-style = "syntax #3b2424"
+	minus-emph-style = "bold syntax #5c3333"
+	minus-empty-line-marker-style = "syntax #3b2424"
+  plus-style = "syntax #1d3337"
+	plus-emph-style = "bold syntax #33514e"
+	plus-empty-line-marker-style = "syntax #1d3337"
+
+	map-styles = \
+		bold purple => syntax "#934e69", \
+		bold blue => syntax "#4d7d90", \
+		bold cyan => syntax "#89aeb8", \
+		bold yellow => syntax "#d78b6c"
+
+[delta "dayfox"]
+  dark = false
+  # Should match the name of the bat theme
+  syntax-theme = "dayfox"
+  blame-palette = "#e4dcd4" "#f6f2ee" "#dbd1dd" "#d3c7bb" "#aab0ad" "#e7d2be"
+	commit-decoration-style = "box ul"
+	file-decoration-style = "#3d2b5a"
+	file-style = "#3d2b5a"
+
+	hunk-header-decoration-style = "box ul"
+	hunk-header-file-style = "bold"
+	hunk-header-line-number-style = "bold #837a72"
+	hunk-header-style = "file line-number syntax"
+
+  line-numbers = true
+	line-numbers-left-style = "#824d5b"
+	line-numbers-minus-style = "bold #b3434e"
+	line-numbers-plus-style = "bold #577f63"
+	line-numbers-right-style = "#824d5b"
+	line-numbers-zero-style = "#824d5b"
+
+  minus-style = "syntax #f0e0de"
+	minus-emph-style = "bold syntax #e3c2bf"
+	minus-empty-line-marker-style = "syntax #f0e0de"
+  plus-style = "syntax #e2eadb"
+	plus-emph-style = "bold syntax #ccd9c0"
+	plus-empty-line-marker-style = "syntax #e2eadb"
+
+	map-styles = \
+		bold purple => syntax "#5e2baf", \
+		bold blue => syntax "#223d90", \
+		bold cyan => syntax "#22676d", \
+		bold yellow => syntax "#924702"

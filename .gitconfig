@@ -1,6 +1,6 @@
 [include]
   path = ~/.gitconfig.local
-	path = ~/.config/delta/themes/catppuccin.gitconfig
+	path = ~/.config/delta/themes/nightfox.gitconfig
 
 [init]
 	defaultBranch = main
@@ -146,8 +146,8 @@
 
 [delta]
   navigate = true
-	features = catppuccin-mocha
-	syntax-theme = Catppuccin-mocha
+	features = terafox
+	syntax-theme = terafox
 
 [merge]
   conflictstyle = diff3
