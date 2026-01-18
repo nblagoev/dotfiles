@@ -41,12 +41,8 @@ local function lsp_keymaps(client, bufnr)
     -- { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
     { "<c-p>", function()
         -- Close the completion menu first (if open).
-        -- if require('blink.cmp.completion.windows.menu').win:is_open() then
-        --     require('blink.cmp').hide()
-        -- end
-        local cmp = require("cmp")
-        if cmp.visible() then
-          cmp.close()
+        if require('blink.cmp.completion.windows.menu').win:is_open() then
+            require('blink.cmp').hide()
         end
 
         vim.lsp.buf.signature_help()
@@ -349,8 +345,8 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
     once = true,
     callback = function()
         -- Extend neovim's client capabilities with the completion ones.
-        local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-        -- local capabilities = require("blink.cmp").get_lsp_capabilities(nil, true)
+        -- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+        local capabilities = require("blink.cmp").get_lsp_capabilities(nil, true)
 
         -- TODO: Do I need the following two?
         -- capabilities.textDocument.foldingRange = {
