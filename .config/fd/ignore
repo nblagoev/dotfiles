@@ -1,0 +1,17 @@
+*.env/
+*.git/
+*.venv/
+*Cache*/
+*cache*/
+.*Cache*/
+.*cache*/
+.cargo/
+.npm/
+.nvm/
+.tmp/
+/.pyenv/
+/go/
+__pycache__/
+node_modules/
+vendor/
+venv/

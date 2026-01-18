@@ -5,6 +5,8 @@ export GH_GET_WORKSPACE_PATH="$HOME/dev"
 #export TERM=xterm-256color-italic
 export EDITOR=nvim
 export PAGER=less
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 export HOMEBREW_CASK_OPTS=--require-sha
 

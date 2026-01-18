@@ -115,6 +115,7 @@ aucmd("FileType", {
     "checkhealth",
     "neotest-summary",
     "neotest-output-panel",
+    "dap-view", "dap-view-term", "dap-repl"
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false

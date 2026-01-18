@@ -600,4 +600,15 @@ function M.dap()
     return M.get_or_create_hl('Special', 'StatusLine') .. icons.ui.Bug .. " " .. require('dap').status()
 end
 
+function M.tab_width()
+  local tab_icon = "󰌒 "
+  local width = vim.bo.tabstop
+  if vim.bo.expandtab then
+    tab_icon = "󱁐 "
+    width = vim.bo.shiftwidth
+  end
+
+  return tab_icon .. width
+end
+
 return M

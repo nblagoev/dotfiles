@@ -168,10 +168,8 @@ return {
     		host = "127.0.0.1",
     		port = 5678,
      	}
-      require("dap-python").resolve_python = function()
-        return "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3"
-      end
-      require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
+      -- require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
+      require("dap-python").setup('debugpy-adapter')
     end,
   },
 }
