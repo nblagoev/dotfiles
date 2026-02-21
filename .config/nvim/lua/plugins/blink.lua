@@ -1,10 +1,14 @@
 return {
   "saghen/blink.cmp",
   enabled = true,
+  version = "v1.*",
   event = { "InsertEnter" },
-  dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
+  dependencies = {
+    { "L3MON4D3/LuaSnip", version = "v2.*" },
+    { "fang2hou/blink-copilot" },
+  },
   -- build = "cargo +nightly build --release",
-  build = "cargo build --release",
+  -- build = "cargo build --release",
 
   opts = {
     snippets = {
@@ -19,7 +23,7 @@ return {
       sources =  function()
         local type = vim.fn.getcmdtype()
         if type == "/" or type == "?" then
-          return { "buffer" }
+          return {}
         elseif type == ":" or type == "@" then
           return { "cmdline", "path" }
         end
@@ -27,10 +31,10 @@ return {
       end,
     },
     sources = {
-      -- default = { "lsp", "path", "snippets", "buffer", "codecompanion" },
+      -- default = { "lsp", "path", "snippets", "buffer", "copilot" },
       -- Disable some sources in comments and strings.
       default = function()
-          local sources = { 'lsp', 'buffer' }
+          local sources = { 'copilot', 'lsp', 'buffer' }
           local ok, node = pcall(vim.treesitter.get_node)
 
           if ok and node then
@@ -44,9 +48,6 @@ return {
 
           return sources
       end,
-      per_filetype = {
-          codecompanion = { 'codecompanion', 'buffer' },
-      },
       -- Make sure file paths don't show up as properties in the cmdline list
       priority = { "path", "cmdline" }, -- <-- Only sources that must be deduplicated
       providers = {
@@ -55,11 +56,11 @@ return {
             show_hidden_files_by_default = true,
           },
         },
-        codecompanion = {
-          name = "CodeCompanion",
-          module = "codecompanion.providers.completion.blink",
+        copilot = {
+          name = "copilot",
+          module = "blink-copilot",
           score_offset = 100,
-          enabled = true,
+          async = true,
         },
         lsp = { opts = { tailwind_color_icon = "󱓻" } },
       },

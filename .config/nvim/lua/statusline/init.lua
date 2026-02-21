@@ -55,7 +55,7 @@ function Status_line()
     _G.show_more_info and is_python() and c.venv() or "",
     _G.show_more_info and c.git_branch() or "",
     _G.show_more_info and c.separator() or "",
-    c.codeium_status(),
+    c.sidekick_status(),
     c.get_copilot_status(),
     c.search_count(),
     c.padding(2),

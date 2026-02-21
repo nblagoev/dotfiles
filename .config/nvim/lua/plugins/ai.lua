@@ -1,61 +1,28 @@
 return {
-  {
-    "olimorris/codecompanion.nvim",
-    cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
-    keys = {
-      { "go", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Toggle" },
-      { "<leader>jc", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Toggle" },
-      { "<leader>jl", "<cmd>CodeCompanion<cr>", mode = { "n", "v" }, desc = "CodeCompanion Inline Assistant" },
-      { "<leader>jA", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "CodeCompanion Actions" },
-      { "<leader>js", "<cmd>CodeCompanionChat Add<cr>", mode = { "v" }, desc = "CodeCompanion Add Selection" },
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = {
-      display = {
-        chat = {
-          window = {
-            layout = "buffer",
-            width = 0.4,
-            position = "left",
-          },
-        },
-      },
-      strategies = {
-        chat = {
-          -- adapter = "anthropic",
-          -- adapter = "openai",
-          adapter = "copilot",
-          keymaps = {
-            change_adapter = {
-              modes = { n = "gA" },
-            },
-          },
-        },
-        inline = { adapter = "copilot" },
-      },
-      adapters = {
-        copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {
-            schema = { model = { default = "claude-sonnet-4" } },
-          })
-        end,
-      },
-    },
-  },
 
   {
-    "Aaronik/GPTModels.nvim",
-    enabled = false,
-    cmd = { "GPTModelsCode" },
-    keys = {
-      { "<leader>jg", ":GPTModelsCode<cr>", mode = { "n", "v" }, desc = "GPTModelsCode" },
-      { "<leader>jG", ":GPTModelsChat<cr>", mode = { "n", "v" }, desc = "GPTModelsChat" },
+    'folke/sidekick.nvim',
+    opts = {
+      -- Disable next-edit suggestions.
+      -- TODO: Give this another chance?
+      nes = { enabled = false },
     },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
+    keys = {
+      {
+        '<leader>tC',
+        function()
+          require('sidekick.cli').toggle { name = 'claude', focus = true }
+        end,
+        desc = 'Claude',
+      },
+      {
+        '<leader>jv',
+        function()
+          require('sidekick.cli').send { msg = '{selection}' }
+        end,
+        mode = { 'x' },
+        desc = 'Send visual selection to Sidekick',
+      },
     },
   },
 
@@ -76,11 +43,11 @@ return {
     },
     opts = {
       panel = {
-        enabled = true,
+        enabled = false, -- replaced by blink-copilot
         auto_refresh = true,
       },
       suggestion = {
-        enabled = true,
+        enabled = false, -- replaced by blink-copilot
         auto_trigger = true,
         keymap = {
           accept = "<C-c>",
@@ -94,34 +61,4 @@ return {
     },
   },
 
-  {
-    "Exafunction/codeium.vim",
-    -- enabled = false,
-    cmd = { "CodeiumEnable", "CodeiumDisable" },
-    -- stylua: ignore
-    keys = {
-      {
-        "<leader>tC",
-        function()
-          if vim.g.codeium_enabled then
-            vim.cmd("CodeiumDisable")
-          else
-            vim.cmd("CodeiumEnable")
-          end
-          vim.cmd("redrawstatus!")
-        end,
-        silent = true,
-        desc = "Codeium Toggle",
-      },
-      { "<C-c>", function() return vim.fn["codeium#Accept"]() end, mode = "i", expr = true, silent = true, desc = "Codeium Accept" },
-      { "<C-n>", function() return vim.fn["codeium#CycleCompletions"](1) end, mode = "i", expr = true, silent = true, desc = "Codeium Next" },
-      { "<C-p>", function() return vim.fn["codeium#CycleCompletions"](-1) end, mode = "i", expr = true, silent = true, desc = "Codeium Prev" },
-      { "<C-]>", function() return vim.fn["codeium#Clear"]() end, mode = "i", expr = true, silent = true, desc = "Codeium Clear" },
-      { "<M-\\>", function() return vim.fn["codeium#Complete"]() end, mode = "i", expr = true, silent = true, desc = "Codeium Complete" },
-    },
-    init = function()
-      vim.g.codeium_disable_bindings = 1
-      -- vim.g.codeium_manual = true
-    end,
-  }
 }

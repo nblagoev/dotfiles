@@ -242,7 +242,7 @@ function M.file_icon()
     DiffviewFileHistory = { icons.git.Branch, 'Number' },
     DiffviewFiles = { icons.git.Branch, 'Number' },
     ['dap-view'] = { icons.ui.Bug, 'Special' },
-    codecompanion = { icons.misc.Robot, 'Conditional' },
+    sidekick_terminal = { icons.misc.Robot, 'Number' },
     fzf = { icons.misc.Terminal, 'Special' },
     gitcommit = { icons.git.Branch, 'Number' },
     gitrebase = { icons.git.Brancht, 'Number' },
@@ -542,16 +542,12 @@ function M.scrollbar2()
   return hl_str("DiagnosticInfo", " " .. sbar .. "  ")
 end
 
----codeium status in the statusline
-function M.codeium_status()
-  if vim.g.codeium_enabled then
-    local status = vim.api.nvim_call_function("codeium#GetStatusString", {})
-    local status_map = {
-      [" ON"] = "",
-      [" * "] = " ",
-    }
-    status = status_map[status] or status
-    return M.get_or_create_hl("SLBgNoneHl", "StatusLine") .. "  " .. status .. "%* "
+---sidekick status in the statusline
+function M.sidekick_status()
+  local sidekick_loaded = #require("sidekick.status").cli() > 0
+  if sidekick_loaded then
+    local status = require("sidekick.status").cli()
+    return M.get_or_create_hl("SLBgNoneHl", "StatusLine") .. "  " .. (#status > 1 and #status or "") .. "%* "
   end
 
   return ""

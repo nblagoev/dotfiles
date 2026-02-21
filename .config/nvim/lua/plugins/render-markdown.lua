@@ -1,8 +1,8 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
-  ft = { "markdown", "Avante", "codecompanion", "copilot-chat" },
+  ft = { "markdown", "Avante", "copilot-chat" },
   opts = {
-    file_types = { "markdown", "Avante", "codecompanion", "copilot-chat" },
+    file_types = { "markdown", "Avante", "copilot-chat" },
     bullet = {
       icons = { "•", "◦", "▪", "▫" },
       -- right_pad = 1,

@@ -1,4 +1,3 @@
-local get_hl_hex = require("utils").get_hl_hex
 
 -- Autocommands
 local aucmd = vim.api.nvim_create_autocmd
