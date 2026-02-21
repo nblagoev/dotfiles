@@ -14,8 +14,6 @@ return {
       signcolumn = true,
       -- _extmark_signs = false,
       numhl = false,
-      signs = { change = { text = "┋" } },
-      signs_staged = { change = { text = "┋" } },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
@@ -53,10 +51,9 @@ return {
         map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
         map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset buffer" })
         map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
-        map("n", "<leader>gb", function()
-          gs.blame_line({ full = true })
-        end, { desc = "Blame line" })
-        map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Git Blame" })
+        map("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
+        map("n", "<leader>gB", function() gs.blame_line({ full = true }) end, { desc = "Blame line" })
+        map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Line Blame" })
         map("n", "<leader>gd", gs.diffthis, { desc = "Diff this" })
         map("n", "<leader>gD", function()
           gs.diffthis("~")

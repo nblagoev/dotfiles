@@ -11,29 +11,59 @@ return {
       return colors[math.random(#colors)]
     end
 
-    dashboard.section.header.val = {
-        "        .          .        ",
-        "      ';;,.        ::'      ",
-        "    ,:::;,,        :ccc,    ",
-        "   ,::c::,,,,.     :cccc,   ",
-        "   ,cccc:;;;;;.    cllll,   ",
-        "   ,cccc;.;;;;;,   cllll;   ",
-        "   :cccc; .;;;;;;. coooo;   ",
-        "   ;llll;   ,:::::'loooo;   ",
-        "   ;llll:    ':::::loooo:   ",
-        "   :oooo:     .::::llodd:   ",
-        "   .;ooo:       ;cclooo:.   ",
-        "     .;oc        'coo;.     ",
-        "       .'         .,.       ",
-        -- "                                                     ",
-        -- "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
-        -- "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
-        -- "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
-        -- "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
-        -- "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
-        -- "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
-        -- "                                                     ",
-    }
+    local function generate_bonsai()
+      local handle = io.popen("cbonsai -p")
+      if not handle then
+        return {
+            "        .          .        ",
+            "      ';;,.        ::'      ",
+            "    ,:::;,,        :ccc,    ",
+            "   ,::c::,,,,.     :cccc,   ",
+            "   ,cccc:;;;;;.    cllll,   ",
+            "   ,cccc;.;;;;;,   cllll;   ",
+            "   :cccc; .;;;;;;. coooo;   ",
+            "   ;llll;   ,:::::'loooo;   ",
+            "   ;llll:    ':::::loooo:   ",
+            "   :oooo:     .::::llodd:   ",
+            "   .;ooo:       ;cclooo:.   ",
+            "     .;oc        'coo;.     ",
+            "       .'         .,.       ",
+        }
+      end
+
+      local result = handle:read("*a")
+      handle:close()
+
+      -- Split into raw lines (keep all escape codes for now)
+      local raw_lines = {}
+      for line in (result .. "\n"):gmatch("(.-)\n") do
+        table.insert(raw_lines, line)
+      end
+
+      -- Extract the last block of lines containing visible characters
+      local last_frame_lines = {}
+      local i = #raw_lines
+      while i > 0 do
+        local line = raw_lines[i]
+        -- strip ANSI codes
+        line = line
+          :gsub("\27%].-\7", "")
+          :gsub("\27%[[0-9;?%-]*[ -/]*[@-~]", "")
+          :gsub("\27%([A-Za-z0-9]", "")
+          :gsub("\27.", "")
+        if line:find("%S") then
+          table.insert(last_frame_lines, 1, line)
+        elseif #last_frame_lines > 0 then
+          -- stop once we have captured the whole last frame
+          break
+        end
+        i = i - 1
+      end
+
+      return last_frame_lines
+    end
+
+    dashboard.section.header.val = generate_bonsai()
 
     dashboard.section.buttons.val = {
       dashboard.button("n", "󰈔  New file", ":ene <BAR> startinsert <CR>"),
@@ -72,13 +102,7 @@ return {
       callback = function()
         local stats = require("lazy").stats()
         local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-        dashboard.section.footer.val = "⚡ Neovim loaded "
-          .. stats.loaded
-          .. "/"
-          .. stats.count
-          .. " plugins in "
-          .. ms
-          .. "ms"
+        dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms"
         pcall(vim.cmd.AlphaRedraw)
       end,
     })
