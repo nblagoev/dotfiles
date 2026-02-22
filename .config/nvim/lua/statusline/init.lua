@@ -45,7 +45,7 @@ function Status_line()
     c.show_macro_recording(),
     c.dap() or c.lsp_progress(),
     "%=",
-    _G.show_more_info and c.lang_version() or "",
+    -- _G.show_more_info and c.lang_version() or "",
     _G.show_more_info and c.LSP() or "",
     _G.show_more_info and " Ux%04B " or "",
     _G.show_more_info and c.padding(2) or "",

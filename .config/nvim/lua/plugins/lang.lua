@@ -8,23 +8,23 @@ return {
 
   -- Teraform
   {
-		'hashivim/vim-terraform',
-		ft = { "terraform" },
-	},
+    'hashivim/vim-terraform',
+    ft = { "terraform" },
+  },
 
   -- TOML
   {
     'cespare/vim-toml',
   },
 
-	-- YAML
-	{
-		"cuducos/yaml.nvim",
-		ft = { "yaml" },
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-	},
+-- YAML
+  {
+    "cuducos/yaml.nvim",
+    ft = { "yaml" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+  },
 
   -- LaTeX
   {
