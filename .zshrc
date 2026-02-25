@@ -15,6 +15,14 @@ fi
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 antidote load $HOME/.zplugins
 
+autoload -Uz compinit
+if [[ ! -f ~/.cache/zcompdump.zwc ]]; then
+    compinit -d ~/.cache/zcompdump
+    zcompile ~/.cache/zcompdump
+else
+    compinit -C -d ~/.cache/zcompdump
+fi
+
 eval "$(fzf --zsh)"
 eval "$(navi widget zsh)"
 eval "$(direnv hook zsh)"
@@ -35,3 +43,5 @@ source $HOME/.local/share/bob/env/env.sh
 # ~/.local/bin/cleanup-history ~/.history
 # fc -R # reload history
 # trap "~/.local/bin/cleanup-history ~/.history" EXIT
+
+# zprof

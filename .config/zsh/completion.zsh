@@ -1,7 +1,3 @@
-zmodload zsh/complist
-autoload -U compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
@@ -57,4 +53,4 @@ zstyle ':fzf-tab:complete:((cp|rm|cat|bat|less|code|vim|hx):argument-rest|kate:*
 zstyle ':fzf-tab:complete:updatelocal:argument-rest' fzf-preview "git --git-dir=$UPDATELOCAL_GITDIR/\${word}/.git log --color --date=short --pretty=format:'%Cgreen%cd %h %Creset%s %Cred%d%Creset ||%b' ..FETCH_HEAD 2>/dev/null"
 zstyle ':fzf-tab:complete:updatelocal:argument-rest' fzf-flags --preview-window=down:5:wrap
 
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
+compdef '/opt/homebrew/bin/terraform' terraform
