@@ -51,7 +51,7 @@ local function lsp_keymaps(client, bufnr)
 
 
     { "<leader>lp", function()
-      require("utils").lazy_require("peek").peek_definition()
+      require("utils").lazy_require("peek")().peek_definition()
     end, desc = "Peek Definition", has = "definition" },
 
     { "<leader>ld", function() snacks.picker.lsp_definitions() end, desc = "Goto Definition", has = "definition" },
@@ -120,9 +120,6 @@ local function on_attach(client, bufnr)
     if has(client, 'codeAction') then
         require('lightbulb').attach_lightbulb(bufnr, client)
     end
-
-    -- Don't check for the capability here to allow dynamic registration of the request.
-    vim.lsp.document_color.enable(true, bufnr, {style = 'virtual'})
 
     lsp_keymaps(client, bufnr)
 
@@ -237,10 +234,10 @@ vim.diagnostic.config {
     underline = true,
     signs = {
         text = {
-            [vim.diagnostic.severity.ERROR] = diagnostic_icons.Error,
-            [vim.diagnostic.severity.WARN] = diagnostic_icons.Warn,
-            [vim.diagnostic.severity.INFO] = diagnostic_icons.Info,
-            [vim.diagnostic.severity.HINT] = diagnostic_icons.Hint,
+            [vim.diagnostic.severity.ERROR] = diagnostic_icons.ERROR,
+            [vim.diagnostic.severity.WARN] = diagnostic_icons.WARN,
+            [vim.diagnostic.severity.INFO] = diagnostic_icons.INFO,
+            [vim.diagnostic.severity.HINT] = diagnostic_icons.HINT,
         },
         numhl = {
           [vim.diagnostic.severity.WARN] = "WarningMsg",
@@ -249,7 +246,7 @@ vim.diagnostic.config {
           [vim.diagnostic.severity.HINT] = "DiagnosticHint",
         },
     },
-    virtual_lines = false,
+    virtual_lines = true,
     -- virtual_lines = { current_line = true },
     virtual_text = {
         prefix = "",
@@ -261,7 +258,7 @@ vim.diagnostic.config {
                 ['Lua Syntax Check.'] = 'lua',
             }
 
-            local message = diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]]
+            local message = diagnostic.message
             if diagnostic.source then
                 message = string.format('%s %s', message, special_sources[diagnostic.source] or diagnostic.source)
             end

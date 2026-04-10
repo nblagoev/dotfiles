@@ -92,11 +92,11 @@ local M = {
     CloudDownload = " ",
   },
   diagnostics = {
-    Error = " ",
-    Warning = " ",
-    Information = " ",
-    Question = " ",
-    Hint = " ",
+    ERROR = " ",
+    WARNING = " ",
+    INFO = " ",
+    QUESTION = " ",
+    HINT = " ",
   },
   misc = {
     Palette = '󰏘',

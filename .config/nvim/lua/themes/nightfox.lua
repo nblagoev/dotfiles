@@ -9,6 +9,8 @@ return {
     },
     groups = {
       all = {
+        TreesitterContext = { bg = "none" },
+        TreesitterContextLineNumber = { bg = "none" },
         TreesitterContextBottom = { style = "underline", sp = "bg4" },
         NoiceCmdlinePopUp = { bg = "bg0" },
         BlinkCmpKindText = { link = "Operator" },

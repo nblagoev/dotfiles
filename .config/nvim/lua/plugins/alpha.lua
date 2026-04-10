@@ -83,7 +83,7 @@ return {
     dashboard.section.header.opts.hl = pick_color()
     dashboard.section.buttons.opts.hl = "AlphaButtons"
     dashboard.section.footer.opts.hl = pick_color()
-    dashboard.opts.layout[1].val = 8
+    dashboard.opts.layout[1].val = 4
 
     if vim.o.filetype == "lazy" then
       vim.cmd.close()

@@ -97,7 +97,7 @@ keymap("n", "<leader>qQ", ":q!<CR>", { desc = "Force Quit" })
 keyset('n', '<leader>qR', '<cmd>restart<cr>', { desc = 'Restart Neovim' })
 --: }}}
 
---: Easy select thw whole file {{{
+--: Easy select the whole file {{{
 keymap("n", ",A", "ggVG<c-$>", { desc = "Select All" })
 --: }}}
 
@@ -323,6 +323,24 @@ keymap("n", "ci", '"_ci')
 keymap("n", "C", '"_C')
 keymap("v", "x", '"_x')
 keymap("v", "c", '"_c')
+--: }}}
+
+--: incremental treesitter selection mappings (+ lsp fallback) {{{
+vim.keymap.set({ 'n', 'x', 'o' }, '<cr>', function()
+    if vim.treesitter.get_parser(nil, nil, { error = false }) then
+        require 'vim.treesitter._select'.select_parent(vim.v.count1)
+    else
+        vim.lsp.buf.selection_range(vim.v.count1)
+    end
+end, { desc = 'Select parent (outer) node' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, '<bs>', function()
+    if vim.treesitter.get_parser(nil, nil, { error = false }) then
+        require 'vim.treesitter._select'.select_child(vim.v.count1)
+    else
+        vim.lsp.buf.selection_range(-vim.v.count1)
+    end
+end, { desc = 'Select child (inner) node' })
 --: }}}
 
 --: Other mappings {{{
