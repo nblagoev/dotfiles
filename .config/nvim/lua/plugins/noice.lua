@@ -38,7 +38,7 @@ return {
       },
       hover = { enabled = true, silent = true },
       signature = { enabled = true },
-      progress = { enabled = false },
+      progress = { enabled = true },
     },
     cmdline = {
       format = {

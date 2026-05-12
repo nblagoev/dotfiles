@@ -64,6 +64,7 @@ return {
 
   {
     "linrongbin16/lsp-progress.nvim",
+    enabled = false,
     opts = {
       max_size = 50,
       spinner = { "", "󰪞", "󰪟", "󰪠", "󰪢", "󰪣", "󰪤", "󰪥" },
