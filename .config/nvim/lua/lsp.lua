@@ -51,7 +51,7 @@ local function lsp_keymaps(client, bufnr)
 
 
     { "<leader>lp", function()
-      require("utils").lazy_require("peek")().peek_definition()
+      require("lspeek").peek_definition()
     end, desc = "Peek Definition", has = "definition" },
 
     { "<leader>ld", function() snacks.picker.lsp_definitions() end, desc = "Goto Definition", has = "definition" },

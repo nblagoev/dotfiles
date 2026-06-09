@@ -242,12 +242,11 @@ function M.file_icon()
     DiffviewFileHistory = { icons.git.Branch, 'Number' },
     DiffviewFiles = { icons.git.Branch, 'Number' },
     ['dap-view'] = { icons.ui.Bug, 'Special' },
+    ['nvim-pack'] = { icons.kind.Method, 'Special' },
     sidekick_terminal = { icons.misc.Robot, 'Number' },
     fzf = { icons.misc.Terminal, 'Special' },
     gitcommit = { icons.git.Branch, 'Number' },
     gitrebase = { icons.git.Brancht, 'Number' },
-    lazy = { icons.kind.Method, 'Special' },
-    lazyterm = { icons.misc.Rerminal, 'Special' },
     minifiles = { icons.kind.Folder, 'Directory' },
   }
 
