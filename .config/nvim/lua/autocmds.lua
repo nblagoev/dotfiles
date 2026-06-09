@@ -1,4 +1,3 @@
-
 -- Autocommands
 local aucmd = vim.api.nvim_create_autocmd
 
@@ -8,18 +7,18 @@ end
 
 -- Switch theme based on background color
 aucmd("OptionSet", {
-    pattern = "background",
-    callback = function()
-        if vim.o.background == "light" then
-            vim.cmd("colorscheme dayfox")
-        else
-            vim.cmd("colorscheme terafox")
-        end
-    end,
+  pattern = "background",
+  callback = function()
+    if vim.o.background == "light" then
+      vim.cmd("colorscheme dayfox")
+    else
+      vim.cmd("colorscheme terafox")
+    end
+  end,
 })
 
 -- Prevent accidental writes to buffers that shouldn't be edited
-aucmd("BufRead", { pattern = {'*.orig', '*.bak'}, command = 'set readonly' })
+aucmd("BufRead", { pattern = { '*.orig', '*.bak' }, command = 'set readonly' })
 
 -- Autospelling and zen mode for tex and md files
 aucmd("BufRead", {
@@ -33,29 +32,29 @@ aucmd("BufRead", {
 
 
 aucmd('FileType', {
-    group = augroup('treesitter_folding'),
-    desc = 'Enable Treesitter folding',
-    callback = function(args)
-        local bufnr = args.buf
-        -- Enable Treesitter indentation
-        vim.bo[bufnr].indentexpr = 'v:lua.require"nvim-treesitter".indentexpr()'
-        -- Enable Treesitter folding when not in huge files and when Treesitter is working.
-        if vim.bo[bufnr].filetype ~= 'bigfile' and pcall(vim.treesitter.start, bufnr) then
-            vim.api.nvim_buf_call(bufnr, function()
-                vim.wo[0][0].foldmethod = 'expr'
-                vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-                vim.cmd.normal 'zx'
-            end)
-        end
-    end,
+  group = augroup('treesitter_folding'),
+  desc = 'Enable Treesitter folding',
+  callback = function(args)
+    local bufnr = args.buf
+    -- Enable Treesitter indentation
+    vim.bo[bufnr].indentexpr = 'v:lua.require"nvim-treesitter".indentexpr()'
+    -- Enable Treesitter folding when not in huge files and when Treesitter is working.
+    if vim.bo[bufnr].filetype ~= 'bigfile' and pcall(vim.treesitter.start, bufnr) then
+      vim.api.nvim_buf_call(bufnr, function()
+        vim.wo[0][0].foldmethod = 'expr'
+        vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.cmd.normal 'zx'
+      end)
+    end
+  end,
 })
 
 aucmd('TextYankPost', {
-    group = augroup('yank_highlight'),
-    desc = 'Highlight on yank',
-    callback = function()
-        vim.hl.on_yank { higroup = 'Visual' }
-    end,
+  group = augroup('yank_highlight'),
+  desc = 'Highlight on yank',
+  callback = function()
+    vim.hl.on_yank { higroup = 'Visual' }
+  end,
 })
 
 -- Indent four spaces
@@ -127,7 +126,6 @@ aucmd("BufReadPost", {
 aucmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
-    "PlenaryTestPopup",
     "help",
     "lspinfo",
     "man",
@@ -212,29 +210,29 @@ aucmd('VimEnter', {
 
 local line_numbers_group = vim.api.nvim_create_augroup('nbl/toggle_line_numbers', {})
 aucmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'CmdlineLeave', 'WinEnter' }, {
-    group = line_numbers_group,
-    desc = 'Toggle relative line numbers on',
-    callback = function()
-        if vim.wo.nu and not vim.startswith(vim.api.nvim_get_mode().mode, 'i') then
-            vim.wo.relativenumber = true
-        end
-    end,
+  group = line_numbers_group,
+  desc = 'Toggle relative line numbers on',
+  callback = function()
+    if vim.wo.nu and not vim.startswith(vim.api.nvim_get_mode().mode, 'i') then
+      vim.wo.relativenumber = true
+    end
+  end,
 })
 aucmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'CmdlineEnter', 'WinLeave' }, {
-    group = line_numbers_group,
-    desc = 'Toggle relative line numbers off',
-    callback = function(args)
-        if vim.wo.nu then
-            vim.wo.relativenumber = false
-        end
+  group = line_numbers_group,
+  desc = 'Toggle relative line numbers off',
+  callback = function(args)
+    if vim.wo.nu then
+      vim.wo.relativenumber = false
+    end
 
-        -- Redraw here to avoid having to first write something for the line numbers to update.
-        if args.event == 'CmdlineEnter' then
-            if not vim.tbl_contains({ '@', '-' }, vim.v.event.cmdtype) then
-                vim.cmd.redraw()
-            end
-        end
-    end,
+    -- Redraw here to avoid having to first write something for the line numbers to update.
+    if args.event == 'CmdlineEnter' then
+      if not vim.tbl_contains({ '@', '-' }, vim.v.event.cmdtype) then
+        vim.cmd.redraw()
+      end
+    end
+  end,
 })
 
 -- Reset cursor shape on exit (needed in Fish within Tmux somehow)

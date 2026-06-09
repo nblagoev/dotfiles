@@ -1,0 +1,53 @@
+local add = require('vim-pack').add
+
+add {
+  {
+    src = 'folke/sidekick.nvim',
+    opts = {
+      -- Disable next-edit suggestions.
+      -- TODO: Give this another chance?
+      nes = { enabled = false },
+    },
+    on_setup = function(opts)
+      vim.keymap.set('n', '<leader>tC', function()
+        require('sidekick.cli').toggle { name = 'claude', focus = true }
+      end, { desc = 'Claude' })
+
+      vim.keymap.set('x', '<leader>jv', function()
+        require('sidekick.cli').send { msg = '{selection}' }
+      end, { desc = 'Send visual selection to Sidekick' })
+    end
+  },
+
+  {
+    src = "AndreM222/copilot-lualine",
+  },
+
+  {
+    src = "zbirenbaum/copilot.lua",
+    opts = {
+      panel = {
+        enabled = false, -- replaced by blink-copilot
+        auto_refresh = true,
+      },
+      suggestion = {
+        enabled = false, -- replaced by blink-copilot
+        auto_trigger = true,
+        keymap = {
+          accept = "<C-c>",
+          accept_word = false,
+          accept_line = false,
+          next = "<C-n>",
+          prev = "<C-p>",
+          dismiss = "<C-]>",
+        },
+      },
+    },
+    on_setup = function(opts)
+      vim.keymap.set('n', '<leader>tP', function()
+        vim.cmd("Copilot toggle")
+      end, { desc = 'Copilot' })
+    end,
+  },
+
+}
