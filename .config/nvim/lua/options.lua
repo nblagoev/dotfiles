@@ -29,6 +29,7 @@ opt.guicursor = {
   "i-c-ci-cr-ve:ver10-InsertCursor",
   -- "i-c-ci-ve:block-InsertCursor",
   "o-r:hor50",
+  'a:blinkwait300-blinkoff200-blinkon150',
 }
 opt.hlsearch = true -- highlight all matches on previous search pattern
 opt.incsearch = true
@@ -92,29 +93,7 @@ opt.fillchars = {
 
 vim.o.cursorlineopt = "number"
 
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-end
-
--- Highlight on Yank
-vim.cmd([[
-  augroup highlight_yank
-  autocmd!
-  " au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=400, on_visual=false}
-  au TextYankPost * silent! lua vim.highlight.on_yank {timeout=70}
-  augroup END
-]])
-
-if vim.fn.exists(vim.g.neovide) then
-  -- vim.opt.guifont = { "Berkeley Mono", ":h16.5" }
-  vim.opt.linespace = 10
-  vim.g.transparency = 1
-  vim.g.neovide_opacity = 1
-  -- vim.g.neovide_background_color = "#000000" .. vim.fn.printf("%x", vim.fn.float2nr(255 * vim.g.transparency))
-  vim.g.neovide_input_macos_option_key_is_meta = true
-  vim.g.neovide_floating_blur_amount_x = 0
-  vim.g.neovide_floating_blur_amount_y = 0
-end
+opt.smoothscroll = true
 
 -- Use ripgrep for grepping.
 vim.o.grepprg = "rg --vimgrep"

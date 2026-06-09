@@ -144,12 +144,8 @@ keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 --: toggle line numbers {{{
 keyset("n", "<leader>tl", function()
-  vim.cmd([[
-    set invnumber
-    set invrelativenumber
-    set invcursorline
-    ]])
-end, { desc = "Line Numbers" })
+  vim.cmd("set invrelativenumber")
+end, { desc = "Line Numbers (Relative)" })
 --: }}}
 
 --: search for word under cursor and stays there {{{
@@ -343,8 +339,13 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<bs>', function()
 end, { desc = 'Select child (inner) node' })
 --: }}}
 
+--: Package manager {{{
+keyset("n", "<leader>P", function()
+    vim.pack.update()
+end, { desc = "Update packages" })
+--: }}}
+
 --: Other mappings {{{
-keyset("n", "<leader>ol", "<cmd>:Lazy<cr>", { desc = "Lazy Dashboard" })
 keyset("n", "<leader>op", "<cmd>e#<cr>", { desc = "Reopen buffer" })
 --: }}}
 
