@@ -3,7 +3,7 @@ local M = {}
 
 ---@class PluginSpec
 ---@field src string The GitHub repository of the plugin
----@field disabled? false Disable the plugin
+---@field disabled? boolean Disable the plugin
 ---@field module_name? string Optional module name for configuration (defaults to the repo name)
 ---@field opts? table|fun():table Optional configuration options for the plugin
 ---@field on_setup? fun(table):nil Optional function to run after the plugin is loaded and configured

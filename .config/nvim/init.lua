@@ -2,7 +2,7 @@
 vim.loader.enable()
 
 -- Load colorscheme
-vim.cmd("colorscheme nightfox")
+vim.cmd("colorscheme terafox")
 
 -- Global variables.
 vim.g.mapleader = " "
@@ -11,17 +11,11 @@ vim.g.projects_dir = vim.env.HOME .. '/dev'
 
 vim.keymap.set("", "<Space>", "<Nop>")
 
-vim.api.nvim_create_autocmd('VimEnter', {
-  once = true,
-  callback = function()
-    require("mappings")
-    require("statusline")
-  end,
-})
-
+require("mappings")
 require("options")
 require("commands")
 require("autocmds")
+require("statusline")
 require("marks")
 require("lsp")
 
