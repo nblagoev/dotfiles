@@ -148,59 +148,23 @@ add_on_event('UIEnter', {
 
       return {
         triggers = {
-          -- Leader triggers
-          { mode = { 'n', 'x' }, keys = '<Leader>' },
-
-          -- `[` and `]` keys
-          { mode = 'n',          keys = '[' },
+          { mode = { 'n', 'x' }, keys = '<Leader>' }, -- Leader triggers
+          { mode = 'n',          keys = '[' },        -- `[` and `]` keys
           { mode = 'n',          keys = ']' },
-
-          -- Built-in completion
-          { mode = 'i',          keys = '<C-x>' },
-
-          -- `g` key
-          { mode = { 'n', 'x' }, keys = 'g' },
-
-          -- Marks
-          { mode = { 'n', 'x' }, keys = "'" },
+          { mode = 'i',          keys = '<C-x>' },    -- Built-in completion
+          { mode = { 'n', 'x' }, keys = "'" },        -- Marks
           { mode = { 'n', 'x' }, keys = '`' },
-
-          -- Registers
-          { mode = { 'n', 'x' }, keys = '"' },
+          { mode = { 'n', 'x' }, keys = '"' },        -- Registers
           { mode = { 'i', 'c' }, keys = '<C-r>' },
-
-          -- Window commands
-          { mode = 'n',          keys = '<C-w>' },
-
-          -- `z` and `,` keys
-          { mode = { 'n', 'x' }, keys = 'z' },
-          { mode = { 'n', 'x' }, keys = ',' },
+          { mode = 'n',          keys = '<C-w>' },    -- Window commands
+          { mode = { 'n', 'x' }, keys = ',' },        -- `,` key
+          { mode = { 'n', 'x' }, keys = 'g' },        -- `g` key
+          { mode = { 'n', 'x' }, keys = 's' },        -- `s` key
+          { mode = { 'n', 'x' }, keys = 'z' },        -- `z` key
         },
 
         clues = {
-          { mode = 'n', keys = '<Leader>b',     desc = '+Buffers' },
-          { mode = 'n', keys = '<Leader>d',     desc = '+Debug' },
-          { mode = 'n', keys = '<Leader>f',     desc = '+File/Fold' },
-          { mode = 'n', keys = '<Leader>g',     desc = '+Git/Glance' },
-          { mode = 'n', keys = '<Leader>h',     desc = '+Git hunks' },
-          { mode = 'n', keys = '<Leader>j',     desc = '+AI' },
-          { mode = 'n', keys = '<Leader>l',     desc = '+Language' },
-          { mode = 'n', keys = '<Leader>L',     desc = '+Lua' },
-          { mode = 'n', keys = '<Leader>n',     desc = '+Notifications' },
-          { mode = 'n', keys = '<Leader>o',     desc = '+Open' },
-          { mode = 'n', keys = '<Leader>q',     desc = '+Quit' },
-          { mode = 'n', keys = '<Leader>s',     desc = '+Search/Replace' },
-          { mode = 'n', keys = '<Leader>t',     desc = '+Toggle' },
-          { mode = 'n', keys = '<Leader>/',     desc = '+Multicursor' },
-          { mode = 'n', keys = '<Leader><Tab>', desc = '+Tabs' },
-
-          { mode = 'v', keys = '<Leader>c',     desc = '+Code' },
-          { mode = 'v', keys = '<Leader>d',     desc = '+Debug' },
-          { mode = 'v', keys = '<Leader>h',     desc = '+Gitsigns' },
-          { mode = 'v', keys = '<Leader>j',     desc = '+AI' },
-          { mode = 'v', keys = '<Leader>l',     desc = '+Language' },
-          { mode = 'v', keys = '<Leader>o',     desc = '+Open' },
-          { mode = 'v', keys = '<Leader>s',     desc = '+Search/Replace' },
+          Config.leader_group_clues,
 
           -- Builtins.
           miniclue.gen_clues.square_brackets(),

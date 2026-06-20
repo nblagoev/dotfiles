@@ -9,6 +9,9 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "," -- "\" is the default
 vim.g.projects_dir = vim.env.HOME .. '/dev'
 
+-- Define main config table to be able to pass data between scripts
+_G.Config = {}
+
 vim.keymap.set("", "<Space>", "<Nop>")
 
 require("mappings")

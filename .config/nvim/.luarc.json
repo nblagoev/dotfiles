@@ -8,7 +8,6 @@
     "library": [
       "$VIMRUNTIME/lua",
       "${3rd}/luv/library",
-      "lua/float_term.lua",
       "lua/icons.lua",
       "lua/vim-pack.lua",
       "$XDG_DATA_HOME/nvim/site/pack/core/opt/LuaSnip/lua",
