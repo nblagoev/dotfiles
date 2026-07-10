@@ -102,7 +102,7 @@ style = 'fg:surface1_text bg:surface1'
 disabled = false
 
 [golang]
-disabled = false
+disabled = true
 
 [nodejs]
 symbol = "  "
@@ -119,13 +119,13 @@ style = 'fg:surface1_text bg:surface1'
 symbol = "  "
 format = "[$symbol($version)]($style)"
 style = 'fg:surface1_text bg:surface1'
-disabled = false
+disabled = true
 
 [python]
 symbol =" 󰌠 "
 format ="[${symbol}${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style)"
 style = 'fg:surface1_text bg:surface1'
-disabled = false
+disabled = true
 
 [gcloud]
 disabled = true
@@ -135,7 +135,7 @@ format = '[  󰔛 $duration]($style)'
 style = "fg:surface1_text bg:surface1"
 
 [direnv]
-disabled = false
+disabled = true
 format = '[$symbol $loaded $allowed ]($style)'
 style = 'bold surface0_text bg:surface0'
 symbol = '' # '󰌪'
