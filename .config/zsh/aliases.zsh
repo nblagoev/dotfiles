@@ -3,10 +3,13 @@ alias r="rgfzf"
 alias k="kubectl"
 alias vim="nvim"
 alias cat="bat"
+alias cl="claude"
+alias cx="codex"
 alias da="direnv allow"
 
 alias dot='/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias navi='navi --path ~/.config/navi'
+alias op-ssh-add='SSH_AUTH_SOCK=~/.1password/agent.sock ssh-add'
 
 alias ls='eza --color=always --no-filesize --icons=always --no-time --no-user --no-permissions'
 alias ll='eza -ghla --classify=auto --group-directories-first --git'
