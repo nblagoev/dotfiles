@@ -1,0 +1,5 @@
+% age, decrypt, encrypt
+# decrypt file using identity from 1Password
+age -d -i <(op document get "age-key-item-name") -o decrypted-file.txt encrypted-file.age
+# generate a new identity key and store it in 1Password
+age-keygen -pq | op document create - --title "age-identities" --file-name "key.txt" --vault Private
