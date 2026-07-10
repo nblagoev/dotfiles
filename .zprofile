@@ -7,6 +7,7 @@ export EDITOR=nvim
 export PAGER=less
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
+export VIMRUNTIME="$XDG_DATA_HOME/bob/$(/bin/cat $XDG_DATA_HOME/bob/used)/share/nvim/runtime"
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 export HOMEBREW_CASK_OPTS=--require-sha
 
@@ -42,4 +43,5 @@ export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git
 # Added by Toolbox App
 export PATH="$PATH:/Users/nblagoev/Library/Application Support/JetBrains/Toolbox/scripts"
 
+[ -f ~/.local/share/bob/env/env.sh ] && source ~/.local/share/bob/env/env.sh
 [ -f ~/.config/zsh/local_profile.zsh ] && source ~/.config/zsh/local_profile.zsh
