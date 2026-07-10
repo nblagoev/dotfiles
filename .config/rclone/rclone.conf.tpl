@@ -13,8 +13,14 @@ host = 10.0.50.2
 user = svc-tmfs-nblagoev
 pass = op://Automation/rclone_crypt/obscured/ironforge_password
 
-[sec]
+[sec_prim]
 type = crypt
-remote = op://Automation/rclone_crypt/remote
+remote = op://Automation/rclone_crypt/primary_remote
+password = op://Automation/rclone_crypt/obscured/sec_password
+password2 = op://Automation/rclone_crypt/obscured/sec_password2
+
+[sec_fall]
+type = crypt
+remote = op://Automation/rclone_crypt/fallback_remote
 password = op://Automation/rclone_crypt/obscured/sec_password
 password2 = op://Automation/rclone_crypt/obscured/sec_password2
