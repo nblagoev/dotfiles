@@ -5,10 +5,104 @@ ORIGIN=https://github.com/nblagoev/dotfiles.git
 # exit on error
 set -e
 
-# Supported platforms
-MACOS=MACOS
-UBUNTU_AMD64=UBUNTU_AMD64
-RASPBIAN_ARMV5=RASPBIAN_ARMV5
+printf '\n\e[1;32m%s\e[m\n' "OS detection..."
+
+kernel=$(uname -s)
+raw_arch=$(uname -m)
+arch=
+distro=
+distro_like=
+version=unknown
+wsl=false
+platform=
+bootstrap_script=
+
+case "$kernel" in
+    Darwin)
+        if [ "$raw_arch" != "arm64" ]; then
+            >&2 echo "Unsupported macOS architecture: $raw_arch"
+            exit 1
+        fi
+
+        arch=arm64
+        distro=macos
+        version=$(sw_vers -productVersion 2>/dev/null || printf '%s' unknown)
+        platform=macos
+        bootstrap_script=MACOS.sh
+        ;;
+    Linux)
+        case "$raw_arch" in
+            x86_64|amd64)
+                arch=x86_64
+                ;;
+            aarch64|arm64)
+                arch=aarch64
+                ;;
+            *)
+                arch=$raw_arch
+                ;;
+        esac
+
+        if [ -r /etc/os-release ]; then
+            os_release=/etc/os-release
+        elif [ -r /usr/lib/os-release ]; then
+            os_release=/usr/lib/os-release
+        else
+            >&2 echo "Cannot identify Linux distribution (arch=$arch)"
+            exit 1
+        fi
+
+        . "$os_release"
+        distro=${ID:-}
+        distro_like=${ID_LIKE:-}
+        version=${VERSION_ID:-unknown}
+
+        if [ -z "$distro" ]; then
+            >&2 echo "Cannot identify Linux distribution ID (arch=$arch)"
+            exit 1
+        fi
+
+        if [ -n "${WSL_INTEROP:-}" ]; then
+            wsl=true
+        elif [ -r /proc/sys/kernel/osrelease ] && grep -qi microsoft /proc/sys/kernel/osrelease; then
+            wsl=true
+        fi
+
+        case "$distro" in
+            fedora)
+                platform=fedora
+                bootstrap_script=FEDORA.sh
+                ;;
+            *)
+                case " $distro_like " in
+                    *" fedora "*)
+                        platform=fedora
+                        bootstrap_script=FEDORA.sh
+                        ;;
+                    *)
+                        platform=unsupported
+                        ;;
+                esac
+                ;;
+        esac
+        ;;
+    *)
+        >&2 echo "Unsupported kernel: $kernel (arch=$raw_arch)"
+        exit 1
+        ;;
+esac
+
+printf 'os=%s version=%s arch=%s wsl=%s\n' "$distro" "$version" "$arch" "$wsl"
+
+if [ "$platform" = "unsupported" ]; then
+    >&2 echo "Unsupported Linux distribution: id=$distro arch=$arch"
+    exit 1
+fi
+
+if [ "$platform" = "fedora" ]; then
+    >&2 echo "Fedora is detected, but its package bootstrap has not been added yet."
+    exit 1
+fi
 
 # authorise sudo early on
 if ! sudo -n echo 2>/dev/null; then
@@ -21,51 +115,13 @@ fi
 # This works by poking the parent process to see if it's still alive.
 while true; do sudo -n true; sleep 15; kill -0 "$$" || exit; done 2>/dev/null &
 
-printf '\n\e[1;32m%s\e[m\n' "OS detection..."
-
-if uname | grep -q Linux; then
-    if ! command -v hostnamectl >/dev/null; then
-        >&2 echo "Could not determine OS"
-        exit 1
-    fi
-
-    if sudo hostnamectl | grep -q "Ubuntu" && getconf LONG_BIT | grep -q 64; then
-        PLATFORM=$UBUNTU_AMD64
-    elif sudo hostnamectl | grep -q "Raspbian" && getconf LONG_BIT | grep -q 32; then
-        PLATFORM=$RASPBIAN_ARMV5
-    else
-        >&2 echo "Unsupported OS"
-        exit 1
-    fi
-elif uname | grep -q Darwin; then
-    if [ "$(uname -m)" = "arm64" ]; then
-        PLATFORM=$MACOS
-    else
-        >&2 echo "Unsupported macOS architecture: $(uname -m)"
-        exit 1
-    fi
-else
-    >&2 echo "Unsupported OS"
-    exit 1
-fi
-
-echo $PLATFORM
-
 printf '\n\e[1;32m%s\e[m\n' "Bootstrapping..."
 
 # make sure git/sudo is installed
-case $PLATFORM in
-    $MACOS)
+case "$platform" in
+    macos)
         # triggers install of xcode cli tools or effectively does nothing
         git --version
-        ;;
-    $UBUNTU_AMD64)
-        sudo apt-get -y update
-        sudo apt-get -y install git
-        ;;
-    $RASPBIAN_ARMV5)
-        sudo apt-get -y update
-        sudo apt-get -y install git
         ;;
 esac
 
@@ -87,7 +143,7 @@ dot checkout
 dot config status.showUntrackedFiles no
 dot pull --ff-only
 
-source ./.bootstrap/"${PLATFORM}".sh
+source "./.bootstrap/${bootstrap_script}"
 
 mkdir ~/.ssh
 touch ~/.history
