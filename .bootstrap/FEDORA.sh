@@ -19,6 +19,7 @@ sudo dnf install -y \
     cmatrix \
     coreutils \
     croc \
+    crudini \
     ctop \
     curl \
     difftastic \
@@ -83,6 +84,11 @@ if [ ! -f /etc/yum.repos.d/hashicorp.repo ]; then
     sudo dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 fi
 sudo dnf install -y terraform
+
+if [ "$BOOTSTRAP_WSL" = true ]; then
+    sudo crudini --set /etc/wsl.conf network hostname "$BOOTSTRAP_DISTRO"
+    sudo crudini --set /etc/wsl.conf network generateHosts false
+fi
 
 # Antidote
 if [ ! -d "$antidote_dir/.git" ]; then

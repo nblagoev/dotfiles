@@ -153,6 +153,9 @@ if [ ! -x "$platform_script" ]; then
     exit 1
 fi
 
+BOOTSTRAP_DISTRO=$distro
+BOOTSTRAP_WSL=$wsl
+export BOOTSTRAP_DISTRO BOOTSTRAP_WSL
 "$platform_script"
 
 ssh_dir="$HOME/.ssh"
