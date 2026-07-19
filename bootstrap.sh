@@ -6,8 +6,7 @@ ORIGIN=https://github.com/nblagoev/dotfiles.git
 set -e
 
 # Supported platforms
-MACOS_ARM64=MACOS_ARM64
-MACOS_AMD64=MACOS_AMD64
+MACOS=MACOS
 UBUNTU_AMD64=UBUNTU_AMD64
 RASPBIAN_ARMV5=RASPBIAN_ARMV5
 
@@ -38,11 +37,12 @@ if uname | grep -q Linux; then
         >&2 echo "Unsupported OS"
         exit 1
     fi
-elif uname | grep -q Darwin && getconf LONG_BIT | grep -q 64; then
-    if uname -m | grep -q arm; then
-        PLATFORM=$MACOS_ARM64
+elif uname | grep -q Darwin; then
+    if [ "$(uname -m)" = "arm64" ]; then
+        PLATFORM=$MACOS
     else
-        PLATFORM=$MACOS_AMD64
+        >&2 echo "Unsupported macOS architecture: $(uname -m)"
+        exit 1
     fi
 else
     >&2 echo "Unsupported OS"
@@ -55,7 +55,7 @@ printf '\n\e[1;32m%s\e[m\n' "Bootstrapping..."
 
 # make sure git/sudo is installed
 case $PLATFORM in
-    $MACOS_AMD64)
+    $MACOS)
         # triggers install of xcode cli tools or effectively does nothing
         git --version
         ;;
