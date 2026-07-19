@@ -91,11 +91,6 @@ if [ "$platform" = "unsupported" ]; then
     exit 1
 fi
 
-if [ "$platform" = "fedora" ]; then
-    >&2 echo "Fedora is detected, but its package bootstrap has not been added yet."
-    exit 1
-fi
-
 # authorise sudo early on
 if ! sudo -n echo 2>/dev/null; then
     echo "Please enter sudo password. Sudo session will be kept alive until this script exits."
