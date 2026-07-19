@@ -1,8 +1,0 @@
-[flavor]
-# set both to the same theme, as yazi cannot properly detect the background in tmux
-dark  = "catppuccin-mocha"
-light = "catppuccin-mocha"
-
-[status]
-separator_open  = " "
-separator_close = " "
