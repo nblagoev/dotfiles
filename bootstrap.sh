@@ -5,13 +5,14 @@ ORIGIN=https://github.com/nblagoev/dotfiles.git
 # exit on error
 set -e
 
+script_dir=$(CDPATH= cd "$(dirname "$0")" && pwd)
+
 printf '\n\e[1;32m%s\e[m\n' "OS detection..."
 
 kernel=$(uname -s)
 raw_arch=$(uname -m)
 arch=
 distro=
-distro_like=
 version=unknown
 wsl=false
 platform=
@@ -54,7 +55,6 @@ case "$kernel" in
 
         . "$os_release"
         distro=${ID:-}
-        distro_like=${ID_LIKE:-}
         version=${VERSION_ID:-unknown}
 
         if [ -z "$distro" ]; then
@@ -74,15 +74,7 @@ case "$kernel" in
                 bootstrap_script=FEDORA.sh
                 ;;
             *)
-                case " $distro_like " in
-                    *" fedora "*)
-                        platform=fedora
-                        bootstrap_script=FEDORA.sh
-                        ;;
-                    *)
-                        platform=unsupported
-                        ;;
-                esac
+                platform=unsupported
                 ;;
         esac
         ;;
@@ -114,6 +106,12 @@ fi
 # sudo keepalive. This will keep the sudo watchdog fed until this script exits.
 # This works by poking the parent process to see if it's still alive.
 while true; do sudo -n true; sleep 15; kill -0 "$$" || exit; done 2>/dev/null &
+sudo_keepalive_pid=$!
+cleanup_sudo_keepalive() {
+    kill "$sudo_keepalive_pid" 2>/dev/null || true
+}
+trap cleanup_sudo_keepalive 0
+trap 'exit 1' 1 2 15
 
 printf '\n\e[1;32m%s\e[m\n' "Bootstrapping..."
 
@@ -125,35 +123,55 @@ case "$platform" in
         ;;
 esac
 
-test ! -d $HOME/.dotfiles && git clone --recurse-submodules --bare $ORIGIN $HOME/.dotfiles
-function dot {
-   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
+dotfiles_dir="$HOME/.dotfiles"
+backup_dir="$HOME/.dotfiles-backup"
+
+if [ ! -d "$dotfiles_dir" ]; then
+    command git clone --recurse-submodules --bare "$ORIGIN" "$dotfiles_dir"
+fi
+
+dot() {
+    command git --git-dir="$dotfiles_dir" --work-tree="$HOME" "$@"
 }
-mkdir -p .dotfiles-backup
-dot checkout
 
-if [ $? = 0 ]; then
-  printf '\n\e[1;32m%s\e[m\n' "Checked out dotfiles.";
+mkdir -p "$backup_dir"
+if dot checkout; then
+    printf '\n\e[1;32m%s\e[m\n' "Checked out dotfiles."
 else
-  printf '\n\e[1;32m%s\e[m\n' "Backing up pre-existing dotfiles.";
-  dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
-fi;
-
-dot checkout
+    printf '\n\e[1;32m%s\e[m\n' "Backing up pre-existing dotfiles."
+    (
+        cd "$HOME"
+        dot checkout 2>&1 | awk '/^[[:space:]]+\./ { print $1 }' |
+            while IFS= read -r path; do
+                mkdir -p "$backup_dir/$(dirname "$path")"
+                mv "$path" "$backup_dir/$path"
+            done
+    )
+    dot checkout
+fi
 dot config status.showUntrackedFiles no
 dot pull --ff-only
 
-source "./.bootstrap/${bootstrap_script}"
+platform_script="$script_dir/.bootstrap/$bootstrap_script"
+if [ ! -x "$platform_script" ]; then
+    >&2 echo "Platform bootstrap script is missing or not executable: $platform_script"
+    exit 1
+fi
 
-mkdir ~/.ssh
-touch ~/.history
-touch ~/.ssh/known_hosts
-touch ~/.ssh/allowed_signers
-touch ~/.ssh/authorized_keys
-touch ~/.ssh/config
-chmod 600 ~/.history
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/known_hosts
-chmod 600 ~/.ssh/allowed_signers
-chmod 600 ~/.ssh/authorized_keys
-chmod 600 ~/.ssh/config
+"$platform_script"
+
+ssh_dir="$HOME/.ssh"
+history_file="$HOME/.history"
+
+mkdir -p "$ssh_dir"
+touch "$history_file"
+touch "$ssh_dir/known_hosts"
+touch "$ssh_dir/allowed_signers"
+touch "$ssh_dir/authorized_keys"
+touch "$ssh_dir/config"
+chmod 600 "$history_file"
+chmod 700 "$ssh_dir"
+chmod 600 "$ssh_dir/known_hosts"
+chmod 600 "$ssh_dir/allowed_signers"
+chmod 600 "$ssh_dir/authorized_keys"
+chmod 600 "$ssh_dir/config"
