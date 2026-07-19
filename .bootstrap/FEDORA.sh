@@ -85,9 +85,30 @@ if [ ! -f /etc/yum.repos.d/hashicorp.repo ]; then
 fi
 sudo dnf install -y terraform
 
+# WSL
 if [ "$BOOTSTRAP_WSL" = true ]; then
     sudo crudini --set /etc/wsl.conf network hostname "$BOOTSTRAP_DISTRO"
     sudo crudini --set /etc/wsl.conf network generateHosts false
+
+    if [ "$(cat /proc/1/comm)" = systemd ]; then
+        binfmt_conf=/etc/binfmt.d/wsl.conf
+        binfmt_rule=':WSLInterop:M::MZ::/init:PF'
+        binfmt_tmp=$(mktemp)
+
+        printf '%s\n' "$binfmt_rule" > "$binfmt_tmp"
+
+        if ! sudo test -f "$binfmt_conf" ||
+            ! sudo cmp -s "$binfmt_tmp" "$binfmt_conf" ||
+            [ "$(sudo stat -c '%U:%G:%a' "$binfmt_conf")" != root:root:644 ]; then
+            sudo install -o root -g root -m 644 "$binfmt_tmp" "$binfmt_conf"
+
+            if ! sudo systemctl restart systemd-binfmt.service; then
+                >&2 printf '%s\n' 'WSLInterop rule was saved; restart WSL to activate it.'
+            fi
+        fi
+
+        rm "$binfmt_tmp"
+    fi
 fi
 
 # Antidote
