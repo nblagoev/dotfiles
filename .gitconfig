@@ -1,160 +1,115 @@
 [include]
   path = ~/.gitconfig.local
-	path = ~/.config/delta/themes/nightfox.gitconfig
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
 [alias]
-  aliases     = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
-	# Staging
-	a 			= add
+  aliases = "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort"
+  a       = add
+  br      = branch
+  brc     = branch --show-current
+  c       = commit
+  cf      = commit --fixup
+  co      = checkout
+  cb      = checkout -b
+  cp      = cherry-pick
+  d       = diff
+  dc      = diff --cached
+  dw      = diff --word-diff
+  ds      = diff --stat -r
+  dt      = -c diff.external=difft diff
+  dlog    = -c diff.external=difft log -p --ext-diff
+  dshow   = -c diff.external=difft show --ext-diff
+  plom    = pull origin main
+  pf      = push --force-with-lease
+  pom     = push origin main
+  r       = remote -v
+  # Force merge commit (no fast-forward, aka merge bubble)
+  mf      = merge --no-ff
+  pub     = push -u origin HEAD
+  unpub   = "!git push origin :$(branch --show-current)"
+  aq      = rebase origin/main -i --autosquash
+  st      = status -sb
+  last    = log -1 HEAD
+  lg      = log --graph --pretty=custom --abbrev-commit --date=relative
+  ll      = log --stat --abbrev-commit
+  lc      = shortlog --summary --numbered # List contributors
+  heir    = log --all --graph --decorate --oneline --simplify-by-decoration  # Remote
 
-	# Branch
-	br 			= branch
-	branch-name = rev-parse --abbrev-ref HEAD
-	branch-files = "!git diff master...HEAD --name-status | sed '/^D/d ; s/^.\\s\\+//'"
+  # Reset
+  uncommit    = reset HEAD~1 --mixed
+  untrack     = rm --cached --
+  unpushed    = log --branches --not --remotes --simplify-by-decoration --decorate --oneline
+  untracked   = "!git ls-files . --exclude-standard --others"
+  # Submodules
+  subpull     = submodule update --init --recursive
+  # Assumptions
+  assume      = update-index --assume-unchanged
+  unassume    = update-index --no-assume-unchanged
+  assumed     = "!git ls-files -v | grep ^h | cut -c 3-"
+  # Pull Requests (https://gist.github.com/gnarf/5406589)
+  pr-clean    = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+  # for github remores
+  pr          = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+  review      = "!f() { git log -p --reverse \"$@\" origin/main...HEAD; }; f"
+  # Deletes all branches already merged into master.
+  bclean      = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+  #via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
+  # show the most recently touched branches
+  recent      = "!git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--' | less -XFR"
+  latest      = "!git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/remotes | sed -e 's-refs/remotes/origin/--' | less -XFR"
+  ignored     = !git ls-files -ci --exclude-standard
+  lasttag     = describe --tags --abbrev=0
+  stag        = tag -l --sort=v:refname
+  findtodo    = grep --line-number --word-regexp TODO
+  cleanup     = !git remote prune origin && git gc && git clean -dfx && git stash clear
+  ignore      = "!([ ! -e .gitignore ] && touch .gitignore) | echo `\n$2` >> .gitignore"
 
-	# Commit
-	c 			= commit
-	ca 			= commit -a
-	cm 			= commit -m
-	amend 		= commit --amend
-	amend-all 	= !git add --all && git commit --amend --reuse-message=HEAD
-
-	# Clone
-	cl 			= clone
-	sclone 		= clone --depth=1
-
-	# Checkout
-	co 			= checkout
-	cb 			= checkout -b
-
-	# Cherry-pick
-	cp 			= cherry-pick
-
-	# Diff
-	d 			= diff
-	dc 			= diff --cached
-	dw 			= diff --word-diff
-	dt 			= difftool
-	ds			= diff --stat -r
-
-	# Merge
-	m = merge
-
-	# Pull
-	up 			= pull
-	plom 		= pull origin main
-
-	# Push
-	p 			= push
-	pom 		= push origin main
-	# Push the current branch to the remote "origin", and set it to track
-	# the upstream branch
-	pub         = "!git push -u origin $(git branch-name)"
-	# Delete the remote version of the current branch
-	unpub       = "!git push origin :$(git branch-name)"
-
-	# Status/Logging
-	st			= status -sb
-	last    	= log -1 HEAD
-	lg 			= log --graph --pretty=custom2 --abbrev-commit --date=relative
-	ll 			= log --stat --abbrev-commit
-	lc 			= shortlog --summary --numbered # List contributors
-	filelog     = log -u
-	heir 		= log --all --graph --decorate --oneline --simplify-by-decoration
-	today   	= log --since=midnight --color --graph \
-					--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
-					--abbrev-commit
-  yday 	  = log --since yesterday --until=midnight --color --graph \
-					--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
-					--abbrev-commit
-
-	# Reset
-	uncommit	= reset HEAD~1 --mixed # Resets the previous commit, but keeps all the changes from that commit in the WD
-	untrack 	= rm --cached --
-	unpushed = log --branches --not --remotes --simplify-by-decoration --decorate --oneline
-  untracked = "!git ls-files . --exclude-standard --others"
-
-	# Remote
-  r 			= remote -v
-
-    # Submodules
-	subpull 	= submodule update --init --recursive
-
-	# Assumptions
-
-	assume   = update-index --assume-unchanged
-	unassume = update-index --no-assume-unchanged
-	assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
-
-	# Pull Requests (https://gist.github.com/gnarf/5406589)
-	pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
-	# for github remores
-	pr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-
-	# Misc
-
-    # Deletes all branches already merged into master.
-	bclean      = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
-	#via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
-	# show the most recently touched branches
-    recent = "!git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--' | less -XFR"
-	latest = "!git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/remotes | sed -e 's-refs/remotes/origin/--' | less -XFR"
-	ignored 	= !git ls-files -ci --exclude-standard
-	lasttag 	= describe --tags --abbrev=0
-	findtodo 	= grep --line-number --word-regexp TODO
-	cleanup     = !git remote prune origin && git gc && git clean -dfx && git stash clear
-	ignore      = "!([ ! -e .gitignore ] && touch .gitignore) | echo `\n$2` >> .gitignore"
-
-	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 [color]
-	ui = always
+  ui = auto
 
 [color "status"]
   added = green
   changed = yellow
-	untracked = red
+  untracked = red
 
 [color "branch"]
-	current = green bold
-	local = green
-	remote = yellow
-	plain = normal
+  current = green bold
+  local = green
+  remote = yellow
+  plain = normal
 
 [pretty]
-	custom = "%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset"
-	custom2 = "%Cred%h%Creset %C(bold blue)%an%C(reset) - %s %Creset%C(yellow)%d%Creset %Cgreen(%cr)%Creset"
+  custom = "%Cred%h%Creset %C(bold blue)%an%C(reset) - %s %Creset%C(yellow)%d%Creset %Cgreen(%cr)%Creset"
 
 [push]
-	default = simple
-	# Make `git push` automatically push relevant
-	# annotated tags when pushing branches out
-	followTags = true
+  default = simple
+  # Make `git push` automatically push relevant
+  # annotated tags when pushing branches out
+  followTags = true
 
 [core]
-	editor = nvim
-	excludesfile = ~/.gitignore
-	autocrlf = input
-	ignorecase = false
-  pager = delta
+  editor = nvim
+  excludesfile = ~/.gitignore
+  autocrlf = input
+  ignorecase = false
 
-[interactive]
-    diffFilter = delta --color-only
-
-[delta]
-  navigate = true
-	features = terafox
-	syntax-theme = terafox
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
 
 [merge]
   conflictstyle = diff3
-	tool = codediff
+  tool = codediff
 
-[diff]
-  colorMoved = default
+[mergetool "vimdiff"]
+  path = nvim
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
 [mergetool "codediff"]
-	cmd = nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\"
+  cmd = nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\"
