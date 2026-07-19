@@ -19,7 +19,8 @@ unfocused-split-opacity = 0.6
 
 macos-titlebar-style = tabs
 macos-option-as-alt = left
-macos-icon = custom-style
+macos-icon = xray
+# macos-icon = custom-style
 # macos-icon-frame = beige
 # Terafox
 macos-icon-ghost-color = #688b89
@@ -36,7 +37,6 @@ confirm-close-surface = false
 
 auto-update-channel = tip
 command-palette-entry = title:"Toggle Shades", action:"text:shades\n"
-command-palette-entry = title:Neovim, action:"text:nvim\n"
 
 keybind = global:ctrl+;=toggle_quick_terminal
 keybind = ctrl+-=new_split:down
@@ -47,6 +47,8 @@ keybind = ctrl+\=new_split:right
 # custom-shader = shaders/glitchy.glsl
 # custom-shader = shaders/bettercrt.glsl
 # custom-shader = shaders/cursor_smear.glsl
+# custom-shader = shaders/cursor_blaze.glsl
+custom-shader = shaders/smooth_cursor_movement.glsl
 
 # config-file = fonts/mixed.conf
 config-file = fonts/iosevka.conf
