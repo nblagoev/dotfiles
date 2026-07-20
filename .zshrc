@@ -2,25 +2,37 @@
 
 # zmodload zsh/zprof
 
+source "$XDG_CONFIG_HOME/zsh/platform.zsh"
+
 if [[ $TERM = dumb ]]; then
-  unset zle_bracketed_paste
+    unset zle_bracketed_paste
 fi
 
 # Start tmux by default in Alacritty and exit terminal if tmux exits.
-if [[ -n "$ALACRITTY_SOCKET" && -z "$TMUX" ]] ; then
-  echo -e "\n\nAttaching tmux..."
-  tmux attach-session || exec tmux new-session;
+if [[ -n $ALACRITTY_SOCKET && -z $TMUX ]]; then
+    echo -e "\n\nAttaching tmux..."
+    tmux attach-session || exec tmux new-session
 fi
 
-source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
-antidote load $HOME/.zplugins
+# Set plugin options before Antidote loads plugins.
+source "$XDG_CONFIG_HOME/zsh/options.zsh"
 
-autoload -Uz compinit
-if [[ ! -f ~/.cache/zcompdump.zwc ]]; then
-    compinit -d ~/.cache/zcompdump
-    zcompile ~/.cache/zcompdump
+if [[ $DOTFILES_PLATFORM == macos ]]; then
+    source "$(brew --prefix antidote)/share/antidote/antidote.zsh"
+    [ -f "$XDG_CONFIG_HOME/op/plugins.sh" ] && source "$XDG_CONFIG_HOME/op/plugins.sh"
 else
-    compinit -C -d ~/.cache/zcompdump
+    source "$XDG_DATA_HOME/antidote/antidote.zsh"
+fi
+
+antidote load "$HOME/.zplugins"
+
+mkdir -p "$HOME/.cache"
+autoload -Uz compinit
+if [[ ! -f $HOME/.cache/zcompdump.zwc ]]; then
+    compinit -d "$HOME/.cache/zcompdump"
+    zcompile "$HOME/.cache/zcompdump"
+else
+    compinit -C -d "$HOME/.cache/zcompdump"
 fi
 
 eval "$(fzf --zsh)"
@@ -29,16 +41,12 @@ eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
-for filename in $HOME/.config/zsh/{aliases,commands,options,completion,keybindings}.zsh; do
-    source $filename
+for filename in "$XDG_CONFIG_HOME"/zsh/{aliases,commands,completion,keybindings}.zsh; do
+    source "$filename"
 done
 unset filename
 
-[ -f ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
-[ -f ~/.config/zsh/localrc.zsh ] && source ~/.config/zsh/localrc.zsh
-
-source $HOME/.cargo/env
-source $HOME/.local/share/bob/env/env.sh
+[[ -r "$XDG_CONFIG_HOME/zsh/localrc.zsh" ]] && source "$XDG_CONFIG_HOME/zsh/localrc.zsh"
 
 # ~/.local/bin/cleanup-history ~/.history
 # fc -R # reload history

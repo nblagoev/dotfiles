@@ -1,47 +1,42 @@
 # ~/.zprofile
 
-export DEFAULT_USER=$USER
-export GH_GET_WORKSPACE_PATH="$HOME/dev"
-#export TERM=xterm-256color-italic
-export EDITOR=nvim
-export PAGER=less
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export VIMRUNTIME="$XDG_DATA_HOME/bob/$(/bin/cat $XDG_DATA_HOME/bob/used)/share/nvim/runtime"
-export HOMEBREW_NO_INSECURE_REDIRECT=1
-export HOMEBREW_CASK_OPTS=--require-sha
+source "$HOME/.config/zsh/platform.zsh"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
-# Path {{{
+typeset -U path
+_extend_path() {
+    [[ -d $1 ]] && path=("$1" "${path[@]}")
+}
 
-  # Extend $PATH without duplicates
-  function _extend_path() {
-    if ! $( echo "$PATH" | tr ":" "\n" | grep -qx "$1" ) ; then
-      PATH="$1:$PATH"
-    fi
-  }
-
-  [ -d ~/.bin ] && _extend_path "$HOME/.bin"
-  [ -d ~/.local/bin ] && _extend_path "$HOME/.local/bin"
-  [ -d /usr/local/bin ] && _extend_path "/usr/local/bin"
-  [ -d /usr/local/sbin ] && _extend_path "/usr/local/sbin"
-  #[ -d ~/.npm-global ] && _extend_path "~/.npm-global/bin"
-  _extend_path $(brew --prefix)/opt/llvm/bin
-# }}}
-
-# FZF {{{
-export FZF_HOME=$(brew --prefix fzf)
-export FZF_DEFAULT_OPTS_FILE="$HOME/.config/fzfrc"
+export FZF_DEFAULT_OPTS_FILE="$XDG_CONFIG_HOME/fzfrc"
 export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
-# }}}
+if [[ $DOTFILES_PLATFORM == macos ]]; then
+    export VIMRUNTIME="$XDG_DATA_HOME/bob/$(/bin/cat "$XDG_DATA_HOME/bob/used")/share/nvim/runtime"
+    export HOMEBREW_NO_INSECURE_REDIRECT=1
+    export HOMEBREW_CASK_OPTS=--require-sha
 
-# Added by Toolbox App
-export PATH="$PATH:/Users/nblagoev/Library/Application Support/JetBrains/Toolbox/scripts"
+    brew_bin=/opt/homebrew/bin/brew
+    eval "$("$brew_bin" shellenv)"
+    export FZF_HOME="$("$brew_bin" --prefix fzf)"
+fi
 
-[ -f ~/.local/share/bob/env/env.sh ] && source ~/.local/share/bob/env/env.sh
-[ -f ~/.config/zsh/local_profile.zsh ] && source ~/.config/zsh/local_profile.zsh
+_extend_path "$HOME/.bin"
+_extend_path "$HOME/.local/bin"
+_extend_path /usr/local/bin
+_extend_path /usr/local/sbin
+
+source "$HOME/.cargo/env"
+
+if [[ $DOTFILES_PLATFORM == macos ]]; then
+    _extend_path "$("$brew_bin" --prefix llvm)/bin"
+    path+=("$HOME/Library/Application Support/JetBrains/Toolbox/scripts")
+    source "$XDG_DATA_HOME/bob/env/env.sh"
+
+    unset brew_bin
+fi
+
+[[ -r "$XDG_CONFIG_HOME/zsh/local_profile.zsh" ]] && source "$XDG_CONFIG_HOME/zsh/local_profile.zsh"

@@ -1,2 +1,4 @@
 .DS_Store
 iterm2/AppSupport
+zsh/local_profile.zsh
+zsh/localrc.zsh

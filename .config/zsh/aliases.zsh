@@ -2,14 +2,25 @@
 alias r="rgfzf"
 alias k="kubectl"
 alias vim="nvim"
-alias cat="bat"
 alias cl="claude"
 alias cx="codex"
-alias da="direnv allow"
 
-alias dot='/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias navi='navi --path ~/.config/navi'
-alias op-ssh-add='SSH_AUTH_SOCK=~/.1password/agent.sock ssh-add'
+alias cat="bat"
+alias da="direnv allow"
+alias navi='navi --path "$XDG_CONFIG_HOME/navi"'
+
+if [[ $DOTFILES_PLATFORM == macos ]]; then
+    alias op-ssh-add='SSH_AUTH_SOCK=~/.1password/agent.sock ssh-add'
+fi
+
+if [[ $DOTFILES_WSL == true ]]; then
+    alias ssh='ssh.exe'
+    alias ssh-add='ssh-add.exe'
+fi
+
+dot() {
+    command git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
+}
 
 alias ls='eza --color=always --no-filesize --icons=always --no-time --no-user --no-permissions'
 alias ll='eza -ghla --classify=auto --group-directories-first --git'
@@ -38,8 +49,20 @@ alias urlencode='python3 -c "import sys, urllib.parse as p; print(p.quote_plus(s
 
 alias path='echo $PATH | tr -s ":" "\n"'
 alias npm-exec='PATH=$(npm bin):$PATH'
-alias clip='pbcopy'
 alias findP="ps -ef | grep -v grep | grep "
+
+clip() {
+    if [[ $DOTFILES_PLATFORM == macos ]] && (( $+commands[pbcopy] )); then
+        pbcopy "$@"
+    elif [[ $DOTFILES_WSL == true ]] && (( $+commands[clip.exe] )); then
+        clip.exe "$@"
+    elif (( $+commands[wl-copy] )); then
+        wl-copy "$@"
+    else
+        print -u2 'No clipboard command is available.'
+        return 1
+    fi
+}
 
 alias weather="curl -4 http://wttr.in/Sofia"
 

@@ -52,5 +52,3 @@ zstyle ':fzf-tab:complete:(ssh|scp|rsync):*' fzf-preview 'dig $word'
 zstyle ':fzf-tab:complete:((cp|rm|cat|bat|less|code|vim|hx):argument-rest|kate:*)' fzf-preview 'bat --color=always -- $realpath 2>/dev/null || ls --color=always -- $realpath'
 zstyle ':fzf-tab:complete:updatelocal:argument-rest' fzf-preview "git --git-dir=$UPDATELOCAL_GITDIR/\${word}/.git log --color --date=short --pretty=format:'%Cgreen%cd %h %Creset%s %Cred%d%Creset ||%b' ..FETCH_HEAD 2>/dev/null"
 zstyle ':fzf-tab:complete:updatelocal:argument-rest' fzf-flags --preview-window=down:5:wrap
-
-compdef '/opt/homebrew/bin/terraform' terraform
