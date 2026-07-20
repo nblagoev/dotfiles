@@ -1,5 +1,5 @@
 % dotfiles
 # init a dotfiles repo
 git init --bare $HOME/.dotfiles
-alias dot='/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dot config status.showUntrackedFiles no

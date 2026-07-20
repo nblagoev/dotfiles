@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $(uname -s) != Darwin ]]; then
+	echo "backup is only supported on macOS." >&2
+	exit 1
+fi
+
 op inject -f -i ~/.config/rclone/rclone.conf.tpl -o ~/.config/rclone/rclone.conf
 
 icloud-sync start "~/Library/Mobile Documents/iCloud~com~apple~iBooks/Documents" \

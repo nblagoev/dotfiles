@@ -51,19 +51,6 @@ alias path='echo $PATH | tr -s ":" "\n"'
 alias npm-exec='PATH=$(npm bin):$PATH'
 alias findP="ps -ef | grep -v grep | grep "
 
-clip() {
-    if [[ $DOTFILES_PLATFORM == macos ]] && (( $+commands[pbcopy] )); then
-        pbcopy "$@"
-    elif [[ $DOTFILES_WSL == true ]] && (( $+commands[clip.exe] )); then
-        clip.exe "$@"
-    elif (( $+commands[wl-copy] )); then
-        wl-copy "$@"
-    else
-        print -u2 'No clipboard command is available.'
-        return 1
-    fi
-}
-
 alias weather="curl -4 http://wttr.in/Sofia"
 
 # Lists the ten most used commands.

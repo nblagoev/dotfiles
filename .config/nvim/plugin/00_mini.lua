@@ -253,15 +253,18 @@ add {
         vim.fn.setreg("+", cur_entry_path)
         print("Path copied to clipboard!")
       end
-      local preview_file = function()
-        local cur_entry_path = MiniFiles.get_fs_entry().path
-        vim.system({ "qlmanage", "-p", cur_entry_path }, {
-          stdout = false,
-          stderr = false,
-        })
-        vim.defer_fn(function()
-          vim.system({ "osascript", "-e", 'tell application "qlmanage" to activate' })
-        end, 200)
+      local preview_file
+      if vim.fn.has("mac") == 1 then
+        preview_file = function()
+          local cur_entry_path = MiniFiles.get_fs_entry().path
+          vim.system({ "qlmanage", "-p", cur_entry_path }, {
+            stdout = false,
+            stderr = false,
+          })
+          vim.defer_fn(function()
+            vim.system({ "osascript", "-e", 'tell application "qlmanage" to activate' })
+          end, 200)
+        end
       end
       local make_executable = function()
         local cur_entry_path = MiniFiles.get_fs_entry().path
@@ -281,7 +284,7 @@ add {
         callback = function(args)
           vim.keymap.set("n", "Y", copy_path, { buffer = args.data.buf_id, desc = "Copy Path" })
           vim.keymap.set("n", "X", make_executable, { buffer = args.data.buf_id, desc = "Make file executable" })
-          if vim.fn.has("mac") == 1 then
+          if preview_file then
             vim.keymap.set("n", "F", preview_file, { buffer = args.data.buf_id, desc = "Preview File in MacOS" })
           end
         end,

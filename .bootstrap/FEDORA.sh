@@ -69,6 +69,7 @@ sudo dnf install -y \
     tzdata \
     uv \
     watch \
+    wl-clipboard \
     wget \
     xxh \
     yubikey-manager \

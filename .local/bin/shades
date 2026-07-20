@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $(uname -s) != Darwin ]]; then
+  echo "shades is only supported on macOS." >&2
+  exit 1
+fi
+
 tmux_path="$HOME/.config/tmux/tmux.conf"
 helix_path="$HOME/.config/helix/config.toml"
 starship_path="$HOME/.config/starship.toml"

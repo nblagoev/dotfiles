@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case $(uname -s) in
+    Darwin)
+        exec pbcopy "$@"
+        ;;
+    Linux)
+        if [ -n "${WSL_INTEROP:-}" ] || grep -qi microsoft /proc/sys/kernel/osrelease; then
+            exec clip.exe "$@"
+        fi
+        exec wl-copy "$@"
+        ;;
+    *)
+        echo "clip is unsupported on $(uname -s)." >&2
+        exit 1
+        ;;
+esac

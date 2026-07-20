@@ -242,7 +242,7 @@ local function pick_dotfiles()
   Snacks.picker({
     finder = "proc",
     title = "Dotfiles",
-    cmd = "/opt/homebrew/bin/git",
+    cmd = "git",
     args = {
       "--git-dir=" .. home .. "/.dotfiles/",
       "--work-tree=" .. home,

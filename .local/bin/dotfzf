@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e pipefail
 
-files=$(/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME ls-tree --full-tree --name-only -r HEAD | sed "s|^|$HOME/|")
+files=$(git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" ls-tree --full-tree --name-only -r HEAD | sed "s|^|$HOME/|")
 
 # tty required, see GNU xargs man page
 # Note that BSD args does not allow the delimiter to be \n so \0 must be used with the -0 option.

@@ -133,8 +133,9 @@ command("OpenGithubRepo", function()
 end, {})
 vim.keymap.set({ "n", "v" }, "<leader>og", "<cmd>OpenGithubRepo<cr>", { desc = "Open Github Repo" })
 
--- Command to preview files using macOS Quick Look
-command("QuickLookPreview", function()
+if vim.fn.has("mac") == 1 then
+  -- Command to preview files using macOS Quick Look
+  command("QuickLookPreview", function()
   local mode = vim.api.nvim_get_mode().mode
   local filepath = ""
 
@@ -165,13 +166,14 @@ command("QuickLookPreview", function()
   vim.defer_fn(function()
     vim.system({ "osascript", "-e", 'tell application "qlmanage" to activate' })
   end, 200)
-end, {})
-vim.keymap.set(
-  { "n", "v" },
-  "<leader>ov",
-  "<cmd>QuickLookPreview<cr>",
-  { desc = "Quick Look File Preview" }
-)
+  end, {})
+  vim.keymap.set(
+    { "n", "v" },
+    "<leader>ov",
+    "<cmd>QuickLookPreview<cr>",
+    { desc = "Quick Look File Preview" }
+  )
+end
 
 command("LuaInspect", function()
   local sel = vim.fn.mode() == "v" and vim.getVisualSelection() or nil

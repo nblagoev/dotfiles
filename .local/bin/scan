@@ -31,17 +31,23 @@ for s in "${scans[@]}"; do echo -e "===\nargs: $s\n---"; scan $s; echo -e "---\n
 ips = []
 subnets = []
 
-# Get IPs and subnets we care about from ifconfig. Basically, from any network
-# device starting with the letter "e" (en0, en1, eth0, eth1, etc).
-ether = nil
-%x{ifconfig}.each_line do |line|
-  if line =~ /^(\S)/
-    # If the line starts with a letter, set a flag if that letter is "e".
-    ether = $1 == 'e'
-  elsif ether && line =~ /inet (?:addr:)?((\d+\.\d+\.\d+)\.\d+)/
-    # Save IP address (1.2.3.4) and subnet (1.2.3.*) for later.
-    ips << $1
-    subnets << "#{$2}.*"
+# Get IPs and subnets from Ethernet interfaces.
+if RUBY_PLATFORM.include?("darwin")
+  ether = nil
+  %x{ifconfig}.each_line do |line|
+    if line =~ /^(\S)/
+      ether = $1 == 'e'
+    elsif ether && line =~ /inet (?:addr:)?((\d+\.\d+\.\d+)\.\d+)/
+      ips << $1
+      subnets << "#{$2}.*"
+    end
+  end
+else
+  %x{ip -o -4 addr show scope global}.each_line do |line|
+    if line =~ /^\d+:\s+(e\S*)\s+inet\s+((\d+\.\d+\.\d+)\.\d+)/
+      ips << $2
+      subnets << "#{$3}.*"
+    end
   end
 end
 

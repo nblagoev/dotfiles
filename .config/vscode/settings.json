@@ -114,9 +114,6 @@
 	"workbench.preferredDarkColorTheme": "Catppuccin Mocha",
 	"workbench.preferredLightColorTheme": "Catppuccin Latte",
 
-	"go.alternateTools": {
-		"go": "/opt/homebrew/bin/go"
-	},
 	"go.useLanguageServer": true,
 	"gopls": {
 	  "ui.semanticTokens": true,
