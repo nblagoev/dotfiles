@@ -1,0 +1,11 @@
+finder:
+  command: fzf
+  overrides: --height 25
+  overrides_var: --height 25
+style:
+  tag:
+    color: blue
+  comment:
+    color: white
+  snippet:
+    color: yellow

@@ -1,4 +1,7 @@
 vim.filetype.add {
+    extension = {
+        cheat = 'navi',
+    },
     filename = {
         ['.eslintrc.json'] = 'jsonc',
     },

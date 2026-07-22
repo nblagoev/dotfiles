@@ -1,5 +1,7 @@
 % minisign, sign
 # sign
 minizign -S -s <(op document get "minisign.key") -m file.txt
+
+% minisign, verify
 # verify
 minizign -V -p <(op document get "minisign.pub") -m file.txt

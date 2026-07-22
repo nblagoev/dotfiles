@@ -1,8 +1,19 @@
 % ssh, resident-key
 # generate resident key
 ssh-keygen -t ed25519-sk -O resident -O verify-required -O application=ssh:auth
+
+% ssh, sign
 # sign a file
-ssh-keygen -Y sign -f ~/.ssh/id_ed25519_sk.pub -n reason myfile.txt
+$ key_file: fd --type f --extension pub . "$HOME/.ssh"
+$ file: fd --type f --hidden --exclude .git
+ssh-keygen -Y sign -f <key_file> -n <namespace> <file>
+
+% ssh, verify
 # verify a file signature (needs an "allowed signers" file mapping identity -> pubkey)
-echo "you@example.com $(cat ~/.ssh/id_ed25519_sk.pub)" > allowed_signers
-ssh-keygen -Y verify -f allowed_signers -I you@example.com -n reason -s myfile.txt.sig < myfile.txt
+$ public_key: fd --type f --extension pub . "$HOME/.ssh"
+$ file: fd --type f --hidden --exclude .git
+# The identity must match the left-hand field in allowed_signers, usually your email.
+$ identity: git config --global --includes --get user.email
+signer="<identity> $(cat "<public_key>")"
+grep -qxF "$signer" allowed_signers || printf '%s\n' "$signer" >> allowed_signers
+ssh-keygen -Y verify -f allowed_signers -I <identity> -n <namespace> -s <file>.sig < <file>

@@ -1,5 +1,75 @@
-% age, decrypt, encrypt
-# decrypt file using identity from 1Password
-age -d -i <(op document get "age-key-item-name") -o decrypted-file.txt encrypted-file.age
-# generate a new identity key and store it in 1Password
-age-keygen -pq | op document create - --title "age-identities" --file-name "key.txt" --vault Private
+% age, key, generate
+# Generate a post-quantum age identity. Keep the identity file out of Git.
+age-keygen -pq -o <identity-file>
+
+% age, key, recipient
+# Derive recipient(s) from an identity file.
+$ identity_file: fd --type f --hidden --glob 'key*.txt' --glob '*.agekey'
+age-keygen -y <identity_file>
+
+% age, key, 1password
+# Generate an identity and save it as a 1Password document.
+$ vault: op vault list --format=json | jq -r '.[].name'
+age-keygen -pq | op document create - --title <title> --file-name key.txt --vault <vault>
+
+% age, yubikey, list
+# List age recipients for connected YubiKeys.
+age-plugin-yubikey --list
+
+% age, yubikey, list-all
+# List every age-compatible YubiKey recipient, including identities not named for age.
+age-plugin-yubikey --list-all
+
+% age, yubikey, generate
+# Generate an age identity in a YubiKey PIV slot.
+age-plugin-yubikey --generate --name <name> --pin-policy once --touch-policy always
+
+% age, encrypt, recipient
+# Encrypt a file to one recipient.
+$ input: fd --type f --hidden --exclude .git
+$ recipient: sed '/^#/d; /^$/d' "$HOME/.age-recipients"
+age -r <recipient> -o <output-file.age> <input>
+
+% age, encrypt, recipients-file
+# Encrypt a file to every recipient listed in a file.
+$ input: fd --type f --hidden --exclude .git
+$ recipients_file: fd --type f --hidden --glob '.age-recipients' --glob '*.recipients'
+age -R <recipients_file> -o <output-file.age> <input>
+
+% age, encrypt, armor
+# Create an ASCII-armored encrypted file for Git or text-only transport.
+$ input: fd --type f --hidden --exclude .git
+$ recipients_file: fd --type f --hidden --glob '.age-recipients' --glob '*.recipients'
+age -a -R <recipients_file> -o <output-file.age> <input>
+
+% age, decrypt, identity
+# Decrypt with a local age identity file.
+$ encrypted_file: fd --type f --extension age
+$ identity_file: fd --type f --hidden --glob 'key*.txt' --glob '*.agekey'
+age -d -i <identity_file> -o <output-file> <encrypted_file>
+
+% age, decrypt, 1password
+# Decrypt with an identity stored as a 1Password document.
+$ encrypted_file: fd --type f --extension age
+$ vault: op vault list --format=json | jq -r '.[].name'
+op document get <document> --vault <vault> | age -d -i - -o <output-file> <encrypted_file>
+
+% age, decrypt, yubikey
+# Decrypt with identities from connected YubiKeys; age prompts for PIN and touch when required.
+$ encrypted_file: fd --type f --extension age
+age-plugin-yubikey --identity | age -d -i - -o <output-file> <encrypted_file>
+
+% age, recipients, rotate
+# Re-encrypt a file to a new recipients list.
+$ encrypted_file: fd --type f --extension age
+$ identity_file: fd --type f --hidden --glob 'key*.txt' --glob '*.agekey'
+$ recipients_file: fd --type f --hidden --glob '.age-recipients' --glob '*.recipients'
+age -d -i <identity_file> <encrypted_file> | age -R <recipients_file> -o <output-file.age>
+
+% age, history, encrypt
+# Refresh the armored history backup tracked in dotfiles.
+age -a -R "$HOME/.age-recipients" -o "$HOME/.history.age" "$HOME/.history"
+
+% age, history, decrypt
+# Restore history to a chosen output file with a connected YubiKey.
+age-plugin-yubikey --identity | age -d -i - -o <output-file> "$HOME/.history.age"
