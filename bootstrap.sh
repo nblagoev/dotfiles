@@ -160,9 +160,18 @@ export BOOTSTRAP_DISTRO BOOTSTRAP_WSL
 
 ssh_dir="$HOME/.ssh"
 history_file="$HOME/.history"
+encrypted_history="$HOME/.history.age"
 
 mkdir -p "$ssh_dir"
-touch "$history_file"
+if [ ! -s "$history_file" ]; then
+    history_tmp=$(mktemp "$HOME/.history.XXXXXX")
+    if ! age-plugin-yubikey --identity |
+        age -d -i - -o "$history_tmp" "$encrypted_history"; then
+        rm -f "$history_tmp"
+        exit 1
+    fi
+    mv "$history_tmp" "$history_file"
+fi
 touch "$ssh_dir/known_hosts"
 touch "$ssh_dir/allowed_signers"
 touch "$ssh_dir/authorized_keys"
