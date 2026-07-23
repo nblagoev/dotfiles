@@ -72,6 +72,9 @@
 [color]
   ui = auto
 
+[color "diff"]
+  meta = blue bold
+
 [color "status"]
   added = green
   changed = yellow
@@ -121,3 +124,4 @@
 
 [mergetool "codediff"]
   cmd = nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\"
+
