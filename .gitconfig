@@ -9,7 +9,7 @@
   a       = add
   br      = branch
   brc     = branch --show-current
-  c       = commit
+  cm      = commit -m
   cf      = commit --fixup
   co      = checkout
   cb      = checkout -b
@@ -21,6 +21,7 @@
   dt      = -c diff.external=difft diff
   dlog    = -c diff.external=difft log -p --ext-diff
   dshow   = -c diff.external=difft show --ext-diff
+  fush    = push --force-with-lease
   plom    = pull origin main
   pf      = push --force-with-lease
   pom     = push origin main
@@ -87,8 +88,6 @@
 
 [push]
   default = simple
-  # Make `git push` automatically push relevant
-  # annotated tags when pushing branches out
   followTags = true
 
 [core]
@@ -97,6 +96,15 @@
   autocrlf = input
   ignorecase = false
 
+[rebase]
+  autosquash = true
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = -taggerdate
+
 [diff]
   algorithm = histogram
   colorMoved = plain
@@ -104,7 +112,7 @@
   renames = true
 
 [merge]
-  conflictstyle = diff3
+  conflictStyle = zdiff3
   tool = codediff
 
 [mergetool "vimdiff"]
