@@ -2,6 +2,10 @@
 # generate resident key
 ssh-keygen -t ed25519-sk -O resident -O verify-required -O application=ssh:auth
 
+% ssh, resident-key, restore
+# Restore resident keys from a connected FIDO authenticator into ~/.ssh.
+cd "$HOME/.ssh" && ssh-keygen -K
+
 % ssh, sign
 # sign a file
 $ key_file: fd --type f --extension pub . "$HOME/.ssh"
