@@ -118,6 +118,8 @@ if [ ! -d "$tpm_dir/.git" ]; then
 fi
 
 # Rustup
+rustup-init -y --profile minimal --no-modify-path
+
 export PATH="$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 
 rustup toolchain install stable
