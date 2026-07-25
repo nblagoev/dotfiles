@@ -118,11 +118,11 @@ if [ ! -d "$tpm_dir/.git" ]; then
 fi
 
 # Rustup
-rustup toolchain install nightly
-rustup default nightly
-rustup component add rust-analyzer
-
 export PATH="$HOME/.cargo/bin:$HOME/go/bin:$PATH"
+
+rustup toolchain install stable
+rustup default stable
+rustup component add rust-analyzer
 
 go install github.com/bensadeh/circumflex/cmd/clx@v4.5.0
 go install github.com/bcicen/ctop@v0.7.7
