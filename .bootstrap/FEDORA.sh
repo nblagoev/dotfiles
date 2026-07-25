@@ -126,7 +126,6 @@ rustup default stable
 rustup component add rust-analyzer
 
 go install github.com/bensadeh/circumflex/cmd/clx@latest
-go install github.com/bcicen/ctop@latest
 go install mvdan.cc/gofumpt@latest
 cargo install --locked age-plugin-yubikey
 cargo install --locked jaq
