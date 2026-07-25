@@ -21,7 +21,6 @@
   dt      = -c diff.external=difft diff
   dlog    = -c diff.external=difft log -p --ext-diff
   dshow   = -c diff.external=difft show --ext-diff
-  fush    = push --force-with-lease
   plom    = pull origin main
   pf      = push --force-with-lease
   pom     = push origin main
@@ -41,31 +40,6 @@
   # Reset
   uncommit    = reset HEAD~1 --mixed
   untrack     = rm --cached --
-  unpushed    = log --branches --not --remotes --simplify-by-decoration --decorate --oneline
-  untracked   = "!git ls-files . --exclude-standard --others"
-  # Submodules
-  subpull     = submodule update --init --recursive
-  # Assumptions
-  assume      = update-index --assume-unchanged
-  unassume    = update-index --no-assume-unchanged
-  assumed     = "!git ls-files -v | grep ^h | cut -c 3-"
-  # Pull Requests (https://gist.github.com/gnarf/5406589)
-  pr-clean    = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
-  # for github remores
-  pr          = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-  review      = "!f() { git log -p --reverse \"$@\" origin/main...HEAD; }; f"
-  # Deletes all branches already merged into master.
-  bclean      = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
-  #via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
-  # show the most recently touched branches
-  recent      = "!git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--' | less -XFR"
-  latest      = "!git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/remotes | sed -e 's-refs/remotes/origin/--' | less -XFR"
-  ignored     = !git ls-files -ci --exclude-standard
-  lasttag     = describe --tags --abbrev=0
-  stag        = tag -l --sort=v:refname
-  findtodo    = grep --line-number --word-regexp TODO
-  cleanup     = !git remote prune origin && git gc && git clean -dfx && git stash clear
-  ignore      = "!([ ! -e .gitignore ] && touch .gitignore) | echo `\n$2` >> .gitignore"
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -124,4 +98,3 @@
 
 [mergetool "codediff"]
   cmd = nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\"
-

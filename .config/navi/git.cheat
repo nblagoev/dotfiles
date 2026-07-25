@@ -1,0 +1,75 @@
+% git, log, unpushed
+# Show local branches that have not been pushed to any remote.
+git log --branches --not --remotes --simplify-by-decoration --decorate --oneline
+
+% git, files, untracked
+# List untracked, non-ignored files below the current directory.
+git ls-files . --exclude-standard --others
+
+% git, submodule, update, subpull
+# Initialize and update every submodule recursively.
+git submodule update --init --recursive
+
+% git, assume, set
+# Mark tracked files as unchanged until explicitly restored.
+$ files: git ls-files --- --multi --expand
+git update-index --assume-unchanged <files>
+
+% git, assume, unset, unassume
+# Restore assumed-unchanged files to normal tracking.
+$ files: git ls-files -v | awk '/^h/ { print substr($0, 3) }' --- --multi --expand
+git update-index --no-assume-unchanged <files>
+
+% git, assume, list, assumed
+# List files marked assumed unchanged.
+git ls-files -v | awk '/^h/ { print substr($0, 3) }'
+
+% git, pr, clean, pr-clean
+# Delete locally fetched pull-request branches under refs/heads/pr/.
+git for-each-ref refs/heads/pr/* --format='%(refname)' | while IFS= read -r ref; do git branch -D "${ref#refs/heads/}"; done
+
+% git, pr, checkout
+# Fetch a GitHub pull request and check out its local pr/<pr_number> branch.
+$ remote: git remote | grep -E '^(upstream|origin)$'
+git fetch -fu <remote> refs/pull/<pr_number>/head:pr/<pr_number> && git checkout pr/<pr_number>
+
+% git, review
+# Review commits on HEAD that are not in origin/main, oldest first.
+git log -p --reverse origin/main...HEAD
+
+% git, branch, clean, bclean
+# Delete branches already merged into a selected local base branch.
+$ base: git branch --format='%(refname:short)'
+git branch --merged <base> | sed 's/^\* //' | grep -vxF '<base>' | xargs -r git branch -d
+
+% git, branch, recent
+# Show local branches ordered by their most recent commit.
+git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--' | less -XFR
+
+% git, remote, recent, latest
+# Show remote branches ordered by their most recent commit.
+git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/remotes | sed -e 's-refs/remotes/origin/--' | less -XFR
+
+% git, files, ignored
+# List tracked files that match an ignore rule.
+git ls-files -ci --exclude-standard
+
+% git, tag, latest, lasttag
+# Print the most recent reachable tag.
+git describe --tags --abbrev=0
+
+% git, tag, list, stag
+# List tags in version order.
+git tag -l --sort=v:refname
+
+% git, todo, findtodo
+# Find TODO markers in tracked files.
+git grep --line-number --word-regexp TODO
+
+% git, cleanup
+# Prune origin, garbage-collect, delete untracked and ignored files, and clear all stashes.
+git remote prune origin && git gc && git clean -dfx && git stash clear
+
+% git, ignore
+# Append a pattern to .gitignore in the current directory.
+printf '\n%s\n' '<pattern>' >> .gitignore
