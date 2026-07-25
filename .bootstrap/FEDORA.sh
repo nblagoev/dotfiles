@@ -8,7 +8,6 @@ tpm_dir="$HOME/.tmux/plugins/tpm"
 sudo dnf install -y \
     @development-tools \
     age \
-    age-plugin-yubikey \
     asciiquarium \
     bat \
     btop \
@@ -20,7 +19,6 @@ sudo dnf install -y \
     coreutils \
     croc \
     crudini \
-    ctop \
     curl \
     difftastic \
     direnv \
@@ -35,14 +33,10 @@ sudo dnf install -y \
     go \
     gum \
     hugo \
-    hurl \
     hyperfine \
-    inetutils \
     ipcalc \
     iperf3 \
-    jaq \
     jq \
-    lazygit \
     libtiff \
     lnav \
     minisign \
@@ -54,14 +48,15 @@ sudo dnf install -y \
     openssh-clients \
     openssl-devel \
     pinentry \
+    pcsc-lite \
+    pcsc-lite-ccid \
+    pcsc-lite-devel \
     pkgconf-pkg-config \
     qrencode \
     rclone \
     ripgrep \
     rustup \
-    sd \
     sslscan \
-    starship \
     tmux \
     trash-cli \
     tree-sitter-cli \
@@ -71,7 +66,6 @@ sudo dnf install -y \
     watch \
     wl-clipboard \
     wget \
-    xxh \
     yubikey-manager \
     yt-dlp \
     z3 \
@@ -131,7 +125,12 @@ rustup component add rust-analyzer
 export PATH="$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 
 go install github.com/bensadeh/circumflex/cmd/clx@v4.5.0
+go install github.com/bcicen/ctop@v0.7.7
 go install mvdan.cc/gofumpt@v0.10.0
+cargo install --locked age-plugin-yubikey
+cargo install --locked jaq
+cargo install --locked sd
+cargo install --locked starship
 cargo install --locked --version 0.15.9 television
 uv tool install --reinstall --python 3.13 'posting==2.10.0'
 

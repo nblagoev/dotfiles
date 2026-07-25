@@ -5,8 +5,6 @@ ORIGIN=https://github.com/nblagoev/dotfiles.git
 # exit on error
 set -e
 
-script_dir=$(CDPATH= cd "$(dirname "$0")" && pwd)
-
 printf '\n\e[1;32m%s\e[m\n' "OS detection..."
 
 kernel=$(uname -s)
@@ -147,7 +145,7 @@ fi
 dot config status.showUntrackedFiles no
 dot pull --ff-only
 
-platform_script="$script_dir/.bootstrap/$bootstrap_script"
+platform_script="$HOME/.bootstrap/$bootstrap_script"
 if [ ! -x "$platform_script" ]; then
     >&2 echo "Platform bootstrap script is missing or not executable: $platform_script"
     exit 1
@@ -157,6 +155,9 @@ BOOTSTRAP_DISTRO=$distro
 BOOTSTRAP_WSL=$wsl
 export BOOTSTRAP_DISTRO BOOTSTRAP_WSL
 "$platform_script"
+
+PATH="$HOME/.cargo/bin:$PATH"
+export PATH
 
 ssh_dir="$HOME/.ssh"
 history_file="$HOME/.history"
