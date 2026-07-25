@@ -1,11 +1,6 @@
 local add = require('vim-pack').add
 local on_plugin_update = require('vim-pack').on_plugin_update
 
-on_plugin_update('blink.cmp', function()
-  ---@diagnostic disable-next-line: undefined-field
-  require('blink.cmp').build():pwait()
-end)
-
 -- Auto-completion and snippets.
 add {
   { src = 'saghen/blink.lib',      setup = false },
@@ -165,6 +160,10 @@ add {
       },
     },
     on_setup = function(_)
+      -- TODO: Fix the Task type below.
+      ---@diagnostic disable-next-line: undefined-field
+      require('blink.cmp').build():pwait()
+
       -- https://github.com/saghen/blink.cmp/issues/1222
       local original = require("blink.cmp.completion.list").show
       ---@diagnostic disable-next-line: duplicate-set-field

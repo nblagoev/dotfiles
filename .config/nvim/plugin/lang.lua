@@ -23,7 +23,7 @@ add {
 -- YAML
 -- TODO: depends on "nvim-treesitter/nvim-treesitter"
 add_on_file_type('yaml', {
-  { src = 'cuducos/yaml.nvim' },
+  { src = 'cuducos/yaml.nvim', module_name = 'yaml_nvim' },
 })
 
 -- LaTeX
