@@ -48,7 +48,7 @@ sed -i '' "1s/theme = .*/theme = \"$helix_theme\"/" "$helix_path"
 sed -i '' "s/palette = .*/palette = \"$to_theme\"/" "$starship_path"
 sed -i '' "s/colorscheme $from_theme/colorscheme $to_theme/" "$nvim_path"
 
-files_to_update=("$tmux_path" "$gitconfig_path" "$batconfig_path" "$yazi_path" "$btop_path")
+files_to_update=("$tmux_path" "$gitconfig_path" "$batconfig_path" "$btop_path")
 sed -i '' "s/$from_theme/$to_theme/" "${files_to_update[@]}"
 
 # Update fzf colors
