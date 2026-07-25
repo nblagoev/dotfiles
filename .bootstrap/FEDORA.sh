@@ -11,7 +11,6 @@ sudo dnf install -y \
     asciiquarium \
     bat \
     btop \
-    cbonsai \
     cfssl \
     cloc \
     cmake \
@@ -41,6 +40,7 @@ sudo dnf install -y \
     lnav \
     minisign \
     navi \
+    ncurses-devel \
     neovim \
     newsboat \
     nmap \
@@ -72,6 +72,14 @@ sudo dnf install -y \
     zoxide \
     zsh \
     zxing-cpp
+
+bat cache --build
+
+# cbonsai
+cbonsai_dir=$(mktemp -d)
+git clone --branch v1.4.2 --depth 1 https://gitlab.com/jallbrit/cbonsai.git "$cbonsai_dir"
+make -C "$cbonsai_dir" install PREFIX="$HOME/.local"
+rm -rf "$cbonsai_dir"
 
 # Terraform
 sudo dnf install -y dnf-plugins-core
@@ -127,11 +135,13 @@ rustup component add rust-analyzer
 
 go install github.com/bensadeh/circumflex/cmd/clx@latest
 go install mvdan.cc/gofumpt@latest
+
 cargo install --locked age-plugin-yubikey
 cargo install --locked jaq
 cargo install --locked sd
 cargo install --locked starship
 cargo install --locked --version 0.15.9 television
+
 uv tool install --reinstall posting
 
 zsh_path=$(command -v zsh)
