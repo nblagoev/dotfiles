@@ -108,13 +108,12 @@ fi
 
 # Antidote
 if [ ! -d "$antidote_dir/.git" ]; then
-    git clone --branch v2.1.0 --depth 1 https://github.com/mattmc3/antidote.git "$antidote_dir"
+    git clone --depth 1 https://github.com/mattmc3/antidote.git "$antidote_dir"
 fi
 
 # TPM
 if [ ! -d "$tpm_dir/.git" ]; then
     git clone https://github.com/tmux-plugins/tpm.git "$tpm_dir"
-    git -C "$tpm_dir" checkout 99469c4a9b1ccf77fade25842dc7bafbc8ce9946
 fi
 
 # Rustup
@@ -126,15 +125,15 @@ rustup toolchain install stable
 rustup default stable
 rustup component add rust-analyzer
 
-go install github.com/bensadeh/circumflex/cmd/clx@v4.5.0
-go install github.com/bcicen/ctop@v0.7.7
-go install mvdan.cc/gofumpt@v0.10.0
+go install github.com/bensadeh/circumflex/cmd/clx@latest
+go install github.com/bcicen/ctop@latest
+go install mvdan.cc/gofumpt@latest
 cargo install --locked age-plugin-yubikey
 cargo install --locked jaq
 cargo install --locked sd
 cargo install --locked starship
 cargo install --locked --version 0.15.9 television
-uv tool install --reinstall --python 3.13 'posting==2.10.0'
+uv tool install --reinstall posting
 
 zsh_path=$(command -v zsh)
 if [ "${SHELL:-}" != "$zsh_path" ]; then
